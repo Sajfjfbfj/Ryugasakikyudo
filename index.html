@@ -5,22 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 	<meta name="google-site-verification" content="BPIz999ax7wid03IH2bc6D9QQT1WzAw4Ej9VHfXODMo" />
- <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "ここに自分のApp IDを入れる", // ← OneSignalの管理画面で確認
-      notifyButton: {
-        enable: true
-      },
-      serviceWorkerPath: '/OneSignalSDKWorker.js',
-      serviceWorkerUpdaterPath: '/OneSignalSDKUpdaterWorker.js'
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "28b0df39-f015-45df-b389-168d88a4d3e5",
     });
   });
 </script>
-
-
   <style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
 	<link rel="icon" href="\wp-content\uploads\2025\02\龍翔会.png" type="image/png">
 	<script type="application/ld+json">
@@ -2289,6 +2282,5 @@ var wpfront_scroll_top_data = {"data":{"css":"#wpfront-scroll-top-container{posi
 <script type="text/javascript" id="slb_context">/* <![CDATA[ */if ( !!window.jQuery ) {(function($){$(document).ready(function(){if ( !!window.SLB ) { {$.extend(SLB, {"context":["public","user_guest"]});} }})})(jQuery);}/* ]]> */</script>
 
 <script src="/wp-content/uploads/custom-css-js/254.js?v=9788"></script>
-
 </body>
 </html>
