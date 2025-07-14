@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://ryugasakikyudo.vercel.app/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<sitemap>
-		<loc>https://ryugasakikyudo.vercel.app/post-sitemap.xml</loc>
-		<lastmod>2025-07-03T05:30:52+00:00</lastmod>
+		<loc>/post-sitemap.xml</loc>
+		<lastmod>2025-07-14T19:56:39+00:00</lastmod>
 	</sitemap>
 	<sitemap>
-		<loc>https://ryugasakikyudo.vercel.app/page-sitemap.xml</loc>
-		<lastmod>2025-07-02T17:25:32+00:00</lastmod>
+		<loc>/page-sitemap.xml</loc>
+		<lastmod>2025-07-10T03:57:14+00:00</lastmod>
 	</sitemap>
 	<sitemap>
-		<loc>https://ryugasakikyudo.vercel.app/category-sitemap.xml</loc>
-		<lastmod>2025-07-03T05:30:52+00:00</lastmod>
+		<loc>/category-sitemap.xml</loc>
+		<lastmod>2025-07-14T19:56:39+00:00</lastmod>
 	</sitemap>
 	<sitemap>
-		<loc>https://ryugasakikyudo.vercel.app/author-sitemap.xml</loc>
+		<loc>/author-sitemap.xml</loc>
 		<lastmod>2025-02-27T04:03:10+00:00</lastmod>
 	</sitemap>
 </sitemapindex>
