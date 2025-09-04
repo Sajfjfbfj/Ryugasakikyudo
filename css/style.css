@@ -635,6 +635,19 @@ footer {
   margin-bottom: 15px;
   line-height: 1.6;
 }
+.form-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background-color: #f9f9f9;
+}
+
+.form-wrapper iframe {
+  border-radius: 8px;
+  border: none;
+}
 
 .form-wrapper {
   margin-bottom: 40px;
