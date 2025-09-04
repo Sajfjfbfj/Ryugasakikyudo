@@ -182,6 +182,34 @@ document.addEventListener("DOMContentLoaded", () => {
   "url": "https://ryugasakikyudo.vercel.app/"
 }
 </script>
+<script>
+  // 更新したページの情報
+  const updatedPages = [
+    { page: "ホーム", url: "index.html" },
+    { page: "初心者教室", url: "pages/beginner/index.html" },
+    { page: "スケジュール", url: "pages/schedule/index.html" },
+    { page: "大会・審査要項", url: "pages/tournament/index.html" },
+    { page: "大会・審査実績", url: "pages/seiseki/index.html" },
+    { page: "会員専用", url: "pages/member/index.html" },
+    { page: "お問い合わせ", url: "pages/contact/index.html" }
+  ];
+
+  const newsList = document.getElementById("news-list");
+  const today = new Date();
+  const formattedDate = `${today.getMonth() + 1}月${today.getDate()}日`;
+
+  // 最新5件だけに制限
+  const latestUpdates = updatedPages.slice(-5); // 配列の最後の5件を取得
+
+  latestUpdates.forEach(update => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = update.url;
+    a.textContent = `${formattedDate} ${update.page}を更新しました`;
+    li.appendChild(a);
+    newsList.appendChild(li);
+  });
+</script>
 
 </body>
 </html>
