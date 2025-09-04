@@ -245,6 +245,22 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.error('ニュースデータの読み込みに失敗しました', err));
 });
 </script>
+<script>
+async function notifyUpdate() {
+  await fetch("/api/notify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: "龍翔会 弓道サイト更新",
+      message: "大会審査結果が更新されました！",
+      url: window.location.href
+    })
+  });
+}
+
+// ページロード時に通知したい場合
+// notifyUpdate();
+</script>
 
 </body>
 </html>
