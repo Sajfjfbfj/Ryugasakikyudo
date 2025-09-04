@@ -1,0 +1,805 @@
+/* ====== ベース ====== */
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #fff;
+
+  /* 背景画像＋黒の半透明オーバーレイ */
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* 上から下まで黒50% */
+    url('../assets/img/26229848_s.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+main {
+  padding-bottom: 2rem;  /* フッターとの間に余白を追加 */
+}
+
+
+/* ====== ヘッダー ====== */
+/* ヘッダー内のロゴ配置 */
+header {
+  display: flex;             /* ヘッダー内をフレックス */
+  align-items: center;       /* 垂直中央揃え */
+  padding: 0;                /* ヘッダー内の余白をゼロに */
+}
+
+.site-title {
+  margin: 0;                 /* h1のデフォルトマージンを消す */
+  padding: 0;
+}
+
+.site-title img {
+  width: 180px;              /* ロゴの横幅調整 */
+  height: auto;              /* 縦横比維持 */
+  display: block;
+}
+.site-title a {
+  display: inline-block;   /* 画像サイズに合わせる */
+  width: auto;             /* 幅は自動 */
+  height: auto;            /* 高さも自動 */
+  padding: 0;              /* 不要な余白なし */
+  margin: 0;
+  line-height: 0;          /* 行間をなくす */
+}
+
+
+/* overlay-styles.css */
+.hamburger-overlay {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hamburger-overlay__line {
+  position: absolute;
+  left: 11px;
+  width: 26px;
+  height: 2px;
+  background-color: #fff;
+  transition: all .6s;
+}
+
+.hamburger-overlay__line:nth-of-type(1) { top: 14px; }
+.hamburger-overlay__line:nth-of-type(2) { top: 23px; }
+.hamburger-overlay__line:nth-of-type(3) { top: 32px; }
+
+.hamburger-overlay.active .hamburger-overlay__line {
+  background-color: #fff;
+}
+
+.hamburger-overlay.active .hamburger-overlay__line:nth-of-type(1) {
+  transform: translateY(9px) rotate(-45deg);
+}
+.hamburger-overlay.active .hamburger-overlay__line:nth-of-type(2) {
+  opacity: 0;
+}
+.hamburger-overlay.active .hamburger-overlay__line:nth-of-type(3) {
+  transform: translateY(-9px) rotate(45deg);
+}
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  visibility: hidden;
+  opacity: 0;
+  transition: all .6s;
+  z-index: 900;
+}
+
+.nav-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav-overlay__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+.nav-overlay__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-overlay__item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .6s;
+}
+
+.nav-overlay.active .nav-overlay__item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-overlay.active .nav-overlay__item:nth-child(1) { transition-delay: 0.1s; }
+.nav-overlay.active .nav-overlay__item:nth-child(2) { transition-delay: 0.2s; }
+.nav-overlay.active .nav-overlay__item:nth-child(3) { transition-delay: 0.3s; }
+.nav-overlay.active .nav-overlay__item:nth-child(4) { transition-delay: 0.4s; }
+
+.nav-overlay__link {
+  display: inline-block;
+  padding: 20px;
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.nav-overlay__link:hover {
+  color: #4a90e2;
+}
+#about {
+  position: relative;
+  width: 100%;
+  min-height: 400px; /* 好きな高さに調整 */
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* 背景画像を要素全体に */
+#about .about-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* 画像全体を表示 */
+  z-index: 0;
+}
+
+/* 暗めオーバーレイ */
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+/* コンテンツ */
+#about .about-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 6rem 1rem;
+}
+
+#about h2 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+#about p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* ====== 更新情報 ====== */
+#news {
+  margin: 2rem 0;
+}
+
+#news h2 {
+  border-left: 5px solid #444;
+  padding-left: 0.5rem;
+}
+
+#news-list {
+  list-style: none;
+  padding: 0;
+}
+
+#news-list li {
+  margin: 0.5rem 0;
+}
+/* ====== トップページ ====== */
+/* ====== 各ページ入口（カード風） ====== */
+.page-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列固定 */
+  gap: 1rem;
+}
+
+.page-links a {
+  aspect-ratio: 1 / 1; /* 全カードを正方形に */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-links a.card {
+  opacity: 0;
+  transform: translateY(50px); /* 下にずらして非表示状態 */
+  transition: all 0.6s ease-out;
+}
+
+.page-links a.card.visible {
+  opacity: 1;
+  transform: translateY(0); /* 元の位置に */
+}
+
+/* ====== カード共通 ====== */
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 12px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+/* 背景画像（6個分にする） */
+.page-links a:nth-child(1) { background-image: url('../assets/img/30961622_s.jpg'); }
+.page-links a:nth-child(2) { background-image: url('../assets/img/26230334_s.jpg'); }
+.page-links a:nth-child(3) { background-image: url('../assets/img/24697911_s.jpg'); }
+.page-links a:nth-child(4) { background-image: url('../assets/img/5171030_s.jpg'); }
+.page-links a:nth-child(5) { background-image: url('../assets/img/24794886_s.jpg'); }
+.page-links a:nth-child(6) { background-image: url('../assets/img/LINE_ALBUM_20241024スポーツフェスティバル準備_250221_1.jpg'); } /* 追加 */
+
+/* オーバーレイ */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.card span {
+  position: relative;
+  z-index: 2;
+}
+
+.card:hover::before {
+  background: rgba(0,0,0,0.2);
+}
+
+
+
+/* ====== フッター ====== */
+footer {
+  position: relative;   /* 固定解除 */
+  width: 100%;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+/* ==============================
+   初心者教室ページ用スタイル
+   ============================== */
+#beginner {
+  padding: 60px 20px;
+  
+  text-align: center;
+  
+}
+
+#beginner h2 {
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+#beginner .intro-image {
+  margin-bottom: 30px;
+}
+
+#beginner .intro-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px; /* 角丸にして柔らかく */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+#beginner p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  
+}
+
+#beginner h3 {
+  font-size: 1.5rem;
+  margin: 40px 0 15px;
+  
+  border-bottom: 2px solid #ddd;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+#beginner a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  color: #fff;
+  background: black;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+#beginner a:hover {
+  background: #005fa3;   /* 濃いめブルー */
+  transform: translateY(-2px); /* ちょっと浮く */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+/* ====== スケジュールページ ====== */
+#schedule {
+  padding: 60px 20px;
+
+  color: #fff;
+}
+
+#schedule h2 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #444;
+  padding-left: 10px;
+}
+
+#schedule h3 {
+  font-size: 1.6rem;
+  margin: 30px 0 10px;
+  color: #fff;
+}
+
+.schedule-list {
+  list-style: none;
+  padding: 0;
+}
+
+.schedule-list li {
+  margin: 0.8rem 0;
+}
+
+.schedule-list a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+.schedule-list a:hover {
+  color: black;
+}
+/* #tournament ページ専用CSS */
+
+/* ====== 大会・審査要項 (#tournament) ====== */
+/* ====== 要項ページ (#tournament) ====== */
+#tournament {
+  padding: 60px 20px;
+  background: transparent; /* 背景を透明に */
+  color: #fff;             /* 全体の文字を白に */
+}
+
+#tournament h2 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #fff; /* 左線も白に */
+  padding-left: 10px;
+  color: #fff; /* 見出し文字も白 */
+}
+
+#tournament h3 {
+  font-size: 1.6rem;
+  margin: 30px 0 10px;
+  color: #fff; /* 白文字に変更 */
+}
+
+#tournament h4 {
+  font-size: 1.3rem;
+  margin: 20px 0 10px;
+  color: #fff; /* 白文字に変更 */
+}
+
+
+/* PDFリンクリスト */
+#tournament .guidelines-list {
+  list-style: none;
+  padding: 0;
+}
+
+#tournament .guidelines-list li {
+  margin: 0.8rem 0;
+}
+
+#tournament .guidelines-list a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: background 0.3s, color 0.3s;
+}
+
+#tournament .guidelines-list a:hover {
+  background: #e0f0ff;
+  color: #004080;
+}
+
+/* PDFがない大会カード */
+#tournament .guidelines-card {
+ 
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#tournament .guidelines-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+#tournament .guidelines-card li {
+  margin: 0.4rem 0;
+}
+
+#tournament .guidelines-card strong {
+  color: #fff;
+}
+
+/*成績ページ*/
+/* ====== 成績ページ (#seiseki) ====== */
+#seiseki {
+  padding: 60px 20px;
+  background: transparent; /* 背景を透明に */
+  color: #fff;             /* テキストは白 */
+}
+
+#seiseki h2 {
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  border-left: 5px solid #fff; /* 見出し線も白に */
+  padding-left: 10px;
+  color: #fff; /* 見出し文字を白に */
+}
+
+.result-card {
+  background: transparent;  /* カード背景も透明 */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3); /* 薄い白枠 */
+  box-shadow: 0 2px 6px rgba(255,255,255,0.1); /* 白っぽい影 */
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: #fff; /* 中の文字も白 */
+}
+
+.result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.2); /* hover時の白影 */
+}
+
+.result-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #fff; /* 白文字に変更 */
+}
+
+.result-card p {
+  line-height: 1.6;
+  color: #fff; /* 白文字に */
+}
+/* 会員専用情報ページ */
+#members {
+  padding: 60px 20px;
+  background: transparent; /* 背景透明 */
+  color: #fff; /* 白文字 */
+}
+
+#members h2 {
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  border-left: 5px solid #fff;
+  padding-left: 10px;
+}
+
+.joho-card {
+  background: rgba(255, 255, 255, 0.05); /* うっすら透明の背景で可読性アップ */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.joho-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.joho-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.joho-card p,
+.joho-card li {
+  line-height: 1.6;
+  color: #f9f9f9;
+}
+
+/* リストの点を消す */
+.joho-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.joho-card li {
+  margin: 8px 0;
+}
+
+/* リンク */
+.joho-card a {
+  color: #a8d8ff;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin: 5px 0;
+  transition: color 0.3s;
+}
+.joho-card a:hover {
+  color: #66bfff;
+}
+#contact {
+  padding: 60px 20px;
+  background: transparent;
+  color: #fff;
+}
+
+#contact h2 {
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  border-left: 5px solid #fff;
+  padding-left: 10px;
+}
+
+#contact h3 {
+  font-size: 1.4rem;
+  margin: 20px 0 10px;
+  color: #fff;
+  border-left: 4px solid #fff;
+  padding-left: 8px;
+}
+
+#contact p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.form-wrapper {
+  margin-bottom: 40px;
+}
+
+.info-map-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 活動情報カード */
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* マップを隣に並べる用 */
+.map-wrapper {
+  flex: 1;
+  min-height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+
+
+/* ====== スマホ対応 (〜768px) ====== */
+@media screen and (max-width: 768px) {
+
+  /* コンテナ幅 */
+  .container {
+    width: 95%;
+  }
+
+  /* 見出しを小さめに */
+  #about h2 {
+    font-size: 2rem;
+  }
+  #about p {
+    font-size: 1rem;
+  }
+
+  /* ニュース */
+  #news h2 {
+    font-size: 1.5rem;
+  }
+  #news-list li {
+    font-size: 0.95rem;
+  }
+
+  /* ページリンク：1列 */
+  .page-links {
+    grid-template-columns: 1fr;
+  }
+  .page-links a {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  .page-links a:last-child {
+    grid-column: auto;
+    height: auto;
+  }
+
+  /* 初心者教室ページ */
+  #beginner {
+    padding: 40px 15px;
+  }
+  #beginner h2 {
+    font-size: 1.8rem;
+  }
+  #beginner p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  #beginner h3 {
+    font-size: 1.2rem;
+  }
+  #beginner a {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+  }
+    #schedule {
+    padding: 40px 15px;
+  }
+  #schedule h2 {
+    font-size: 2rem;
+  }
+  #schedule h3 {
+    font-size: 1.4rem;
+  }
+  .schedule-list a {
+    font-size: 1rem;
+    padding: 8px;
+  }
+   /* seiseki ページ */
+  #seiseki {
+    padding: 40px 15px;
+  }
+  #seiseki h2 {
+    font-size: 2rem;
+  }
+  .result-card {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  .result-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  .result-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+}
+
+/* ====== タブレット対応 (769px〜1024px) ====== */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  .container {
+    width: 90%;
+  }
+
+  /* about セクション */
+  #about h2 {
+    font-size: 2.4rem;
+  }
+  #about p {
+    font-size: 1.1rem;
+  }
+
+  /* ページリンク：2列 */
+  .page-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .page-links a {
+    aspect-ratio: auto;
+    height: 200px;
+  }
+  .page-links a:last-child {
+    height: 250px;
+  }
+
+  /* 初心者教室 */
+  #beginner h2 {
+    font-size: 2.2rem;
+  }
+  #beginner h3 {
+    font-size: 1.4rem;
+  }
+  #seiseki {
+    padding: 50px 20px;
+  }
+  #seiseki h2 {
+    font-size: 2.2rem;
+  }
+  .result-card {
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+  .result-card h3 {
+    font-size: 1.3rem;
+  }
+  .result-card p {
+    font-size: 1.05rem;
+  }
+}
+
+/* ====== PC (1025px〜) ====== */
+@media screen and (min-width: 1025px) {
+  /* 既存のPC用デザインをそのまま活かす */
+   .info-map-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .info-card {
+    flex: 1;
+    max-width: 400px;
+  }
+  .map-wrapper {
+    flex: 2;
+  }
+}

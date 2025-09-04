@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>龍翔会 弓道</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <!-- ヘッダー -->
+<div class="header">
+   <h1 class="site-title">
+    <a href="../../index.html">
+      <img src="../../assets/img/龍翔会.png" alt="龍翔会 弓道サイト">
+    </a>
+  </h1>
+<button class="hamburger-overlay" aria-label="メニュー" aria-controls="overlay-menu" aria-expanded="false">
+    <span class="hamburger-overlay__line"></span>
+    <span class="hamburger-overlay__line"></span>
+    <span class="hamburger-overlay__line"></span>
+  </button>
+
+  <nav id="overlay-menu" class="nav-overlay" aria-hidden="true">
+    <div class="nav-overlay__content">
+      <ul class="nav-overlay__list">
+        <li class="nav-overlay__item"><a href="../../index.html" class="nav-overlay__link">ホーム</a></li>
+        <li class="nav-overlay__item"><a href="../beginner/index.html" class="nav-overlay__link">初心者教室</a></li>
+        <li class="nav-overlay__item"><a href="../schedule/index.html" class="nav-overlay__link">スケジュール</a></li>
+        <li class="nav-overlay__item"><a href="index.html" class="nav-overlay__link">大会・審査要項</a></li>
+        <li class="nav-overlay__item"><a href="../members/index.html" class="nav-overlay__link">会員専用</a></li>
+        <li class="nav-overlay__item"><a href="../contact/index.html" class="nav-overlay__link">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  
+</div>
+<main>
+  <section id="tournament">
+    <div class="container">
+      <h2>大会・審査 実施要項</h2>
+
+      <!-- 令和7年度 -->
+      <h3>令和7年度</h3>
+      <ul class="guidelines-list">
+        <li><a href="../../assets/Excel/【県外用】令和7年度千葉関東地域連合審査会-実施要項-.xlsx" target="_blank">【千葉】関東地域連合審査会（11/30）実施要項</a></li>
+        <li><a href="../../assets/Excel/R7.11.16-第３回【東京】関東地域連連合審査実施要項等-1.xlsx" target="_blank">【東京】関東地域連合審査会（11/16）実施要項</a></li>
+        <li><a href="../../assets/Excel/令和７年度【茨城】関東地域連合審査要項_r1.xls" target="_blank">【取手】関東地域連合審査会（10/5）案内</a></li>
+        <li><a href="../../assets/PDF/第32回県南大会案内一般-1.pdf" target="_blank">第32回県南弓道大会（9/28）要項</a></li>
+        <li><a href="../../assets/PDF/R7_国宝松本城奉射弓道大会_実施要項-1.pdf" target="_blank">第36回国宝松本城奉射弓道大会（11/3）要項</a></li>
+        <li><a href="../../assets/Excel/【開催案内】令和7年度北信越地区連合審査会【飯田】（実施要項、答案用紙、添書、受審者一覧）-2.xlsx" target="_blank">北信越・福島南部連合審査案内</a></li>
+        <li><a href="../../assets/PDF/2025年05月10日　県民総体_大会要項.pdf" target="_blank">県民総体兼国スポ選考会要項</a></li>
+        <li><a href="../../assets/PDF/2025年04月05日　春季大会_大会要項.pdf" target="_blank">春季大会実施要項</a></li>
+        <li><a href="../../assets/PDF/（３）第７回伊勢「神宮奉納弓道大会」大会要領（参加者説明資料.pdf" target="_blank">第7回伊勢神宮奉納弓道大会 要項</a></li>
+      </ul>
+
+      <!-- PDFがない大会をカード形式で表示 -->
+      <div class="guidelines-card">
+        <h4>水戸観梅大会のご案内</h4>
+        <p>締め切り日までに参加される方は道場の名簿に記入をお願いします</p>
+        <ul>
+          <li><strong>日時：</strong>令和7年3月22日</li>
+          <li><strong>場所：</strong>東日本技術研究所 弓道場</li>
+          <li><strong>参加費：</strong>1,000円（昼食含む）</li>
+          <li><strong>支部内〆切：</strong>令和7年2月27日（木）</li>
+        </ul>
+      </div>
+
+      <div class="guidelines-card">
+        <h4>第57回 土浦桜まつり弓道大会のご案内</h4>
+        <p>締め切り日までに参加される方は道場の名簿に記入をお願いします</p>
+        <ul>
+          <li><strong>日時：</strong>令和7年3月30日（日）9時～開会式</li>
+          <li><strong>場所：</strong>土浦市立武道館弓道場</li>
+          <li><strong>受付：</strong>8時15分～8時45分</li>
+          <li><strong>参加費：</strong>1,000円（昼食含む）</li>
+          <li><strong>競技：</strong>
+            個人競技 射詰一手 競射四つ矢（計6射）<br>
+            団体競技（チーム毎の合計）
+          </li>
+          <li><strong>支部内〆切：</strong>令和7年2月22日（土）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+ 
+  <!-- フッター -->
+  <footer>
+    <p>&copy; 2025 龍翔会 弓道</p>
+  </footer>  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger-overlay");
+    const navOverlay = document.querySelector(".nav-overlay");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navOverlay.classList.toggle("active");
+
+      // ARIA属性の更新（アクセシビリティ対応）
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", !expanded);
+      navOverlay.setAttribute("aria-hidden", expanded);
+    });
+
+    // メニューのリンクをクリックしたら閉じる
+    document.querySelectorAll(".nav-overlay__link").forEach(link => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navOverlay.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", false);
+        navOverlay.setAttribute("aria-hidden", true);
+      });
+    });
+  });
+</script>
+</body>
+</html>
