@@ -40,6 +40,59 @@ main {
 .back-to-top:hover {
   background: #555;
 }
+/* 検索結果全体のコンテナ */
+#searchResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* 個別検索結果カード */
+.search-card {
+  width: 90%;
+  max-width: 600px;
+  padding: 1rem 1.2rem;
+  background-color: rgba(255, 255, 255, 0.95); /* 薄い白 */
+  color: #000; /* 文字は黒 */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ホバー時 */
+.search-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* タイトル */
+.search-card .title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+/* 説明 */
+.search-card .description {
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+/* ファイルリンク */
+/* ファイルリンク */
+.search-card a {
+  color: #ffffff; /* 白系 */
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.search-card a:hover {
+  text-decoration: underline;
+  color: #f0f0f0; /* ホバー時は少し明るめに */
+}
+
 
 /* ====== ヘッダー ====== */
 /* ヘッダー内のロゴ配置 */

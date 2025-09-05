@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>龍翔会 弓道</title>
+  <title>大会審査要項 | 龍翔会 弓道</title>
   <link rel="stylesheet" href="../../css/style.css">    <!-- SEO等-->
    
 <!-- 説明文（検索結果に表示されることがある） -->
@@ -54,6 +54,15 @@
       <img src="../../assets/img/龍翔会.png" alt="龍翔会 弓道サイト">
     </a>
   </h1>
+<section id="search-section" class="section">
+  <div class="container">
+    <input type="text" id="searchInput" placeholder="検索ワードを入力">
+    <button id="searchBtn">検索</button>
+    <div id="searchResults"></div>
+  </div>
+</section>
+
+
 <button class="hamburger-overlay" aria-label="メニュー" aria-controls="overlay-menu" aria-expanded="false">
     <span class="hamburger-overlay__line"></span>
     <span class="hamburger-overlay__line"></span>
@@ -192,6 +201,262 @@ async function notifyUpdate() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 </script>
+<script>
+const siteData = [
+ {
+    "title": "【千葉】関東地域連合審査会（11/30）実施要項",
+    "description": "令和7年度 千葉 関東地域連合審査会 実施要項",
+    "file": "../../assets/Excel/【県外用】令和7年度千葉関東地域連合審査会-実施要項-.xlsx"
+  },
+  {
+    "title": "【東京】関東地域連合審査会（11/16）実施要項",
+    "description": "令和7年度 東京 関東地域連合審査会 実施要項",
+    "file": "../../assets/Excel/R7.11.16-第３回【東京】関東地域連連合審査実施要項等-1.xlsx"
+  },
+  {
+    "title": "【取手】関東地域連合審査会（10/5）案内",
+    "description": "令和7年度 茨城 取手 関東地域連合審査会 案内",
+    "file": "../../assets/Excel/令和７年度【茨城】関東地域連合審査要項_r1.xls"
+  },
+  {
+    "title": "第32回県南弓道大会（9/28）要項",
+    "description": "第32回 県南弓道大会 実施要項",
+    "file": "../../assets/PDF/第32回県南大会案内一般-1.pdf"
+  },
+  {
+    "title": "第36回国宝松本城奉射弓道大会（11/3）要項",
+    "description": "第36回 国宝松本城奉射弓道大会 実施要項",
+    "file": "../../assets/PDF/R7_国宝松本城奉射弓道大会_実施要項-1.pdf"
+  },
+  {
+    "title": "北信越・福島南部連合審査案内",
+    "description": "令和7年度 北信越・福島南部連合審査 実施要項",
+    "file": "../../assets/Excel/【開催案内】令和7年度北信越地区連合審査会【飯田】（実施要項、答案用紙、添書、受審者一覧）-2.xlsx"
+  },
+  {
+    "title": "県民総体兼国スポ選考会要項",
+    "description": "令和7年度 県民総体 兼 国スポ選考会 実施要項",
+    "file": "../../assets/PDF/2025年05月10日　県民総体_大会要項.pdf"
+  },
+  {
+    "title": "春季大会実施要項",
+    "description": "令和7年度 春季大会 実施要項",
+    "file": "../../assets/PDF/2025年04月05日　春季大会_大会要項.pdf"
+  },
+  {
+    "title": "第7回伊勢神宮奉納弓道大会 要項",
+    "description": "第7回 伊勢 神宮奉納弓道大会 大会要領",
+    "file": "../../assets/PDF/（３）第７回伊勢「神宮奉納弓道大会」大会要領（参加者説明資料.pdf"
+  },
+  {
+    "title": "水戸観梅大会のご案内",
+    "description": "日時: 令和7年3月22日 / 場所: 東日本技術研究所 弓道場 / 参加費: 1,000円（昼食含む） / 支部内〆切: 令和7年2月27日",
+    "file": null
+  },
+  {
+    "title": "第57回 土浦桜まつり弓道大会のご案内",
+    "description": "日時: 令和7年3月30日 9時～ / 場所: 土浦市立武道館弓道場 / 受付: 8時15分～8時45分 / 参加費: 1,000円（昼食含む） / 種目: 個人競技 射詰一手 競射四つ矢 / 団体競技 / 支部内〆切: 令和7年2月22日",
+    "file": null
+  },
+  {
+    "title": "令和7年度 第1回【八郷】一般審査会結果",
+    "description": "7/20（日）開催。田島さん 四段合格。",
+    "file": null
+  },
+  {
+    "title": "第46回 神栖市弓道大会 成績報告",
+    "description": "5/11(日)開催。8位入賞：岡田さん。",
+    "file": null
+  },
+  {
+    "title": "鹿島神宮弓道大会 成績報告",
+    "description": "4/29(火)開催。個人5位：渡邊さん、個人11位：岡田さん。",
+    "file": null
+  },
+  {
+    "title": "令和7年度【山梨】関東地域連合審査会結果",
+    "description": "4/27開催。鈴木さん 四段合格。",
+    "file": null
+  },
+  {
+    "title": "令和7年度 春季大会結果",
+    "description": "鈴木さん 奨励賞。",
+    "file": null
+  },
+  {
+    "title": "令和6年度【名古屋】定期中央審査会結果",
+    "description": "岡田先生 錬士六段 合格。",
+    "file": null
+  },
+  {
+    "title": "令和6年度 第四回【東京】関東地域連合審査会結果",
+    "description": "李 鳳善さん 五段合格。",
+    "file": null
+  },
+  {
+    "title": "第41回 県西弓道大会 成績報告",
+    "description": "令和7年2月9日開催。準優勝：大脇さん。",
+    "file": null
+  },
+  {
+    "title": "令和6年度 県南追儺射会 成績報告",
+    "description": "2/2(日)開催。射詰め賞 阿部さん、入賞 田島さん、2位 大脇さん。",
+    "file": null
+  },
+  {
+    "title": "令和6年度 第3回 一般審査会（土浦）結果",
+    "description": "奥野さん 弐段合格。",
+    "file": null
+  },
+  {
+    "title": "令和6年度 新年射会 成績報告",
+    "description": "1/12(日)開催。鈴木さん 成人女子三段以下の部 5位。",
+    "file": null
+  },
+  {
+    "title": "令和6年度 第2回 一般審査会（取手）結果",
+    "description": "丸山さん 初段、鈴木さん 参段、有田さん 参段 合格。",
+    "file": null
+  },
+  {
+    "title": "令和7年度 県連・全弓連スケジュール",
+    "description": "県連スケジュール（茨城県弓道連盟）、全国大会年間スケジュール（全日本弓道連盟）、中央審査会年間スケジュール（全日本弓道連盟）、関東地域連合審査予定表",
+    "file": "../schedule/index.html"
+  },
+  {
+    "title": "令和6年度 県連・全弓連スケジュール",
+    "description": "県連スケジュール（令和6年度）、全国大会年間スケジュール、中央審査会年間スケジュール、関東地域連合審査予定表（令和6年度）",
+    "file": "../schedule/index.html"
+  },
+  {
+    "title": "大会出席簿について",
+    "description": "龍翔会の皆様\n\n先月から道場に貼ってあるかと思いますが、大会の出席簿について新しく作りましたので、今後はそちらを使っていただけると幸いです。",
+    "file": "../../assets/PDF/龍翔会　大会申し込み.pdf"
+  },
+  {
+    "title": "県登録支部名の変更について",
+    "description": "龍翔会の皆様\n\n県登録支部名についてのアンケートにご協力をありがとうございました。その結果、どちらでもよいと回答された方が半数を占めました。\n\nそこで、5月31日、道場に於いて話し合い、今年度から「市」を省き、「龍ケ崎支部」と変更することとなりました。ご了承ください。よろしくお願いいたします。",
+    "file": null
+  },
+  {
+    "title": "総会議事録について",
+    "description": "総会当日はご多用の中お集まりいただき、ありがとうございました。\n\n議事録を道場内に3月いっぱい掲示しておきますのでご確認ください。\n\nまた、入会届がまだの方は、スポーツ保険等の関係上、3月22日(土)までにご持参をお願いいたします。",
+    "file": null
+  },
+  {
+    "title": "令和7年度(案)",
+    "description": "龍翔会の皆様へ\n\n3月16日10時から令和7年度に向けての総会を実施します。当日ご参加いただけない方は、3月16日までに会費をご持参ください。よろしくお願いいたします。\n\nまた、継続されるかどうかのご連絡を支部長か会員までお願いいたします。ご連絡がない場合は、残念ながら継続の手続きができませんのでご了承ください。",
+    "file": [
+      "../../assets/PDF/IMG_2192-3.pdf",
+      "../../assets/PDF/IMG_2192-2.pdf",
+      "../../assets/PDF/IMG_2192-1.pdf"
+    ]
+  },
+  {
+    "title": "総会開催前に",
+    "description": "3月16日に総会を予定しております。当日までにご意見をいただきたく思います。\n\n（以下、長文意見を掲載）\n・龍翔会の中で県連龍ケ崎市支部に登録されていない方が増加\n・会費、役員等は総会で議決すべき事項\n・部活動の外部委託の話もあり時間がかかる可能性あり\n\nご面倒でもご協力をお願いいたします。これはあくまで一つの意見です。皆様からのご意見をどうぞよろしくお願いします。",
+    "file": null
+  },
+  {
+    "title": "お問い合わせ",
+    "description": "お問い合わせは下記フォームからお願いします。",
+    "form": "https://docs.google.com/forms/d/e/1FAIpQLSfl7FGrwlo43TF8zVCPCwCB0ndTWom7y8t09x4CSG0hGdGsdw/viewform?embedded=true",
+    "access": {
+      "最寄駅": "関東鉄道竜ヶ崎線龍ヶ崎駅より徒歩14分",
+      "活動拠点": "〒301-0837 茨城県龍ヶ崎市根町3777 龍ヶ崎中学校弓道場",
+      "活動日": "毎週 火曜、木曜、土曜 19:00~21:00\n第一、第三 日曜 10:00~12:00"
+    },
+    "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25846.109282315432!2d140.15264908771445!3d35.92828454163967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60227be371ed967f%3A0xc8c413ddf8a18b38!2z6b6N44Kx5bSO5biC56uL6b6N44Kx5bSO5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1756951037498!5m2!1sja!2sjp"
+  },
+  {
+    "title": "初心者教室について",
+    "description": "龍翔会の初心者教室では、弓道の基本から丁寧に指導いたします。姿勢や礼儀作法も含め、初めての方でも安心してご参加いただけます。",
+    "sections": [
+      {
+        "subtitle": "見学について",
+        "description": "稽古の見学は随時受け付けております。ご希望の方はお問い合わせページよりご連絡ください。",
+        "link": "../contact/index.html",
+        "image": "../../assets/img/見学受付中.png"
+      },
+      {
+        "subtitle": "過去の初心者教室の様子",
+        "description": "過去の活動の記録はブログにまとめています。",
+        "link": "https://ryusyokai.blogspot.com",
+        "image": "../../assets/img/名称未設定-11.png"
+      }
+    ]
+  }
+];
+
+
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const searchResults = document.getElementById('searchResults');
+
+searchBtn.addEventListener('click', () => {
+  const query = searchInput.value.toLowerCase();
+  searchResults.innerHTML = '';
+
+  const results = siteData.filter(item => {
+    const mainText = item.title + ' ' + item.description;
+    const sectionText = item.sections ? item.sections.map(s => s.subtitle + ' ' + s.description).join(' ') : '';
+    return mainText.toLowerCase().includes(query) || sectionText.toLowerCase().includes(query);
+  });
+
+  if (results.length === 0) {
+    searchResults.innerHTML = '<p>該当する情報は見つかりませんでした。</p>';
+    return;
+  }
+
+  results.forEach(item => {
+    const div = document.createElement('div');
+    div.classList.add('search-item');
+
+    let content = `<h3>${item.title}</h3><p>${item.description}</p>`;
+
+    // PDFファイル
+    if (item.file) {
+      if (Array.isArray(item.file)) {
+        content += '<ul>' + item.file.map(f => `<li><a href="${f}" target="_blank">📄 PDF</a></li>`).join('') + '</ul>';
+      } else {
+        content += `<p><a href="${item.file}" target="_blank">📄 PDF</a></p>`;
+      }
+    }
+
+    // フォーム
+    if (item.form) {
+      content += `<iframe src="${item.form}" width="100%" height="600" frameborder="0"></iframe>`;
+    }
+
+    // アクセス情報
+    if (item.access) {
+      content += '<div class="access-info">';
+      for (const key in item.access) {
+        content += `<p><strong>${key}:</strong> ${item.access[key]}</p>`;
+      }
+      content += '</div>';
+    }
+
+    // 地図
+    if (item.map) {
+      content += `<iframe src="${item.map}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+    }
+
+    // サブセクション
+    if (item.sections) {
+      item.sections.forEach(sec => {
+        content += `<h4>${sec.subtitle}</h4><p>${sec.description}</p>`;
+        if (sec.link) content += `<p><a href="${sec.link}" target="_blank">リンクはこちら</a></p>`;
+        if (sec.image) content += `<img src="${sec.image}" alt="${sec.subtitle}" style="max-width:200px;">`;
+      });
+    }
+
+    div.innerHTML = content;
+    searchResults.appendChild(div);
+  });
+});
+</script>
+
 
 </body>
 </html>
