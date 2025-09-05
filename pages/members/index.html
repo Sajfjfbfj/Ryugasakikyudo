@@ -152,7 +152,7 @@
 
 </section>
 
-
+<button id="backToTop" class="back-to-top">↑</button>
 </main>
 
  
@@ -203,6 +203,22 @@ async function notifyUpdate() {
 // ページロード時に通知したい場合
 // notifyUpdate();
 </script>
+<script>
+  const backToTop = document.getElementById("backToTop");
 
+  // スクロールしたら表示/非表示を切り替え
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  });
+
+  // クリックでトップへ戻る
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
 </body>
 </html>
