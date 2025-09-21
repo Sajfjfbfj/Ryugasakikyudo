@@ -1,0 +1,9 @@
+[
+  { "page": "ホーム", "url": "index.html", "date": "2025-09-21" },
+  { "page": "初心者教室", "url": "pages/beginner/index.html", "date": "2025-09-20" },
+  { "page": "スケジュール", "url": "pages/schedule/index.html", "date": "2025-09-19" },
+  { "page": "大会・審査要項", "url": "pages/tournament/index.html", "date": "2025-09-18" },
+  { "page": "大会・審査実績", "url": "pages/seiseki/index.html", "date": "2025-09-21" },
+  { "page": "会員専用", "url": "pages/member/index.html", "date": "2025-09-16" },
+  { "page": "お問い合わせ", "url": "pages/contact/index.html", "date": "2025-09-15" }
+]

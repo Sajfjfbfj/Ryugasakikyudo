@@ -176,63 +176,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <!-- 更新情報の自動生成スクリプト -->
-
-
 <script>
-  // 更新したいページのリスト
-  const updatedPages = [
-    { page: "ホーム", url: "index.html" },
-    { page: "初心者教室", url: "pages/beginner/index.html" },
-    { page: "スケジュール", url: "pages/schedule/index.html" },
-    { page: "大会・審査要項", url: "pages/tournament/index.html" },
-    { page: "大会・審査実績", url: "pages/seiseki/index.html" },
-    { page: "会員専用", url: "pages/member/index.html" },
-    { page: "お問い合わせ", url: "pages/contact/index.html" }
-  ];
+const newsList = document.getElementById("news-list");
 
-  const newsList = document.getElementById("news-list");
-
-  // URLから最終更新日を取得する関数
-  async function getLastModified(url) {
-    const response = await fetch(url, { method: "HEAD" });
-    return response.headers.get("last-modified");
-  }
-
-  async function showUpdates() {
-    const updates = [];
-
-    for (const p of updatedPages) {
-      const lastModified = await getLastModified(p.url);
-      if (lastModified) {
-        updates.push({
-          page: p.page,
-          url: p.url,
-          date: new Date(lastModified)
-        });
-      }
-    }
-
-    // 更新日でソート（新しい順）
-    updates.sort((a, b) => b.date - a.date);
+// JSONから更新履歴を読み込み、最新順に表示
+fetch('updates.json')
+  .then(res => res.json())
+  .then(data => {
+    // 日付でソート（新しい順）
+    data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     // 最新5件だけ表示
-    updates.slice(0, 5).forEach(update => {
+    data.slice(0, 5).forEach(update => {
       const li = document.createElement("li");
       const a = document.createElement("a");
-
-      const month = update.date.getMonth() + 1;
-      const day = update.date.getDate();
-
       a.href = update.url;
-      a.textContent = `${month}月${day}日 ${update.page}を更新しました`;
 
+      const date = new Date(update.date);
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+
+      a.textContent = `${month}月${day}日 ${update.page}を更新しました`;
       li.appendChild(a);
       newsList.appendChild(li);
     });
-  }
-
-  showUpdates();
+  })
+  .catch(err => console.error("更新情報の読み込みに失敗しました:", err));
 </script>
+
 
 <script type="application/ld+json">
 {
