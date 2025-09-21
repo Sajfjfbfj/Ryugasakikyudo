@@ -45,6 +45,9 @@
     });
   });
 </script>
+<!-- GSAP本体 -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
 </head>
 <body>
   
@@ -86,13 +89,14 @@
 
 
   <!-- サイト紹介 -->
-  <section id="about">
-  <img src="assets/img/DSC_0240.jpg" alt="龍翔会 弓道" class="about-bg">
-  <div class="about-inner">
-    <h2>龍翔会</h2>
-    <p>茨城県龍ヶ崎市を拠点に練習しています！</p>
-  </div>
-</section>
+<div class="text-animation-container">
+  <h1 class="animated-title" data-text="Beautiful Typography">
+    龍翔会
+  </h1>
+  <p class="animated-paragraph">
+    茨城県龍ヶ崎市を拠点に稽古してます！
+  </p>
+</div>
 
 
 <main class="container">
@@ -499,7 +503,59 @@ searchBtn.addEventListener('click', () => {
   });
 });
 </script>
+<script>
+    // テキストを文字単位に分割する関数
+    function splitText(element) {
+      const text = element.textContent;
+      element.innerHTML = '';
+      text.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = char === ' ' ? '\u00A0' : char; // スペース処理
+        element.appendChild(span);
+      });
+    }
 
+    // タイトルのアニメーション
+    const title = document.querySelector('.animated-title');
+    splitText(title);
+
+    gsap.from('.animated-title .char', {
+      duration: 0.8,
+      y: 100,
+      opacity: 0,
+      rotationX: -90,
+      stagger: 0.05,
+      ease: "back.out(1.7)",
+      transformOrigin: "50% 50% -50px"
+    });
+
+    // 段落のアニメーション
+    const paragraph = document.querySelector('.animated-paragraph');
+    splitText(paragraph);
+
+    gsap.from('.animated-paragraph .char', {
+      duration: 0.6,
+      y: 50,
+      opacity: 0,
+      stagger: 0.02,
+      ease: "power2.out",
+      delay: 1
+    });
+
+    // カラフルなテキストエフェクト
+    gsap.to('.animated-title .char', {
+      duration: 2,
+      color: () => {
+        const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      },
+      stagger: 0.1,
+      repeat: -1,
+      yoyo: true,
+      delay: 2
+    });
+  </script>
 
 
 </body>

@@ -41,3 +41,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cards.forEach(card => observer.observe(card));
 });
+// テキストを文字単位に分割する関数
+function splitText(element) {
+  const text = element.textContent;
+  element.innerHTML = '';
+
+  text.split('').forEach(char => {
+    const span = document.createElement('span');
+    span.className = 'char';
+    span.textContent = char === ' ' ? '\u00A0' : char; // スペースの処理
+    element.appendChild(span);
+  });
+}
+
+// タイトルのアニメーション
+const title = document.querySelector('.animated-title');
+splitText(title);
+
+gsap.from('.animated-title .char', {
+  duration: 0.8,
+  y: 100,
+  opacity: 0,
+  rotationX: -90,
+  stagger: 0.05,
+  ease: "back.out(1.7)",
+  transformOrigin: "50% 50% -50px"
+});
+
+// 段落のアニメーション
+const paragraph = document.querySelector('.animated-paragraph');
+splitText(paragraph);
+
+gsap.from('.animated-paragraph .char', {
+  duration: 0.6,
+  y: 50,
+  opacity: 0,
+  stagger: 0.02,
+  ease: "power2.out",
+  delay: 1
+});
+
+// カラフルなテキストエフェクト
+gsap.to('.animated-title .char', {
+  duration: 2,
+  color: () => {
+    const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  },
+  stagger: 0.1,
+  repeat: -1,
+  yoyo: true,
+  delay: 2
+});

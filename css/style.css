@@ -92,6 +92,41 @@ main {
   text-decoration: underline;
   color: #f0f0f0; /* ホバー時は少し明るめに */
 }
+.text-animation-container {
+  max-width: 800px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 40px;
+}
+
+.text-animation-container {
+  max-width: 800px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.7); /* 白＋透明度70% */
+  border-radius: 12px; /* 角丸はお好みで */
+}
+
+
+.animated-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.animated-paragraph {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #666;
+  overflow: hidden;
+}
+
+.char {
+  display: inline-block;
+}
 
 
 /* ====== ヘッダー ====== */
