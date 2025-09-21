@@ -203,8 +203,10 @@ document.addEventListener("DOMContentLoaded", () => {
   "url": "https://ryugasakikyudo.vercel.app/"
 }
 </script>
+
+
 <script>
-  // 更新したページの情報
+  // 更新したいページのリスト
   const updatedPages = [
     { page: "ホーム", url: "index.html" },
     { page: "初心者教室", url: "pages/beginner/index.html" },
@@ -216,21 +218,49 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const newsList = document.getElementById("news-list");
-  const today = new Date();
-  const formattedDate = `${today.getMonth() + 1}月${today.getDate()}日`;
 
-  // 最新5件だけに制限
-  const latestUpdates = updatedPages.slice(-5); // 配列の最後の5件を取得
+  // URLから最終更新日を取得する関数
+  async function getLastModified(url) {
+    const response = await fetch(url, { method: "HEAD" });
+    return response.headers.get("last-modified");
+  }
 
-  latestUpdates.forEach(update => {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    a.href = update.url;
-    a.textContent = `${formattedDate} ${update.page}を更新しました`;
-    li.appendChild(a);
-    newsList.appendChild(li);
-  });
+  async function showUpdates() {
+    const updates = [];
+
+    for (const p of updatedPages) {
+      const lastModified = await getLastModified(p.url);
+      if (lastModified) {
+        updates.push({
+          page: p.page,
+          url: p.url,
+          date: new Date(lastModified)
+        });
+      }
+    }
+
+    // 更新日でソート（新しい順）
+    updates.sort((a, b) => b.date - a.date);
+
+    // 最新5件だけ表示
+    updates.slice(0, 5).forEach(update => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      const month = update.date.getMonth() + 1;
+      const day = update.date.getDate();
+
+      a.href = update.url;
+      a.textContent = `${month}月${day}日 ${update.page}を更新しました`;
+
+      li.appendChild(a);
+      newsList.appendChild(li);
+    });
+  }
+
+  showUpdates();
 </script>
+
 <script>
   const backToTop = document.getElementById("backToTop");
 
