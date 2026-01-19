@@ -1,4 +1,8 @@
 [
+    { "page": "大会・審査成績", "url": "pages/seiseki/index.html", "date": "2026-01-19" },
+
+    { "page": "会員専用", "url": "pages/member/index.html", "date": "2026-01-19" },
+
     { "page": "大会・審査成績", "url": "pages/seiseki/index.html", "date": "2025-11-23" },
 
   { "page": "大会・審査要項", "url": "pages/tournament/index.html", "date": "2025-11-23" },
