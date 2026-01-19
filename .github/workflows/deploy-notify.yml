@@ -3,7 +3,7 @@ name: Deploy and Notify
 on:
   push:
     branches:
-      - main  # mainブランチにpushしたら動く
+      - main
 
 jobs:
   deploy:
@@ -13,12 +13,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to Vercel
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: |
-          npm install -g vercel
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
 
       - name: Send OneSignal Notification
         run: |
@@ -29,6 +29,6 @@ jobs:
             "app_id": "${{ secrets.ONESIGNAL_APP_ID }}",
             "included_segments": ["All"],
             "headings": {"en": "龍翔会サイトが更新されました"},
-            "contents": {"en": "ページが更新されました！最新情報をご覧ください。"},
+            "contents": {"en": "ページが更新されました!最新情報をご覧ください。"},
             "url": "https://ryugasakikyudo.vercel.app/"
           }'
