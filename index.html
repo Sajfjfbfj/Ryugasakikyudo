@@ -37,8 +37,9 @@
     });
   </script>
 
-  <!-- GSAP本体 -->
+  <!-- GSAP & Three.js (Lando Norris 3D WebGL Engine) -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body class="modern-home">
 
@@ -97,15 +98,15 @@
        SECTION #1: HERO (.s.home-hero) - EXACT LANDO NORRIS 3D CANVAS & HUD
        ========================================================================== -->
   <section class="s home-hero" id="heroSection">
+    <!-- Lando Norris 特大バックグラウンド・アウトライン文字 (深度レイヤー1) -->
+    <div class="hero-bg-outline-text" id="heroBgOutline">RYUSYOKAI</div>
+
+    <!-- 3Dインタラクティブ WebGL キャンバス (Three.js 3D 弓道オブジェクト - 深度レイヤー2) -->
+    <div class="gl-canvas" id="glCanvasWrap">
+      <canvas id="threeCanvas"></canvas>
+    </div>
+
     <div class="c home-hero">
-      
-      <!-- 3Dインタラクティブジャイロキャンバス（射手アバター & 回転レティクル） -->
-      <div class="gl-canvas">
-        <div class="hero-3d-model-wrap" id="heroModelWrap">
-          <img src="assets/img/26229848_s.jpg" alt="弓道 射手" class="hero-3d-model-img">
-          <div class="hero-reticle-ring"></div>
-        </div>
-      </div>
 
       <!-- 左HUDウィジェット: DOJO INTEL -->
       <div class="home-hero-left-intel-w" id="heroLeftIntel">
@@ -818,111 +819,463 @@ if (searchBtn && searchInput && searchResults) {
 </script>
 
 <!-- ==========================================================================
-     EXACT LANDO NORRIS GSAP HERO ANIMATIONS & GYRO PARALLAX
+     EXACT LANDO NORRIS 3D WEBGL HERO CANVAS (Three.js) & GSAP MOTIONS
      ========================================================================== -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const landoEase = "power4.out";
-  const tl = gsap.timeline({ defaults: { ease: landoEase } });
+(function initThreeHero() {
+  const canvas = document.getElementById('threeCanvas');
+  const container = document.getElementById('glCanvasWrap');
+  if (!canvas || !container || typeof THREE === 'undefined') return;
 
-  // 1. 3Dモデル中央アバター & 回転レティクル登場
-  tl.fromTo("#heroModelWrap",
-    { scale: 0.4, opacity: 0, rotationY: -45, y: 80 },
-    { scale: 1, opacity: 1, rotationY: 0, y: 0, duration: 1.8, ease: "back.out(1.4)" },
-    0
-  )
-  // 2. 中央タイポグラフィ（RYUSYOKAI & 龍翔会）スプリット登場
-  .fromTo(".text-impact-hero",
-    { y: 70, opacity: 0, letterSpacing: "0.15em" },
-    { y: 0, opacity: 1, letterSpacing: "-0.04em", duration: 1.6, ease: "expo.out" },
-    0.3
-  )
-  .fromTo(".home-hero-kanji-sub",
-    { y: 40, opacity: 0, scale: 0.9 },
-    { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.5)" },
-    0.5
-  )
-  .fromTo(".home-hero-tagline, .home-hero-btn-group",
-    { y: 30, opacity: 0 },
-    { y: 0, opacity: 1, duration: 1 },
-    0.8
-  )
-  // 3. 左右HUDウィジェットの鋭いスライドイン
-  .fromTo("#heroLeftIntel",
-    { x: -100, opacity: 0 },
-    { x: 0, opacity: 1, duration: 1.2 },
-    0.7
-  )
-  .fromTo("#heroRightWidget",
-    { x: 100, opacity: 0 },
-    { x: 0, opacity: 1, duration: 1.2 },
-    0.7
-  );
+  // Scene & Camera
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+  camera.position.set(0, 0, 7.5);
 
-  // 4. マウス追従 3D Gyro Parallax (Lando Norris WebGL Canvas モーション)
-  const heroSection = document.getElementById("heroSection");
-  const modelWrap = document.getElementById("heroModelWrap");
-  const centerText = document.getElementById("heroCenterText");
-  const leftIntel = document.getElementById("heroLeftIntel");
-  const rightWidget = document.getElementById("heroRightWidget");
+  // WebGL Renderer with High-Performance Antialiasing
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true,
+    powerPreference: 'high-performance'
+  });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  if (heroSection && window.matchMedia("(min-width: 992px)").matches) {
-    heroSection.addEventListener("mousemove", (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const normX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 ~ +0.5
-      const normY = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 ~ +0.5
+  // Root Group for All 3D Objects
+  const rootGroup = new THREE.Group();
+  scene.add(rootGroup);
 
-      // 3Dアバターモデルの強烈なチルト＆パン
-      gsap.to(modelWrap, {
-        rotationY: normX * 28,
-        rotationX: -normY * 24,
-        x: normX * 42,
-        y: normY * 34,
-        duration: 0.6,
-        ease: "power2.out"
-      });
+  // 1. Procedural High-Res Kasumi-Mato (霞的) Texture
+  function createKasumiMatoTexture() {
+    const size = 1024;
+    const c = document.createElement('canvas');
+    c.width = size;
+    c.height = size;
+    const ctx = c.getContext('2d');
+    const cx = size / 2;
+    const cy = size / 2;
 
-      // 中央テキストの視差
-      gsap.to(centerText, {
-        rotationY: normX * 12,
-        rotationX: -normY * 10,
-        x: normX * 20,
-        y: normY * 16,
-        duration: 0.8,
-        ease: "power2.out"
-      });
+    // Official Kasumi-mato ring proportions (Diameter 36cm, Radius 18cm)
+    const rings = [
+      { r: 18.0, color: '#f5f5ee' }, // 5. 外白
+      { r: 14.4, color: '#0d0f12' }, // 4. 外黒
+      { r: 10.8, color: '#f5f5ee' }, // 3. 中白
+      { r: 7.2,  color: '#0d0f12' }, // 2. 中黒
+      { r: 3.6,  color: '#f5f5ee' }  // 1. 的芯 (中央白)
+    ];
 
-      // 左HUDウィジェット
-      gsap.to(leftIntel, {
-        x: -normX * 16,
-        y: -normY * 16,
-        rotationY: normX * 8,
-        duration: 0.8,
-        ease: "power2.out"
-      });
+    const maxR = cx - 18;
+    // Outer wood base rim
+    ctx.fillStyle = '#181b15';
+    ctx.fillRect(0, 0, size, size);
 
-      // 右HUDウィジェット
-      gsap.to(rightWidget, {
-        x: normX * 16,
-        y: normY * 16,
-        rotationY: normX * 8,
-        duration: 0.8,
-        ease: "power2.out"
-      });
+    // Draw concentric target circles
+    rings.forEach(ring => {
+      const pxR = (ring.r / 18.0) * maxR;
+      ctx.beginPath();
+      ctx.arc(cx, cy, pxR, 0, Math.PI * 2);
+      ctx.fillStyle = ring.color;
+      ctx.fill();
     });
 
-    heroSection.addEventListener("mouseleave", () => {
-      gsap.to([modelWrap, centerText, leftIntel, rightWidget], {
-        rotationY: 0,
-        rotationX: 0,
-        x: 0,
-        y: 0,
-        duration: 1.2,
-        ease: "power3.out"
-      });
-    });
+    // Subtle washi paper concentric hairline rings
+    for (let i = 1; i < 18; i++) {
+      ctx.strokeStyle = 'rgba(210, 255, 0, 0.08)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, (i / 18.0) * maxR, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Outer neon lime border hairline
+    ctx.strokeStyle = '#d2ff00';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Center Gold / Lime Bullseye Pin
+    ctx.fillStyle = '#d2ff00';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    const texture = new THREE.CanvasTexture(c);
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return texture;
   }
-});
+
+  const matoTexture = createKasumiMatoTexture();
+
+  // 2. 3D Mato Disc Geometry & Materials
+  const matoRadius = 2.45;
+  const matoThickness = 0.24;
+  const discGeo = new THREE.CylinderGeometry(matoRadius, matoRadius, matoThickness, 64);
+
+  const sideMat = new THREE.MeshStandardMaterial({
+    color: 0x191c16,
+    roughness: 0.7,
+    metalness: 0.3
+  });
+  const frontMat = new THREE.MeshStandardMaterial({
+    map: matoTexture,
+    roughness: 0.45,
+    metalness: 0.08
+  });
+  const backMat = new THREE.MeshStandardMaterial({
+    color: 0x141712,
+    roughness: 0.85,
+    metalness: 0.1
+  });
+
+  // Cylinder faces: [0: side, 1: top (front), 2: bottom (back)]
+  const matoDisc = new THREE.Mesh(discGeo, [sideMat, frontMat, backMat]);
+  matoDisc.rotation.x = Math.PI / 2;
+  rootGroup.add(matoDisc);
+
+  // Signature Lando Norris Electric Lime Outer Bezel Ring
+  const limeBezelGeo = new THREE.TorusGeometry(matoRadius + 0.03, 0.032, 16, 64);
+  const limeBezelMat = new THREE.MeshStandardMaterial({
+    color: 0xd2ff00,
+    emissive: 0xd2ff00,
+    emissiveIntensity: 0.8,
+    roughness: 0.15,
+    metalness: 0.85
+  });
+  const limeBezel = new THREE.Mesh(limeBezelGeo, limeBezelMat);
+  rootGroup.add(limeBezel);
+
+  // 3. 3D Traditional Kyudo Arrow (矢 - Ya)
+  const arrowGroup = new THREE.Group();
+
+  // Bamboo Shaft (箆 - No)
+  const shaftLength = 5.8;
+  const shaftGeo = new THREE.CylinderGeometry(0.035, 0.035, shaftLength, 16);
+  const shaftMat = new THREE.MeshStandardMaterial({
+    color: 0xd6a55c,
+    roughness: 0.35,
+    metalness: 0.25
+  });
+  const shaft = new THREE.Mesh(shaftGeo, shaftMat);
+  arrowGroup.add(shaft);
+
+  // Steel Arrowhead (板付 - Itatsuki)
+  const tipGeo = new THREE.ConeGeometry(0.075, 0.4, 16);
+  const tipMat = new THREE.MeshStandardMaterial({
+    color: 0x888888,
+    roughness: 0.18,
+    metalness: 0.95
+  });
+  const tip = new THREE.Mesh(tipGeo, tipMat);
+  tip.position.y = -shaftLength / 2 - 0.2;
+  tip.rotation.x = Math.PI;
+  arrowGroup.add(tip);
+
+  // 3 Raptor Fletching Feathers (羽根 - Hane)
+  const featherGroup = new THREE.Group();
+  const featherWidth = 0.18;
+  const featherHeight = 0.95;
+  const featherGeo = new THREE.PlaneGeometry(featherWidth, featherHeight);
+  const featherMat = new THREE.MeshStandardMaterial({
+    color: 0xf4f4f0,
+    side: THREE.DoubleSide,
+    roughness: 0.65,
+    metalness: 0.08
+  });
+
+  for (let i = 0; i < 3; i++) {
+    const f = new THREE.Mesh(featherGeo, featherMat);
+    f.position.y = shaftLength / 2 - 0.58;
+    f.rotation.y = (i * Math.PI * 2) / 3;
+    f.position.x = Math.cos((i * Math.PI * 2) / 3) * (featherWidth / 2 + 0.02);
+    f.position.z = Math.sin((i * Math.PI * 2) / 3) * (featherWidth / 2 + 0.02);
+    featherGroup.add(f);
+  }
+  arrowGroup.add(featherGroup);
+
+  // Nock (筈 - Hazu) with electric lime accent
+  const hazuGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.2, 16);
+  const hazuMat = new THREE.MeshStandardMaterial({
+    color: 0xd2ff00,
+    emissive: 0xd2ff00,
+    emissiveIntensity: 0.9,
+    roughness: 0.2,
+    metalness: 0.6
+  });
+  const hazu = new THREE.Mesh(hazuGeo, hazuMat);
+  hazu.position.y = shaftLength / 2 + 0.1;
+  arrowGroup.add(hazu);
+
+  // Angle arrow dynamically piercing target
+  arrowGroup.position.set(0.18, 0.12, 0.22);
+  arrowGroup.rotation.set(-0.35, 0.28, 0.42);
+  rootGroup.add(arrowGroup);
+
+  // 4. Gyroscopic Telemetry Reticle Rings
+  const reticleGroup = new THREE.Group();
+
+  // Fine outer gold ring
+  const ring1Geo = new THREE.TorusGeometry(3.15, 0.012, 16, 80);
+  const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x8a997a, transparent: true, opacity: 0.35 });
+  const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+  reticleGroup.add(ring1);
+
+  // Mid lime reticle ring tilted
+  const ring2Geo = new THREE.TorusGeometry(3.5, 0.016, 16, 80);
+  const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xd2ff00, transparent: true, opacity: 0.45 });
+  const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+  ring2.rotation.x = 0.45;
+  reticleGroup.add(ring2);
+
+  rootGroup.add(reticleGroup);
+
+  // 5. Floating Glowing Dust Particles (130 particles)
+  const particleCount = 130;
+  const particleGeo = new THREE.BufferGeometry();
+  const posArray = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i += 3) {
+    posArray[i] = (Math.random() - 0.5) * 15;
+    posArray[i + 1] = (Math.random() - 0.5) * 11;
+    posArray[i + 2] = (Math.random() - 0.5) * 8 - 1;
+  }
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+  const particleMat = new THREE.PointsMaterial({
+    size: 0.065,
+    color: 0xd2ff00,
+    transparent: true,
+    opacity: 0.55,
+    blending: THREE.AdditiveBlending
+  });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // 6. Professional Studio Lighting Setup
+  const ambientLight = new THREE.AmbientLight(0x283222, 1.4);
+  scene.add(ambientLight);
+
+  const mainLight = new THREE.DirectionalLight(0xffffff, 2.3);
+  mainLight.position.set(5, 7, 6);
+  scene.add(mainLight);
+
+  // Signature electric lime rim light from side/back
+  const limeRimLight = new THREE.PointLight(0xd2ff00, 3.8, 18);
+  limeRimLight.position.set(-5, -2, -3);
+  scene.add(limeRimLight);
+
+  const softFill = new THREE.PointLight(0x88bbff, 1.0, 15);
+  softFill.position.set(4, -4, 4);
+  scene.add(softFill);
+
+  // 7. Interactive Orbit Drag & Gyro Parallax Tracking
+  let isDragging = false;
+  let prevMouseX = 0;
+  let prevMouseY = 0;
+  let rotVelX = 0;
+  let rotVelY = 0;
+  let targetRotX = 0.12;
+  let targetRotY = -0.15;
+  let mouseNormX = 0;
+  let mouseNormY = 0;
+
+  const onPointerDown = (e) => {
+    isDragging = true;
+    prevMouseX = e.clientX || (e.touches && e.touches[0].clientX);
+    prevMouseY = e.clientY || (e.touches && e.touches[0].clientY);
+  };
+
+  const onPointerMove = (e) => {
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+    const rect = container.getBoundingClientRect();
+    mouseNormX = (clientX - rect.left) / rect.width - 0.5;
+    mouseNormY = (clientY - rect.top) / rect.height - 0.5;
+
+    if (isDragging) {
+      const deltaX = clientX - prevMouseX;
+      const deltaY = clientY - prevMouseY;
+      prevMouseX = clientX;
+      prevMouseY = clientY;
+
+      rotVelY += deltaX * 0.006;
+      rotVelX += deltaY * 0.006;
+    }
+  };
+
+  const onPointerUp = () => {
+    isDragging = false;
+  };
+
+  window.addEventListener('mousedown', (e) => {
+    if (e.target.closest('a, button, input')) return;
+    onPointerDown(e);
+  });
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.target.closest('a, button, input')) return;
+    onPointerDown(e);
+  }, { passive: true });
+  window.addEventListener('touchmove', onPointerMove, { passive: true });
+  window.addEventListener('touchend', onPointerUp);
+
+  // Responsive Viewport Resize
+  const handleResize = () => {
+    if (!container) return;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    if (w < 768) {
+      camera.position.z = 9.6;
+    } else {
+      camera.position.z = 7.5;
+    }
+  };
+  window.addEventListener('resize', handleResize);
+  handleResize();
+
+  // 8. GSAP Entrance Timeline
+  rootGroup.scale.set(0.01, 0.01, 0.01);
+  if (typeof gsap !== 'undefined') {
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    // 3D Object Zooms in from Depth
+    tl.to(rootGroup.scale, {
+      x: 1,
+      y: 1,
+      z: 1,
+      duration: 1.8,
+      ease: "back.out(1.3)",
+      delay: 0.1
+    }, 0)
+    // Outline Background Typography Reveal
+    .fromTo("#heroBgOutline",
+      { scale: 0.8, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.8, ease: "expo.out" },
+      0.1
+    )
+    // Center Display Typography Split
+    .fromTo(".text-impact-hero",
+      { y: 70, opacity: 0, letterSpacing: "0.15em" },
+      { y: 0, opacity: 1, letterSpacing: "-0.03em", duration: 1.6, ease: "expo.out" },
+      0.3
+    )
+    .fromTo(".home-hero-kanji-sub",
+      { y: 40, opacity: 0, scale: 0.9 },
+      { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.5)" },
+      0.5
+    )
+    .fromTo(".home-hero-tagline, .home-hero-btn-group",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1 },
+      0.8
+    )
+    // Left & Right HUD Widgets Sharp Slide In
+    .fromTo("#heroLeftIntel",
+      { x: -100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.2 },
+      0.7
+    )
+    .fromTo("#heroRightWidget",
+      { x: 100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.2 },
+      0.7
+    );
+
+    // Desktop Gyro Parallax on Text & HUD Widgets
+    const heroSection = document.getElementById("heroSection");
+    const centerText = document.getElementById("heroCenterText");
+    const leftIntel = document.getElementById("heroLeftIntel");
+    const rightWidget = document.getElementById("heroRightWidget");
+
+    if (heroSection && window.matchMedia("(min-width: 992px)").matches) {
+      heroSection.addEventListener("mousemove", (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const normX = (e.clientX - rect.left) / rect.width - 0.5;
+        const normY = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(centerText, {
+          rotationY: normX * 10,
+          rotationX: -normY * 8,
+          x: normX * 18,
+          y: normY * 14,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+
+        gsap.to(leftIntel, {
+          x: -normX * 14,
+          y: -normY * 14,
+          rotationY: normX * 6,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+
+        gsap.to(rightWidget, {
+          x: normX * 14,
+          y: normY * 14,
+          rotationY: normX * 6,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      });
+
+      heroSection.addEventListener("mouseleave", () => {
+        gsap.to([centerText, leftIntel, rightWidget], {
+          rotationY: 0,
+          rotationX: 0,
+          x: 0,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out"
+        });
+      });
+    }
+  }
+
+  // 9. Render & Animation Loop
+  let clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsedTime = clock.getElapsedTime();
+
+    // Inertia damping & drag rotation
+    rootGroup.rotation.y += rotVelY;
+    rootGroup.rotation.x += rotVelX;
+    rotVelX *= 0.94;
+    rotVelY *= 0.94;
+
+    // Gentle idle spin & gyro parallax tilt
+    if (!isDragging) {
+      targetRotY += 0.002;
+      rootGroup.rotation.y += (targetRotY + mouseNormX * 0.55 - rootGroup.rotation.y) * 0.04;
+      rootGroup.rotation.x += (targetRotX + mouseNormY * 0.45 - rootGroup.rotation.x) * 0.04;
+    }
+
+    // Subtle breathing float
+    rootGroup.position.y = Math.sin(elapsedTime * 1.2) * 0.12;
+
+    // Reticle counter-rotations
+    ring1.rotation.z = elapsedTime * 0.15;
+    ring2.rotation.z = -elapsedTime * 0.2;
+    ring2.rotation.y = Math.sin(elapsedTime * 0.5) * 0.3;
+
+    // Floating particles drift
+    particles.rotation.y = elapsedTime * 0.03;
+    particles.rotation.x = Math.sin(elapsedTime * 0.02) * 0.1;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+})();
 </script>
 
 </body>

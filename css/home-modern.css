@@ -1,40 +1,34 @@
 /* ==========================================================================
-   LANDO NORRIS (landonorris.com) AUTHENTIC REPLICA ARCHITECTURE
+   LANDO NORRIS (landonorris.com) AWARD-WINNING ARCHITECTURE (by OFF+BRAND)
    Adapted for 龍翔会 弓道 (RYUSYOKAI KYUDO CLUB)
-   Layout, Typography, Animations, and Components exactly matching landonorris.com
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+JP:wght@600;900&family=Oswald:wght@500;700;800&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+JP:wght@600;900&family=Oswald:wght@500;700;800;900&family=Share+Tech+Mono&display=swap');
 
 :root {
   /* Lando Norris Core Palette */
-  --color--black: #111112;
-  --color--dark-green: #1a1e16;
-  --color--dark-green-tint-1: #282c20;
-  --color--dark-green-tint-2: #535450;
-  --color--lime: #d2ff00;       /* Lando Norris Electric Neon Lime */
+  --color--black: #0c0d10;
+  --color--dark-green: #141712;
+  --color--dark-green-tint-1: #1f241a;
+  --color--dark-green-tint-2: #45493f;
+  --color--lime: #d2ff00;       /* Lando Norris Signature Acid Neon Lime */
   --color--lime-off: #b2c73a;
-  --color--white: #f4f4ed;      /* Washi Off-White */
+  --color--lime-glow: rgba(210, 255, 0, 0.45);
+  --color--white: #f5f5ee;      /* Washi Off-White */
   --color--green-off-white-1: #dde1d2;
-  --color--green-off-white-2: #b4b8a5;
-  --color--grey-on-track: #b9bbad;
-  --color--vermilion: #e60033;  /* Japanese Traditional Wa Accent */
+  --color--green-off-white-2: #a2a894;
+  --color--vermilion: #e60033;  /* Japanese Traditional Wa Vermilion */
 
   /* Spacing & Fluid Scaling */
   --gap: 1.25rem;
-  --gap-med: 2rem;
   --padding--container: 1.5rem;
-  --padding--xlarge: 5rem;
-  --padding--med: 3rem;
-  --fluid-container: 1400px;
+  --padding--xlarge: 5.5rem;
+  --fluid-container: 1440px;
   --animation-default: 0.75s cubic-bezier(0.65, 0.05, 0, 1);
 
   /* Typography Scale */
-  --text--impact: clamp(4.5rem, 11vw, 9.5rem);
-  --text--title-lg: clamp(2.8rem, 6vw, 5.2rem);
-  --text--h1: 4rem;
-  --text--h2: 3rem;
-  --text--h3: 1.8rem;
+  --text--impact: clamp(5rem, 12vw, 10.5rem);
+  --text--title-lg: clamp(2.8rem, 6.5vw, 5.5rem);
   
   --font-display: "Oswald", "Impact", "Helvetica Neue", sans-serif;
   --font-serif-wa: "Noto Serif JP", "Hiragino Mincho ProN", serif;
@@ -42,7 +36,6 @@
   --font-sans: "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
-/* Base resets matching Webflow & Lando Norris */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -56,6 +49,20 @@ body.modern-home {
   overflow-x: hidden;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background Subtle Grid Texture */
+body.modern-home::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ==========================================================================
@@ -68,10 +75,10 @@ body.modern-home {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 2rem;
-  background: rgba(17, 17, 18, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  padding: 1.2rem 2.2rem;
+  background: rgba(12, 13, 16, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -86,12 +93,17 @@ body.modern-home {
 .nav-brand-link img {
   height: 42px;
   width: auto;
-  filter: drop-shadow(0 0 10px rgba(210, 255, 0, 0.35));
+  filter: drop-shadow(0 0 10px var(--color--lime-glow));
+  transition: transform 0.3s ease;
+}
+
+.nav-brand-link:hover img {
+  transform: scale(1.06);
 }
 
 .nav-brand-text {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 800;
   letter-spacing: 0.15em;
   color: var(--color--white);
@@ -113,7 +125,7 @@ body.modern-home {
   text-transform: uppercase;
   background: rgba(210, 255, 0, 0.08);
   border: 1px solid rgba(210, 255, 0, 0.25);
-  padding: 4px 14px;
+  padding: 5px 16px;
   border-radius: 999px;
 }
 
@@ -140,7 +152,7 @@ body.modern-home {
   justify-content: center;
   align-items: center;
   height: 2.85rem;
-  padding: 0 1.4rem;
+  padding: 0 1.5rem;
   background-color: var(--color--lime);
   color: var(--color--black);
   border: 1px solid var(--color--lime);
@@ -160,7 +172,7 @@ body.modern-home {
   border-color: var(--color--white);
   color: var(--color--black);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(210, 255, 0, 0.35);
+  box-shadow: 0 8px 26px var(--color--lime-glow);
 }
 
 /* Hamburger button */
@@ -204,16 +216,16 @@ body.modern-home {
   background-color: var(--color--lime);
 }
 
-/* Search bar modal dropdown */
+/* Search dropdown modal */
 .nav-search-modal {
   position: absolute;
   top: calc(100% + 8px);
-  right: 2rem;
+  right: 2.2rem;
   width: 380px;
-  background: rgba(17, 17, 18, 0.98);
+  background: rgba(17, 18, 22, 0.98);
   border: 1px solid var(--color--lime);
   border-radius: 0.54rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
   padding: 12px;
   z-index: 1000;
   display: none;
@@ -280,9 +292,9 @@ body.modern-home {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 17, 18, 0.97);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  background: rgba(12, 13, 16, 0.97);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   z-index: 110;
   display: flex;
   align-items: center;
@@ -300,9 +312,9 @@ body.modern-home {
 .nav-menu-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  max-width: 1000px;
+  max-width: 1080px;
   width: 90%;
-  gap: 40px;
+  gap: 48px;
   align-items: center;
 }
 
@@ -310,21 +322,22 @@ body.modern-home {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+  transition: opacity 0.3s ease;
 }
 
 .nav-menu-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .nav-menu-links a {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
   font-weight: 800;
   color: var(--color--white);
   text-decoration: none;
@@ -340,7 +353,7 @@ body.modern-home {
 }
 
 /* ==========================================================================
-   HERO SECTION (.s.home-hero) - EXACT LANDO NORRIS ARCHITECTURE
+   HERO SECTION (.s.home-hero) - 3D THREE.JS WEBGL CANVAS & HUD
    ========================================================================== */
 .s.home-hero {
   position: relative;
@@ -364,54 +377,99 @@ body.modern-home {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 90px);
 }
 
-/* 3D GL Canvas & Center Stance Model */
+/* 3D WebGL Canvas Layer */
 .gl-canvas {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 2;
+  cursor: grab;
 }
 
-.hero-3d-model-wrap {
-  position: relative;
-  width: min(440px, 75vw);
-  height: min(440px, 75vw);
-  border-radius: 50%;
-  transform-style: preserve-3d;
-  will-change: transform;
+.gl-canvas:active {
+  cursor: grabbing;
 }
 
-.hero-3d-model-img {
+#threeCanvas {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  filter: contrast(115%) brightness(0.9);
-  box-shadow: 
-    0 0 60px rgba(0, 0, 0, 0.9),
-    0 0 40px rgba(210, 255, 0, 0.15);
+  display: block;
 }
 
-/* Rotating Targeting Reticle */
-.hero-reticle-ring {
+/* Background Giant Outline Typography (Lando Norris Signature Behind Layer) */
+.hero-bg-outline-text {
   position: absolute;
-  inset: -16px;
-  border-radius: 50%;
-  border: 1px dashed rgba(210, 255, 0, 0.4);
-  animation: reticle-spin 50s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(6.5rem, 18vw, 19rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
   pointer-events: none;
+  z-index: 1;
+  user-select: none;
+  text-transform: uppercase;
 }
 
-@keyframes reticle-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Center Stage Content Layer */
+.home-hero-center-text {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  pointer-events: none; /* Allows user to interact with 3D canvas behind */
+}
+
+.home-hero-center-text a,
+.home-hero-center-text button {
+  pointer-events: auto;
+}
+
+.text-impact-hero {
+  font-family: var(--font-display);
+  font-size: var(--text--impact);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.88;
+  color: var(--color--white);
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+}
+
+.text-impact-hero .highlight {
+  color: var(--color--lime);
+}
+
+.home-hero-kanji-sub {
+  font-family: var(--font-serif-wa);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  color: var(--color--white);
+  margin-top: 14px;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+}
+
+.home-hero-tagline {
+  max-width: 600px;
+  margin: 18px auto 0;
+  font-size: 0.96rem;
+  color: var(--color--green-off-white-2);
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.home-hero-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 30px;
 }
 
 /* EXACT Lando Norris Next Race HUD Widget (.home-hero-next-race-w) */
@@ -428,6 +486,7 @@ body.modern-home {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  pointer-events: auto;
 }
 
 .home-hero-next-race-outline {
@@ -505,12 +564,13 @@ body.modern-home {
   left: var(--gap);
   bottom: var(--gap);
   z-index: 20;
-  width: 160px;
-  background: rgba(26, 30, 22, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(210, 255, 0, 0.3);
+  width: 170px;
+  background: rgba(20, 23, 18, 0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(210, 255, 0, 0.35);
   border-radius: 0.54rem;
   padding: 16px 14px;
+  pointer-events: auto;
 }
 
 .home-hero-left-intel-w .text-eyebrow {
@@ -519,7 +579,7 @@ body.modern-home {
 
 .home-hero-left-intel-title {
   font-family: var(--font-display);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: #fff;
   margin-bottom: 6px;
@@ -528,57 +588,29 @@ body.modern-home {
 .home-hero-left-intel-desc {
   font-size: 0.72rem;
   color: var(--color--green-off-white-2);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-/* Center Giant Hero Typography (Exact Lando Norris Font Scale) */
-.home-hero-center-text {
-  position: relative;
-  z-index: 5;
-  text-align: center;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.text-impact-hero {
-  font-family: var(--font-display);
-  font-size: var(--text--impact);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  line-height: 0.88;
-  color: var(--color--white);
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
-}
-
-.text-impact-hero .highlight {
-  color: var(--color--lime);
-}
-
-.home-hero-kanji-sub {
-  font-family: var(--font-serif-wa);
-  font-size: clamp(2rem, 4.5vw, 3.8rem);
-  font-weight: 900;
-  letter-spacing: 0.22em;
-  color: var(--color--white);
-  margin-top: 14px;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-.home-hero-tagline {
-  max-width: 580px;
-  margin: 18px auto 0;
-  font-size: 0.95rem;
-  color: var(--color--green-off-white-2);
-  letter-spacing: 0.06em;
-  line-height: 1.8;
-}
-
-.home-hero-btn-group {
+/* 3D Drag/Rotate Hint Indicator */
+.hero-drag-hint {
+  position: absolute;
+  bottom: 24px;
   display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 28px;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--color--green-off-white-2);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-drag-hint-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color--lime);
+  animation: pulse-dot 2s infinite ease-in-out;
 }
 
 /* ==========================================================================
@@ -589,7 +621,7 @@ body.modern-home {
   background-color: var(--color--dark-green);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem 0;
+  padding: 1.6rem 0;
   overflow: hidden;
   position: relative;
   z-index: 10;
@@ -606,13 +638,13 @@ body.modern-home {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .marquee-signature-img {
-  height: 28px;
+  height: 30px;
   width: auto;
-  filter: drop-shadow(0 0 8px var(--color--lime));
+  filter: drop-shadow(0 0 10px var(--color--lime));
 }
 
 .text-impact-lg-mona.marquee-adv {
@@ -620,7 +652,7 @@ body.modern-home {
   display: flex;
   animation: lando-marquee 32s linear infinite;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -667,7 +699,7 @@ body.modern-home {
 .otot-home-card {
   position: relative;
   height: 520px;
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -693,7 +725,7 @@ body.modern-home {
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
-  filter: brightness(0.4) contrast(110%);
+  filter: brightness(0.38) contrast(110%);
   z-index: 1;
 }
 
@@ -713,7 +745,7 @@ body.modern-home {
 
 .text-impact-reg-brier {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-size: clamp(3rem, 6.5vw, 5rem);
   font-weight: 900;
   color: var(--color--lime);
   line-height: 0.9;
@@ -722,7 +754,7 @@ body.modern-home {
 
 .text-impact-reg-mona.line-increase {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-size: clamp(3rem, 6.5vw, 5rem);
   font-weight: 900;
   color: var(--color--white);
   line-height: 0.9;
@@ -746,6 +778,7 @@ body.modern-home {
   color: var(--color--lime);
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .otot-home-card:hover .otot-card-action {
@@ -797,11 +830,11 @@ body.modern-home {
   height: 380px;
   background-color: var(--color--black);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.75rem;
+  border-radius: 0.85rem;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  padding: 30px 24px;
+  padding: 32px 26px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -820,14 +853,14 @@ body.modern-home {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.4) contrast(115%);
+  filter: brightness(0.38) contrast(115%);
   transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
   z-index: 1;
 }
 
 .helmet-card:hover .helmet-card-img {
   transform: scale(1.1);
-  filter: brightness(0.6) contrast(125%);
+  filter: brightness(0.58) contrast(125%);
 }
 
 .helmet-card-content {
@@ -846,7 +879,7 @@ body.modern-home {
   font-weight: 700;
   letter-spacing: 0.2em;
   color: var(--color--lime);
-  background: rgba(17, 17, 18, 0.85);
+  background: rgba(17, 18, 22, 0.85);
   border: 1px solid rgba(210, 255, 0, 0.4);
   padding: 4px 10px;
   border-radius: 4px;
@@ -1128,7 +1161,7 @@ body.modern-home {
 @media (max-width: 768px) {
   .home-hero-next-race-w,
   .home-hero-left-intel-w {
-    display: none; /* In Lando Norris mobile, these are toggled or docked */
+    display: none;
   }
   .helmet-grid-layout {
     grid-template-columns: 1fr;
