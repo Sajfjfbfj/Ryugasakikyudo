@@ -106,17 +106,29 @@
       <canvas id="threeCanvas"></canvas>
     </div>
 
+    <!-- 射手シルエット & 和の気迫レイヤー -->
+    <div class="hero-archer-silhouette" id="heroArcher">
+      <img src="assets/img/26229848_s.jpg" alt="龍翔会 弓道射手">
+      <div class="hero-archer-kanji">正射必中</div>
+    </div>
+
     <div class="c home-hero">
 
       <!-- 左HUDウィジェット: DOJO INTEL -->
       <div class="home-hero-left-intel-w" id="heroLeftIntel">
-        <div class="text-eyebrow">DOJO INTEL</div>
-        <div class="home-hero-left-intel-title">龍ヶ崎拠点</div>
+        <div class="home-hero-intel-thumb">
+          <img src="assets/img/DSC_0240.jpg" alt="龍ヶ崎中学校 弓道場">
+          <div class="intel-thumb-badge">DOJO CAM</div>
+        </div>
+        <div class="text-eyebrow">DOJO INTEL // 龍ヶ崎拠点</div>
+        <div class="home-hero-left-intel-title">近的 28m / 6人立</div>
         <div class="home-hero-left-intel-desc">
           龍ヶ崎中学校 弓道場<br>
-          近的 28m / 6人立<br>
           火・木・土 19:00〜<br>
           日曜 10:00〜
+        </div>
+        <div class="home-hero-left-intel-coords">
+          LAT 35.9282° N / LON 140.1526° E
         </div>
       </div>
 
@@ -204,9 +216,12 @@
         <!-- ON TRACK: 競技・大会・審査 -->
         <a href="pages/tournament/index.html" class="otot-home-card">
           <img src="assets/img/24697911_s.jpg" alt="和弓 競技" class="otot-card-bg-img">
+          <div class="otot-card-veil"></div>
           <div class="otot-card-content">
             <div>
-              <div class="text-eyebrow" style="margin-bottom: 8px;">COMPETITION & EXAMS</div>
+              <div class="text-eyebrow" style="margin-bottom: 8px;">
+                COMPETITION & EXAMS <span class="otot-card-kanji-badge">競技・審査</span>
+              </div>
               <h2 class="text-impact-reg-brier">ON</h2>
               <h2 class="text-impact-reg-mona line-increase">TRACK</h2>
             </div>
@@ -224,9 +239,12 @@
         <!-- OFF TRACK: 道場・教室・会員 -->
         <a href="pages/beginner/index.html" class="otot-home-card">
           <img src="assets/img/30961622_s.jpg" alt="道場 的場" class="otot-card-bg-img">
+          <div class="otot-card-veil"></div>
           <div class="otot-card-content">
             <div>
-              <div class="text-eyebrow" style="margin-bottom: 8px;">COMMUNITY & EDUCATION</div>
+              <div class="text-eyebrow" style="margin-bottom: 8px;">
+                COMMUNITY & EDUCATION <span class="otot-card-kanji-badge">道場・修養</span>
+              </div>
               <h2 class="text-impact-reg-brier">OFF</h2>
               <h2 class="text-impact-reg-mona line-increase">TRACK</h2>
             </div>
@@ -251,7 +269,7 @@
   <section class="s home-helmets" id="portalSection">
     <div class="c home-helmets">
       <div class="helmets-header">
-        <div class="text-eyebrow" style="margin-bottom: 12px;">SECTION DIRECTORY</div>
+        <div class="text-eyebrow" style="margin-bottom: 12px;">SECTION DIRECTORY // 道場案内</div>
         <h2 class="text-title-lg-mona">
           DOJO <span>PORTAL</span>
         </h2>
@@ -263,7 +281,8 @@
       <div class="helmet-grid-layout">
         <!-- 01 初心者教室 -->
         <a href="pages/beginner/index.html" class="helmet-card">
-          <img src="assets/img/30961622_s.jpg" alt="初心者教室" class="helmet-card-img">
+          <img src="assets/img/30961622_s.jpg" alt="初心者教室 垜の霞的" class="helmet-card-img">
+          <div class="helmet-card-veil"></div>
           <div class="helmet-card-content">
             <span class="helmet-card-tag">// 01 • EDUCATION</span>
             <div>
@@ -275,7 +294,8 @@
 
         <!-- 02 スケジュール -->
         <a href="pages/schedule/index.html" class="helmet-card">
-          <img src="assets/img/26230334_s.jpg" alt="スケジュール" class="helmet-card-img">
+          <img src="assets/img/26230334_s.jpg" alt="スケジュール ゆがけと会" class="helmet-card-img">
+          <div class="helmet-card-veil"></div>
           <div class="helmet-card-content">
             <span class="helmet-card-tag">// 02 • CALENDAR</span>
             <div>
@@ -287,7 +307,8 @@
 
         <!-- 03 大会・審査要項 -->
         <a href="pages/tournament/index.html" class="helmet-card">
-          <img src="assets/img/24697911_s.jpg" alt="大会・審査要項" class="helmet-card-img">
+          <img src="assets/img/24697911_s.jpg" alt="大会・審査要項 和弓の美" class="helmet-card-img">
+          <div class="helmet-card-veil"></div>
           <div class="helmet-card-content">
             <span class="helmet-card-tag">// 03 • TOURNAMENTS</span>
             <div>
@@ -299,7 +320,8 @@
 
         <!-- 04 大会・審査成績 -->
         <a href="pages/seiseki/index.html" class="helmet-card">
-          <img src="assets/img/5171030_s.jpg" alt="大会・審査成績" class="helmet-card-img">
+          <img src="assets/img/22209849_s.jpg" alt="大会・審査成績 猛禽鷹羽の矢" class="helmet-card-img">
+          <div class="helmet-card-veil"></div>
           <div class="helmet-card-content">
             <span class="helmet-card-tag">// 04 • HONORS</span>
             <div>
@@ -311,7 +333,8 @@
 
         <!-- 05 会員専用 -->
         <a href="pages/members/index.html" class="helmet-card">
-          <img src="assets/img/24794886_s.jpg" alt="会員専用" class="helmet-card-img">
+          <img src="assets/img/24794886_s.jpg" alt="会員専用 射場本座の射手" class="helmet-card-img">
+          <div class="helmet-card-veil"></div>
           <div class="helmet-card-content">
             <span class="helmet-card-tag">// 05 • MEMBERS</span>
             <div>
@@ -323,7 +346,8 @@
 
         <!-- 06 お問い合わせ -->
         <a href="pages/contact/index.html" class="helmet-card">
-          <img src="assets/img/DSC_0240.jpg" alt="お問い合わせ" class="helmet-card-img">
+          <img src="assets/img/5171030_s.jpg" alt="お問い合わせ 鹿革ゆがけ" class="helmet-card-img">
+          <div class="helmet-card-veil"></div>
           <div class="helmet-card-content">
             <span class="helmet-card-tag">// 06 • CONTACT</span>
             <div>
@@ -340,8 +364,10 @@
        SECTION #5: IMPACT BANNER (.s.is-lando-exe) - WORLD CHAMPION CALLOUT
        ========================================================================== -->
   <section class="s is-lando-exe">
+    <img src="assets/img/DSC_0240.jpg" alt="龍翔会 道場風景" class="is-lando-exe-bg">
+    <div class="is-lando-exe-overlay"></div>
     <div class="c is-lando-exe">
-      <div class="text-eyebrow" style="margin-bottom: 16px;">THE CORE DISCIPLINE</div>
+      <div class="text-eyebrow" style="margin-bottom: 16px;">THE CORE DISCIPLINE // 龍翔会の精神</div>
       <h2 class="text-impact-lg-mona reduce">
         正射必中 // <span>SEISHA HITCHU</span>
       </h2>
@@ -923,6 +949,15 @@ if (searchBtn && searchInput && searchResults) {
     roughness: 0.45,
     metalness: 0.08
   });
+
+  // Load authentic Kasumi-mato photo texture
+  const texLoader = new THREE.TextureLoader();
+  texLoader.load('assets/img/33106892_s.jpg', (loadedTex) => {
+    loadedTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    frontMat.map = loadedTex;
+    frontMat.needsUpdate = true;
+  });
+
   const backMat = new THREE.MeshStandardMaterial({
     color: 0x141712,
     roughness: 0.85,
@@ -1193,6 +1228,7 @@ if (searchBtn && searchInput && searchResults) {
     const centerText = document.getElementById("heroCenterText");
     const leftIntel = document.getElementById("heroLeftIntel");
     const rightWidget = document.getElementById("heroRightWidget");
+    const heroArcher = document.getElementById("heroArcher");
 
     if (heroSection && window.matchMedia("(min-width: 992px)").matches) {
       heroSection.addEventListener("mousemove", (e) => {
@@ -1224,6 +1260,15 @@ if (searchBtn && searchInput && searchResults) {
           duration: 0.8,
           ease: "power2.out"
         });
+
+        if (heroArcher) {
+          gsap.to(heroArcher, {
+            x: normX * 22,
+            y: -normY * 16,
+            duration: 0.9,
+            ease: "power2.out"
+          });
+        }
       });
 
       heroSection.addEventListener("mouseleave", () => {
@@ -1235,6 +1280,14 @@ if (searchBtn && searchInput && searchResults) {
           duration: 1.2,
           ease: "power3.out"
         });
+        if (heroArcher) {
+          gsap.to(heroArcher, {
+            x: 0,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out"
+          });
+        }
       });
     }
   }

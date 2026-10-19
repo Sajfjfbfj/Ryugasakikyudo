@@ -364,6 +364,13 @@ body.modern-home::before {
   padding-top: 80px;
   overflow: hidden;
   perspective: 1200px;
+  background-color: var(--color--black);
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(12, 13, 16, 0.6) 0%, rgba(12, 13, 16, 0.94) 80%),
+    url('../assets/img/4x/ヘッダー用.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .c.home-hero {
@@ -380,11 +387,56 @@ body.modern-home::before {
   min-height: calc(100vh - 90px);
 }
 
+/* Atmospheric Archer Silhouette (和の静寂と射手の気迫) */
+.hero-archer-silhouette {
+  position: absolute;
+  left: 3%;
+  bottom: 0;
+  height: 72vh;
+  max-height: 640px;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-archer-silhouette img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.28;
+  filter: contrast(125%) brightness(0.95);
+  mask-image: linear-gradient(to top, black 55%, transparent 98%), linear-gradient(to right, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 55%, transparent 98%), linear-gradient(to right, black 50%, transparent 100%);
+  transition: opacity 0.5s ease;
+}
+
+.hero-archer-kanji {
+  position: absolute;
+  left: 16px;
+  bottom: 120px;
+  font-family: var(--font-serif-wa);
+  writing-mode: vertical-rl;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.45em;
+  color: rgba(255, 255, 255, 0.35);
+  border-right: 1.5px solid var(--color--lime);
+  padding-right: 10px;
+  text-shadow: 0 0 12px rgba(210, 255, 0, 0.3);
+}
+
+@media (max-width: 991px) {
+  .hero-archer-silhouette {
+    display: none;
+  }
+}
+
 /* 3D WebGL Canvas Layer */
 .gl-canvas {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   cursor: grab;
 }
 
@@ -564,17 +616,62 @@ body.modern-home::before {
   left: var(--gap);
   bottom: var(--gap);
   z-index: 20;
-  width: 170px;
-  background: rgba(20, 23, 18, 0.88);
-  backdrop-filter: blur(14px);
+  width: 204px;
+  background: rgba(16, 18, 14, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(210, 255, 0, 0.35);
-  border-radius: 0.54rem;
-  padding: 16px 14px;
+  border-radius: 0.65rem;
+  padding: 12px;
   pointer-events: auto;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+  transition: all 0.3s ease;
+}
+
+.home-hero-left-intel-w:hover {
+  border-color: var(--color--lime);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(210, 255, 0, 0.15);
+}
+
+.home-hero-intel-thumb {
+  position: relative;
+  width: 100%;
+  height: 96px;
+  border-radius: 0.45rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.home-hero-intel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(115%) brightness(0.92);
+  transition: transform 0.4s ease;
+}
+
+.home-hero-left-intel-w:hover .home-hero-intel-thumb img {
+  transform: scale(1.08);
+}
+
+.intel-thumb-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #000;
+  background: var(--color--lime);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
 }
 
 .home-hero-left-intel-w .text-eyebrow {
-  margin-bottom: 8px;
+  margin-top: 10px;
+  margin-bottom: 4px;
 }
 
 .home-hero-left-intel-title {
@@ -582,13 +679,23 @@ body.modern-home::before {
   font-size: 0.95rem;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .home-hero-left-intel-desc {
   font-size: 0.72rem;
   color: var(--color--green-off-white-2);
   line-height: 1.45;
+}
+
+.home-hero-left-intel-coords {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color--lime);
+  letter-spacing: 0.12em;
 }
 
 /* 3D Drag/Rotate Hint Indicator */
@@ -725,18 +832,44 @@ body.modern-home::before {
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
-  filter: brightness(0.38) contrast(110%);
+  filter: brightness(0.62) contrast(115%);
   z-index: 1;
 }
 
 .otot-home-card:hover .otot-card-bg-img {
   transform: scale(1.08);
-  filter: brightness(0.55) contrast(120%);
+  filter: brightness(0.8) contrast(125%);
+}
+
+.otot-card-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 13, 16, 0.25) 0%, rgba(12, 13, 16, 0.68) 55%, rgba(12, 13, 16, 0.94) 100%);
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+.otot-home-card:hover .otot-card-veil {
+  background: linear-gradient(180deg, rgba(12, 13, 16, 0.12) 0%, rgba(12, 13, 16, 0.52) 55%, rgba(12, 13, 16, 0.88) 100%);
+}
+
+.otot-card-kanji-badge {
+  display: inline-block;
+  font-family: var(--font-serif-wa);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color--lime);
+  background: rgba(12, 13, 16, 0.85);
+  border: 1px solid rgba(210, 255, 0, 0.4);
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-left: 8px;
 }
 
 .otot-card-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -853,19 +986,31 @@ body.modern-home::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.38) contrast(115%);
+  filter: brightness(0.58) contrast(118%);
   transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
   z-index: 1;
 }
 
 .helmet-card:hover .helmet-card-img {
-  transform: scale(1.1);
-  filter: brightness(0.58) contrast(125%);
+  transform: scale(1.09);
+  filter: brightness(0.78) contrast(125%);
+}
+
+.helmet-card-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 13, 16, 0.22) 0%, rgba(12, 13, 16, 0.65) 60%, rgba(12, 13, 16, 0.94) 100%);
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+.helmet-card:hover .helmet-card-veil {
+  background: linear-gradient(180deg, rgba(12, 13, 16, 0.1) 0%, rgba(12, 13, 16, 0.48) 55%, rgba(12, 13, 16, 0.88) 100%);
 }
 
 .helmet-card-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -901,20 +1046,47 @@ body.modern-home::before {
 }
 
 /* ==========================================================================
-   IMPACT CALLOUT BANNER (.s.is-lando-exe)
+   IMPACT CALLOUT BANNER (.s.is-lando-exe) - CINEMATIC DOJO PANORAMA
    ========================================================================== */
 .s.is-lando-exe {
-  padding: 100px 0;
+  padding: 130px 0;
   background-color: var(--color--black);
-  text-align: center;
   position: relative;
+  overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.is-lando-exe-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  filter: contrast(120%) brightness(0.85);
+  z-index: 1;
+  transition: transform 0.8s ease;
+}
+
+.is-lando-exe:hover .is-lando-exe-bg {
+  transform: scale(1.03);
+}
+
+.is-lando-exe-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(12, 13, 16, 0.68) 0%, rgba(12, 13, 16, 0.95) 80%);
+  z-index: 2;
 }
 
 .c.is-lando-exe {
-  max-width: 900px;
+  position: relative;
+  z-index: 3;
+  max-width: 920px;
   margin: 0 auto;
   padding: 0 var(--padding--container);
+  text-align: center;
 }
 
 .text-impact-lg-mona.reduce {
