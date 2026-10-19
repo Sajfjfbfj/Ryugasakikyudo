@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>龍翔会 弓道</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hero.css">
   <!-- SEO等-->
    
 <!-- 説明文（検索結果に表示されることがある） -->
@@ -88,15 +89,61 @@
 
 
 
-  <!-- サイト紹介 -->
-<div class="text-animation-container">
-  <h1 class="animated-title" data-text="Beautiful Typography">
-    龍翔会
-  </h1>
-  <p class="animated-paragraph">
-    茨城県龍ヶ崎市を拠点に稽古してます！
-  </p>
-</div>
+  <!-- LANDO NORRIS INSPIRED HERO SECTION -->
+  <section class="lando-hero" id="hero">
+    <!-- 弓道・的モチーフの照準サークル -->
+    <div class="hero-target-reticle"></div>
+
+    <!-- 巨大アウトライン英字（奥レイヤー） -->
+    <div class="hero-bg-outline-text" id="heroBgText">RYUSYOKAI</div>
+
+    <div class="hero-inner-container">
+      <!-- 左HUD: 拠点・稽古情報 -->
+      <aside class="hero-hud-card hero-hud-left" id="hudLeft">
+        <span class="hero-hud-badge">DOJO INTEL</span>
+        <h3 class="hero-hud-title">龍ヶ崎支部 龍翔会</h3>
+        <ul class="hero-hud-detail">
+          <li><strong>活動日</strong>毎週 火・木・土 19:00〜21:00</li>
+          <li><strong>日曜</strong>第1・第3日曜 10:00〜12:00</li>
+          <li><strong>道場</strong>龍ヶ崎中学校 弓道場</li>
+        </ul>
+        <a href="pages/beginner/index.html" class="hero-hud-link">初心者教室・見学案内 ➔</a>
+      </aside>
+
+      <!-- 中央: 特大タイポグラフィ -->
+      <div class="hero-center-typography" id="heroCenter">
+        <div class="hero-eyebrow">IBARAKI RYUGASAKI // KYUDO CLUB</div>
+        <h1 class="hero-main-title">龍翔会</h1>
+        <span class="hero-english-title">RYUSYOKAI <span>KYUDO</span> FEDERATION</span>
+        <p class="hero-tagline">
+          静寂を穿つ一筋の矢、龍の如く翔ける。<br>
+          伝統と求道が交差する、茨城県龍ヶ崎市の弓道拠点。
+        </p>
+        <div class="hero-action-buttons">
+          <a href="pages/tournament/index.html" class="hero-btn-primary">大会・審査要項</a>
+          <a href="pages/schedule/index.html" class="hero-btn-secondary">年間スケジュール</a>
+        </div>
+      </div>
+
+      <!-- 右HUD: 次回大会情報（NEXT EVENT） -->
+      <aside class="hero-hud-card hero-hud-right" id="hudRight">
+        <span class="hero-hud-badge">NEXT EVENT</span>
+        <h3 class="hero-hud-title">第33回 県南弓道大会</h3>
+        <ul class="hero-hud-detail">
+          <li><strong>期日</strong>令和8年 9月 27日（日）</li>
+          <li><strong>会場</strong>取手グリーンスポーツセンター</li>
+          <li><strong>対象</strong>一般の部・学生の部</li>
+        </ul>
+        <a href="pages/tournament/index.html" class="hero-hud-link">最新大会要項を見る ➔</a>
+      </aside>
+    </div>
+
+    <!-- スクロールインジケーター -->
+    <div class="hero-scroll-indicator">
+      <div class="hero-scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
 
 
 <main class="container">
@@ -494,58 +541,130 @@ searchBtn.addEventListener('click', () => {
 });
 </script>
 <script>
-    // テキストを文字単位に分割する関数
-    function splitText(element) {
-      const text = element.textContent;
-      element.innerHTML = '';
-      text.split('').forEach(char => {
-        const span = document.createElement('span');
-        span.className = 'char';
-        span.textContent = char === ' ' ? '\u00A0' : char; // スペース処理
-        element.appendChild(span);
+document.addEventListener("DOMContentLoaded", () => {
+  // GSAP ヒーロー登場タイムライン
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  tl.from(".hero-target-reticle", {
+    scale: 0.6,
+    opacity: 0,
+    duration: 1.4
+  }, 0)
+  .from("#heroBgText", {
+    scale: 1.25,
+    opacity: 0,
+    duration: 1.6,
+    ease: "expo.out"
+  }, 0.2)
+  .from(".hero-eyebrow", {
+    y: -20,
+    opacity: 0,
+    duration: 0.8
+  }, 0.5)
+  .from(".hero-main-title", {
+    y: 60,
+    opacity: 0,
+    scale: 0.9,
+    duration: 1.2,
+    ease: "back.out(1.5)"
+  }, 0.6)
+  .from(".hero-english-title", {
+    y: 20,
+    opacity: 0,
+    duration: 0.8
+  }, 0.9)
+  .from(".hero-tagline", {
+    y: 20,
+    opacity: 0,
+    duration: 0.8
+  }, 1.1)
+  .from(".hero-action-buttons", {
+    y: 20,
+    opacity: 0,
+    duration: 0.8
+  }, 1.2)
+  .from("#hudLeft", {
+    x: -40,
+    opacity: 0,
+    duration: 1
+  }, 0.8)
+  .from("#hudRight", {
+    x: 40,
+    opacity: 0,
+    duration: 1
+  }, 0.8)
+  .from(".hero-scroll-indicator", {
+    opacity: 0,
+    duration: 1
+  }, 1.4);
+
+  // マウス追従パララックス 3D チルト（PC環境対応）
+  const heroSection = document.getElementById("hero");
+  const heroCenter = document.getElementById("heroCenter");
+  const heroBgText = document.getElementById("heroBgText");
+  const hudLeft = document.getElementById("hudLeft");
+  const hudRight = document.getElementById("hudRight");
+
+  if (heroSection && window.matchMedia("(min-width: 1025px)").matches) {
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      gsap.to(heroCenter, {
+        rotationY: x * 8,
+        rotationX: -y * 8,
+        x: x * 16,
+        y: y * 16,
+        duration: 0.8,
+        ease: "power2.out"
       });
-    }
 
-    // タイトルのアニメーション
-    const title = document.querySelector('.animated-title');
-    splitText(title);
+      gsap.to(heroBgText, {
+        xPercent: -50 + x * -25,
+        yPercent: -50 + y * -25,
+        duration: 1,
+        ease: "power2.out"
+      });
 
-    gsap.from('.animated-title .char', {
-      duration: 0.8,
-      y: 100,
-      opacity: 0,
-      rotationX: -90,
-      stagger: 0.05,
-      ease: "back.out(1.7)",
-      transformOrigin: "50% 50% -50px"
+      gsap.to(hudLeft, {
+        x: x * -10,
+        y: y * -10,
+        rotationY: x * 5,
+        rotationX: -y * 5,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+
+      gsap.to(hudRight, {
+        x: x * 10,
+        y: y * 10,
+        rotationY: x * 5,
+        rotationX: -y * 5,
+        duration: 0.8,
+        ease: "power2.out"
+      });
     });
 
-    // 段落のアニメーション
-    const paragraph = document.querySelector('.animated-paragraph');
-    splitText(paragraph);
-
-    gsap.from('.animated-paragraph .char', {
-      duration: 0.6,
-      y: 50,
-      opacity: 0,
-      stagger: 0.02,
-      ease: "power2.out",
-      delay: 1
+    heroSection.addEventListener("mouseleave", () => {
+      gsap.to([heroCenter, hudLeft, hudRight], {
+        rotationY: 0,
+        rotationX: 0,
+        x: 0,
+        y: 0,
+        duration: 1,
+        ease: "power3.out"
+      });
+      gsap.to(heroBgText, {
+        xPercent: -50,
+        yPercent: -50,
+        duration: 1,
+        ease: "power3.out"
+      });
     });
-
-    // カラフルなテキストエフェクト
-    gsap.to('.animated-title .char', {
-      duration: 2,
-      color: () => {
-        const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
-        return colors[Math.floor(Math.random() * colors.length)];
-      },
-      stagger: 0.1,
-      repeat: -1,
-      yoyo: true,
-      delay: 2
-    });
-  </script>
+  }
+});
+</script>
 
 
 </body>
