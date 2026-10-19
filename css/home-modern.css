@@ -1,39 +1,42 @@
 /* ==========================================================================
    LANDO NORRIS (landonorris.com) AWARD-WINNING ARCHITECTURE (by OFF+BRAND)
-   Adapted for 龍翔会 弓道 (RYUSYOKAI KYUDO CLUB)
+   Adapted for 龍翔会 弓道 (RYUSYOKAI KYUDO CLUB) - HIGH IMPACT PHOTO EDITION
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+JP:wght@600;900&family=Oswald:wght@500;700;800;900&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+JP:wght@600;700;900&family=Oswald:wght@500;700;800;900&family=Share+Tech+Mono&family=Syne:wght@700;800;900&display=swap');
 
 :root {
   /* Lando Norris Core Palette */
-  --color--black: #0c0d10;
-  --color--dark-green: #141712;
-  --color--dark-green-tint-1: #1f241a;
-  --color--dark-green-tint-2: #45493f;
+  --color--black: #090b0c;
+  --color--dark-green: #111512;
+  --color--dark-green-card: #151a16;
+  --color--dark-green-tint-1: #1c221e;
+  --color--dark-green-tint-2: #48524a;
   --color--lime: #d2ff00;       /* Lando Norris Signature Acid Neon Lime */
-  --color--lime-off: #b2c73a;
+  --color--lime-off: #b5cc38;
   --color--lime-glow: rgba(210, 255, 0, 0.45);
+  --color--lime-glow-soft: rgba(210, 255, 0, 0.15);
   --color--white: #f5f5ee;      /* Washi Off-White */
-  --color--green-off-white-1: #dde1d2;
-  --color--green-off-white-2: #a2a894;
-  --color--vermilion: #e60033;  /* Japanese Traditional Wa Vermilion */
+  --color--green-off-white-1: #dde2d6;
+  --color--green-off-white-2: #9ea89b;
+  --color--gold: #d4af37;
 
   /* Spacing & Fluid Scaling */
   --gap: 1.25rem;
-  --padding--container: 1.5rem;
-  --padding--xlarge: 5.5rem;
+  --padding--container: 2rem;
+  --padding--xlarge: 6rem;
   --fluid-container: 1440px;
   --animation-default: 0.75s cubic-bezier(0.65, 0.05, 0, 1);
+  --transition-fast: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 
   /* Typography Scale */
-  --text--impact: clamp(5rem, 12vw, 10.5rem);
-  --text--title-lg: clamp(2.8rem, 6.5vw, 5.5rem);
+  --text--impact: clamp(4.5rem, 11vw, 9.8rem);
+  --text--title-lg: clamp(2.6rem, 5.8vw, 5rem);
   
-  --font-display: "Oswald", "Impact", "Helvetica Neue", sans-serif;
+  --font-display: "Oswald", "Syne", "Impact", "Helvetica Neue", sans-serif;
   --font-serif-wa: "Noto Serif JP", "Hiragino Mincho ProN", serif;
   --font-mono: "Share Tech Mono", monospace;
-  --font-sans: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
 *, *::before, *::after {
@@ -42,44 +45,58 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color--black);
+}
+
 body.modern-home {
   background-color: var(--color--black) !important;
   color: var(--color--white) !important;
   font-family: var(--font-sans);
   overflow-x: hidden;
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  selection-background-color: var(--color--lime);
 }
 
-/* Background Subtle Grid Texture */
+::selection {
+  background-color: var(--color--lime);
+  color: var(--color--black);
+}
+
+/* Background Subtle High-End Grid Texture */
 body.modern-home::before {
   content: "";
   position: fixed;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(rgba(210, 255, 0, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(210, 255, 0, 0.018) 1px, transparent 1px);
+  background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
 }
 
 /* ==========================================================================
-   NAVIGATION (.nav) - EXACT LANDO NORRIS FIXED BAR
+   NAVIGATION (.nav) - EXACT LANDO NORRIS FLOATING HUD BAR
    ========================================================================== */
 .nav {
   position: fixed;
-  inset: 0 0 auto;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 120;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2.2rem;
-  background: rgba(12, 13, 16, 0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  padding: 1.1rem 2.2rem;
+  background: rgba(9, 11, 12, 0.88);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
 }
 
 .nav-brand-link {
@@ -91,21 +108,21 @@ body.modern-home::before {
 }
 
 .nav-brand-link img {
-  height: 42px;
+  height: 40px;
   width: auto;
   filter: drop-shadow(0 0 10px var(--color--lime-glow));
   transition: transform 0.3s ease;
 }
 
 .nav-brand-link:hover img {
-  transform: scale(1.06);
+  transform: scale(1.08) rotate(-2deg);
 }
 
 .nav-brand-text {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
   color: var(--color--white);
 }
 
@@ -119,14 +136,15 @@ body.modern-home::before {
   text-decoration: none;
   color: var(--color--lime);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
   font-weight: 700;
   text-transform: uppercase;
-  background: rgba(210, 255, 0, 0.08);
-  border: 1px solid rgba(210, 255, 0, 0.25);
-  padding: 5px 16px;
+  background: rgba(210, 255, 0, 0.07);
+  border: 1px solid rgba(210, 255, 0, 0.28);
+  padding: 6px 18px;
   border-radius: 999px;
+  box-shadow: 0 0 20px rgba(210, 255, 0, 0.08);
 }
 
 .nav-middle::before {
@@ -151,20 +169,21 @@ body.modern-home::before {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 2.85rem;
-  padding: 0 1.5rem;
+  height: 2.75rem;
+  padding: 0 1.6rem;
   background-color: var(--color--lime);
   color: var(--color--black);
   border: 1px solid var(--color--lime);
-  border-radius: 0.54rem;
+  border-radius: 0.5rem;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.65, 0.05, 0, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .btn-w:hover {
@@ -172,16 +191,29 @@ body.modern-home::before {
   border-color: var(--color--white);
   color: var(--color--black);
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px var(--color--lime-glow);
+  box-shadow: 0 8px 30px var(--color--lime-glow);
+}
+
+.btn-w.is-outline {
+  background-color: transparent;
+  color: var(--color--white);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
+}
+
+.btn-w.is-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color--lime);
+  color: var(--color--lime);
 }
 
 /* Hamburger button */
 .nav-ham {
-  width: 2.85rem;
-  height: 2.85rem;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.54rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.5rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -193,7 +225,7 @@ body.modern-home::before {
 
 .nav-ham:hover {
   border-color: var(--color--lime);
-  background: rgba(210, 255, 0, 0.1);
+  background: rgba(210, 255, 0, 0.12);
 }
 
 .nav-ham span {
@@ -219,20 +251,28 @@ body.modern-home::before {
 /* Search dropdown modal */
 .nav-search-modal {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 2.2rem;
-  width: 380px;
-  background: rgba(17, 18, 22, 0.98);
+  width: min(92vw, 420px);
+  background: rgba(14, 18, 15, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color--lime);
-  border-radius: 0.54rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-  padding: 12px;
+  border-radius: 0.65rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+  padding: 16px;
   z-index: 1000;
   display: none;
 }
 
 .nav-search-modal.active {
   display: block;
+  animation: fadeInDown 0.25s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .nav-search-box {
@@ -242,23 +282,31 @@ body.modern-home::before {
 
 .nav-search-box input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 4px;
   outline: none;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  transition: border-color 0.2s ease;
+}
+
+.nav-search-box input:focus {
+  border-color: var(--color--lime);
 }
 
 .nav-search-box button {
   background: var(--color--lime);
   color: #000;
   border: none;
-  padding: 8px 14px;
+  padding: 10px 18px;
   border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
   font-weight: 800;
   cursor: pointer;
+  letter-spacing: 0.1em;
 }
 
 #searchResults:empty {
@@ -266,35 +314,42 @@ body.modern-home::before {
 }
 
 #searchResults {
-  margin-top: 12px;
-  max-height: 360px;
+  margin-top: 14px;
+  max-height: 380px;
   overflow-y: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 10px;
+  padding-top: 12px;
 }
 
 .search-item {
-  padding: 8px 0;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .search-item h3 {
   font-size: 0.95rem;
   color: var(--color--lime);
+  margin-bottom: 4px;
 }
 
 .search-item p {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--color--green-off-white-2);
+  line-height: 1.5;
 }
 
-/* Fullscreen Menu Overlay */
+.search-item a {
+  color: var(--color--lime);
+  text-decoration: underline;
+}
+
+/* Fullscreen Menu Overlay (with Interactive Image Preview) */
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 13, 16, 0.97);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(9, 11, 12, 0.97);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
   z-index: 110;
   display: flex;
   align-items: center;
@@ -312,48 +367,65 @@ body.modern-home::before {
 .nav-menu-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  max-width: 1080px;
+  max-width: 1120px;
   width: 90%;
-  gap: 48px;
+  gap: 60px;
   align-items: center;
+}
+
+.nav-menu-preview-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(210, 255, 0, 0.3);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
 }
 
 .nav-menu-preview-img {
   width: 100%;
-  aspect-ratio: 4/5;
+  height: 100%;
   object-fit: cover;
-  border-radius: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease, transform 0.5s ease;
+  filter: contrast(115%) brightness(0.9);
+}
+
+.nav-menu-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(9, 11, 12, 0.8) 100%);
+  pointer-events: none;
 }
 
 .nav-menu-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .nav-menu-links a {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
   font-weight: 800;
   color: var(--color--white);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   display: inline-block;
+  position: relative;
 }
 
 .nav-menu-links a:hover {
   color: var(--color--lime);
-  transform: translateX(12px);
+  transform: translateX(14px);
+  text-shadow: 0 0 30px var(--color--lime-glow);
 }
 
 /* ==========================================================================
-   HERO SECTION (.s.home-hero) - 3D THREE.JS WEBGL CANVAS & HUD
+   HERO SECTION (.s.home-hero) - CINEMATIC VIDEO + 3D THREE.JS CANVAS & HUD
    ========================================================================== */
 .s.home-hero {
   position: relative;
@@ -365,74 +437,70 @@ body.modern-home::before {
   overflow: hidden;
   perspective: 1200px;
   background-color: var(--color--black);
-  background-image: 
-    radial-gradient(circle at 50% 40%, rgba(12, 13, 16, 0.6) 0%, rgba(12, 13, 16, 0.94) 80%),
-    url('../assets/img/4x/ヘッダー用.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
 }
 
-.c.home-hero {
+/* Background Cinematic Video Layer */
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: var(--fluid-container);
-  margin: 0 auto;
-  padding: 0 var(--padding--container);
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 90px);
-}
-
-/* Atmospheric Archer Silhouette (和の静寂と射手の気迫) */
-.hero-archer-silhouette {
-  position: absolute;
-  left: 3%;
-  bottom: 0;
-  height: 72vh;
-  max-height: 640px;
-  z-index: 2;
-  pointer-events: none;
-  display: flex;
-  align-items: flex-end;
-}
-
-.hero-archer-silhouette img {
   height: 100%;
-  width: auto;
-  object-fit: contain;
-  opacity: 0.28;
-  filter: contrast(125%) brightness(0.95);
-  mask-image: linear-gradient(to top, black 55%, transparent 98%), linear-gradient(to right, black 50%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, black 55%, transparent 98%), linear-gradient(to right, black 50%, transparent 100%);
-  transition: opacity 0.5s ease;
+  overflow: hidden;
+  z-index: 0;
 }
 
-.hero-archer-kanji {
+.hero-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.42;
+  filter: brightness(0.75) contrast(125%) saturate(1.1);
+  transform: scale(1.02);
+  transition: opacity 1s ease;
+}
+
+/* Dark Film Veil over Video */
+.hero-video-veil {
   position: absolute;
-  left: 16px;
-  bottom: 120px;
-  font-family: var(--font-serif-wa);
-  writing-mode: vertical-rl;
-  font-size: 1.15rem;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 45%, rgba(9, 11, 12, 0.45) 0%, rgba(9, 11, 12, 0.88) 75%, rgba(9, 11, 12, 0.98) 100%),
+    linear-gradient(180deg, rgba(9, 11, 12, 0.5) 0%, transparent 40%, rgba(9, 11, 12, 0.95) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Film Grain Noise Texture */
+.hero-noise-texture {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgba(210, 255, 0, 0.04) 1px, transparent 0);
+  background-size: 4px 4px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Background Giant Outline Typography (Lando Norris Signature Behind Layer) */
+.hero-bg-outline-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(6.5rem, 19vw, 21rem);
   font-weight: 900;
-  letter-spacing: 0.45em;
-  color: rgba(255, 255, 255, 0.35);
-  border-right: 1.5px solid var(--color--lime);
-  padding-right: 10px;
-  text-shadow: 0 0 12px rgba(210, 255, 0, 0.3);
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.07);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+  text-transform: uppercase;
 }
 
-@media (max-width: 991px) {
-  .hero-archer-silhouette {
-    display: none;
-  }
-}
-
-/* 3D WebGL Canvas Layer */
+/* 3D WebGL Canvas Layer (Three.js 3D Kasumi-Mato & Piercing Arrow) */
 .gl-canvas {
   position: absolute;
   inset: 0;
@@ -450,23 +518,63 @@ body.modern-home::before {
   display: block;
 }
 
-/* Background Giant Outline Typography (Lando Norris Signature Behind Layer) */
-.hero-bg-outline-text {
+/* Archer Silhouette Atmosphere */
+.hero-archer-silhouette {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-display);
-  font-size: clamp(6.5rem, 18vw, 19rem);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
-  white-space: nowrap;
+  left: 3%;
+  bottom: 0;
+  height: 72vh;
+  max-height: 640px;
+  z-index: 4;
   pointer-events: none;
-  z-index: 1;
-  user-select: none;
-  text-transform: uppercase;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-archer-silhouette img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.32;
+  filter: contrast(135%) brightness(0.9);
+  mask-image: linear-gradient(to top, black 50%, transparent 95%), linear-gradient(to right, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 50%, transparent 95%), linear-gradient(to right, black 50%, transparent 100%);
+  transition: opacity 0.5s ease;
+}
+
+.hero-archer-kanji {
+  position: absolute;
+  left: 16px;
+  bottom: 120px;
+  font-family: var(--font-serif-wa);
+  writing-mode: vertical-rl;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.45em;
+  color: rgba(255, 255, 255, 0.45);
+  border-right: 2px solid var(--color--lime);
+  padding-right: 12px;
+  text-shadow: 0 0 15px rgba(210, 255, 0, 0.4);
+}
+
+@media (max-width: 991px) {
+  .hero-archer-silhouette {
+    display: none;
+  }
+}
+
+.c.home-hero {
+  width: 100%;
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 90px);
 }
 
 /* Center Stage Content Layer */
@@ -475,6 +583,7 @@ body.modern-home::before {
   z-index: 5;
   text-align: center;
   pointer-events: none; /* Allows user to interact with 3D canvas behind */
+  padding: 20px;
 }
 
 .home-hero-center-text a,
@@ -490,38 +599,129 @@ body.modern-home::before {
   text-transform: uppercase;
   line-height: 0.88;
   color: var(--color--white);
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 12px 50px rgba(0, 0, 0, 0.98);
 }
 
 .text-impact-hero .highlight {
   color: var(--color--lime);
+  text-shadow: 0 0 40px var(--color--lime-glow);
 }
 
 .home-hero-kanji-sub {
   font-family: var(--font-serif-wa);
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
   font-weight: 900;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.28em;
   color: var(--color--white);
   margin-top: 14px;
-  text-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 .home-hero-tagline {
-  max-width: 600px;
+  max-width: 620px;
   margin: 18px auto 0;
-  font-size: 0.96rem;
-  color: var(--color--green-off-white-2);
-  letter-spacing: 0.08em;
-  line-height: 1.8;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  font-size: 1rem;
+  color: var(--color--green-off-white-1);
+  letter-spacing: 0.09em;
+  line-height: 1.85;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95);
 }
 
 .home-hero-btn-group {
   display: flex;
   justify-content: center;
   gap: 18px;
-  margin-top: 30px;
+  margin-top: 32px;
+}
+
+/* Left Telemetry Box (Dojo Intel) */
+.home-hero-left-intel-w {
+  position: absolute;
+  left: var(--gap);
+  bottom: var(--gap);
+  z-index: 20;
+  width: 220px;
+  background: rgba(14, 18, 15, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(210, 255, 0, 0.4);
+  border-radius: 0.75rem;
+  padding: 14px;
+  pointer-events: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  transition: all 0.3s ease;
+}
+
+.home-hero-left-intel-w:hover {
+  border-color: var(--color--lime);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(210, 255, 0, 0.2);
+}
+
+.home-hero-intel-thumb {
+  position: relative;
+  width: 100%;
+  height: 105px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.home-hero-intel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(118%) brightness(0.92);
+  transition: transform 0.5s ease;
+}
+
+.home-hero-left-intel-w:hover .home-hero-intel-thumb img {
+  transform: scale(1.1);
+}
+
+.intel-thumb-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #000;
+  background: var(--color--lime);
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.home-hero-left-intel-w .text-eyebrow {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.home-hero-left-intel-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.home-hero-left-intel-desc {
+  font-size: 0.75rem;
+  color: var(--color--green-off-white-2);
+  line-height: 1.5;
+}
+
+.home-hero-left-intel-coords {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color--lime);
+  letter-spacing: 0.12em;
 }
 
 /* EXACT Lando Norris Next Race HUD Widget (.home-hero-next-race-w) */
@@ -530,15 +730,20 @@ body.modern-home::before {
   right: var(--gap);
   bottom: var(--gap);
   z-index: 20;
-  width: 130px;
-  height: 250px;
+  width: 140px;
+  height: 260px;
   color: var(--color--dark-green-tint-2);
-  padding: 16px 14px;
+  padding: 18px 16px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   pointer-events: auto;
+  transition: transform 0.3s ease;
+}
+
+.home-hero-next-race-w:hover {
+  transform: translateY(-4px);
 }
 
 .home-hero-next-race-outline {
@@ -547,6 +752,7 @@ body.modern-home::before {
   z-index: -1;
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
 }
 
 .home-hero-next-race-outline svg {
@@ -562,9 +768,9 @@ body.modern-home::before {
 
 .text-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color--lime);
   line-height: 1;
@@ -590,134 +796,26 @@ body.modern-home::before {
 
 .home-hero-next-race-event-title {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--color--white);
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: 0.05em;
+  margin-top: 4px;
 }
 
 .home-hero-next-race-date {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--color--lime);
   letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .home-hero-next-race-sub {
-  font-size: 0.68rem;
-  color: var(--color--green-off-white-2);
-  line-height: 1.3;
-}
-
-/* Left Telemetry Box (Dojo Intel) */
-.home-hero-left-intel-w {
-  position: absolute;
-  left: var(--gap);
-  bottom: var(--gap);
-  z-index: 20;
-  width: 204px;
-  background: rgba(16, 18, 14, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(210, 255, 0, 0.35);
-  border-radius: 0.65rem;
-  padding: 12px;
-  pointer-events: auto;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
-  transition: all 0.3s ease;
-}
-
-.home-hero-left-intel-w:hover {
-  border-color: var(--color--lime);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(210, 255, 0, 0.15);
-}
-
-.home-hero-intel-thumb {
-  position: relative;
-  width: 100%;
-  height: 96px;
-  border-radius: 0.45rem;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.home-hero-intel-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: contrast(115%) brightness(0.92);
-  transition: transform 0.4s ease;
-}
-
-.home-hero-left-intel-w:hover .home-hero-intel-thumb img {
-  transform: scale(1.08);
-}
-
-.intel-thumb-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  font-weight: 800;
-  color: #000;
-  background: var(--color--lime);
-  padding: 2px 6px;
-  border-radius: 3px;
-  letter-spacing: 0.1em;
-}
-
-.home-hero-left-intel-w .text-eyebrow {
-  margin-top: 10px;
-  margin-bottom: 4px;
-}
-
-.home-hero-left-intel-title {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 4px;
-}
-
-.home-hero-left-intel-desc {
   font-size: 0.72rem;
   color: var(--color--green-off-white-2);
-  line-height: 1.45;
-}
-
-.home-hero-left-intel-coords {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--color--lime);
-  letter-spacing: 0.12em;
-}
-
-/* 3D Drag/Rotate Hint Indicator */
-.hero-drag-hint {
-  position: absolute;
-  bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.25em;
-  color: var(--color--green-off-white-2);
-  z-index: 10;
-  pointer-events: none;
-}
-
-.hero-drag-hint-icon {
-  width: 14px;
-  height: 14px;
-  color: var(--color--lime);
-  animation: pulse-dot 2s infinite ease-in-out;
+  line-height: 1.35;
 }
 
 /* ==========================================================================
@@ -728,7 +826,7 @@ body.modern-home::before {
   background-color: var(--color--dark-green);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.6rem 0;
+  padding: 1.8rem 0;
   overflow: hidden;
   position: relative;
   z-index: 10;
@@ -745,11 +843,11 @@ body.modern-home::before {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .marquee-signature-img {
-  height: 30px;
+  height: 32px;
   width: auto;
   filter: drop-shadow(0 0 10px var(--color--lime));
 }
@@ -757,7 +855,7 @@ body.modern-home::before {
 .text-impact-lg-mona.marquee-adv {
   white-space: nowrap;
   display: flex;
-  animation: lando-marquee 32s linear infinite;
+  animation: lando-marquee 36s linear infinite;
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 4.4rem);
   font-weight: 900;
@@ -769,8 +867,8 @@ body.modern-home::before {
 .text-impact-lg-mona.marquee-adv span {
   display: inline-flex;
   align-items: center;
-  gap: 24px;
-  padding-right: 48px;
+  gap: 28px;
+  padding-right: 56px;
 }
 
 .text-impact-lg-mona.marquee-adv strong {
@@ -805,24 +903,25 @@ body.modern-home::before {
 
 .otot-home-card {
   position: relative;
-  height: 520px;
-  border-radius: 1.2rem;
+  height: 540px;
+  border-radius: 1.4rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 48px 40px;
+  padding: 50px 42px;
   box-sizing: border-box;
   text-decoration: none;
   color: inherit;
   transition: all 0.4s cubic-bezier(0.65, 0.05, 0, 1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 .otot-home-card:hover {
   border-color: var(--color--lime);
   transform: translateY(-8px);
-  box-shadow: 0 24px 60px rgba(210, 255, 0, 0.2);
+  box-shadow: 0 30px 80px rgba(210, 255, 0, 0.22);
 }
 
 .otot-card-bg-img {
@@ -831,26 +930,26 @@ body.modern-home::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
-  filter: brightness(0.62) contrast(115%);
+  transition: transform 0.7s cubic-bezier(0.65, 0.05, 0, 1), filter 0.7s ease;
+  filter: brightness(0.65) contrast(118%);
   z-index: 1;
 }
 
 .otot-home-card:hover .otot-card-bg-img {
-  transform: scale(1.08);
-  filter: brightness(0.8) contrast(125%);
+  transform: scale(1.1);
+  filter: brightness(0.85) contrast(128%);
 }
 
 .otot-card-veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(12, 13, 16, 0.25) 0%, rgba(12, 13, 16, 0.68) 55%, rgba(12, 13, 16, 0.94) 100%);
+  background: linear-gradient(180deg, rgba(9, 11, 12, 0.2) 0%, rgba(9, 11, 12, 0.65) 55%, rgba(9, 11, 12, 0.95) 100%);
   z-index: 2;
   transition: background 0.4s ease;
 }
 
 .otot-home-card:hover .otot-card-veil {
-  background: linear-gradient(180deg, rgba(12, 13, 16, 0.12) 0%, rgba(12, 13, 16, 0.52) 55%, rgba(12, 13, 16, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(9, 11, 12, 0.1) 0%, rgba(9, 11, 12, 0.48) 55%, rgba(9, 11, 12, 0.88) 100%);
 }
 
 .otot-card-kanji-badge {
@@ -860,7 +959,7 @@ body.modern-home::before {
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--color--lime);
-  background: rgba(12, 13, 16, 0.85);
+  background: rgba(9, 11, 12, 0.85);
   border: 1px solid rgba(210, 255, 0, 0.4);
   padding: 3px 10px;
   border-radius: 4px;
@@ -878,7 +977,7 @@ body.modern-home::before {
 
 .text-impact-reg-brier {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6.5vw, 5rem);
+  font-size: clamp(3.2rem, 7vw, 5.4rem);
   font-weight: 900;
   color: var(--color--lime);
   line-height: 0.9;
@@ -887,7 +986,7 @@ body.modern-home::before {
 
 .text-impact-reg-mona.line-increase {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6.5vw, 5rem);
+  font-size: clamp(3.2rem, 7vw, 5.4rem);
   font-weight: 900;
   color: var(--color--white);
   line-height: 0.9;
@@ -897,7 +996,7 @@ body.modern-home::before {
 .text-body-reg-mona {
   font-size: 1.05rem;
   color: var(--color--green-off-white-1);
-  line-height: 1.6;
+  line-height: 1.65;
   max-width: 440px;
 }
 
@@ -906,17 +1005,17 @@ body.modern-home::before {
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--color--lime);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
 .otot-home-card:hover .otot-card-action {
   color: #fff;
-  transform: translateX(8px);
+  transform: translateX(10px);
 }
 
 /* ==========================================================================
@@ -935,7 +1034,7 @@ body.modern-home::before {
 }
 
 .helmets-header {
-  margin-bottom: 48px;
+  margin-bottom: 50px;
 }
 
 .text-title-lg-mona {
@@ -944,7 +1043,7 @@ body.modern-home::before {
   font-weight: 900;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  line-height: 0.9;
+  line-height: 0.92;
   color: var(--color--white);
 }
 
@@ -955,29 +1054,30 @@ body.modern-home::before {
 .helmet-grid-layout {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 26px;
 }
 
 .helmet-card {
   position: relative;
-  height: 380px;
+  height: 400px;
   background-color: var(--color--black);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.85rem;
+  border-radius: 1rem;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  padding: 32px 26px;
+  padding: 34px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.4s cubic-bezier(0.65, 0.05, 0, 1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
 .helmet-card:hover {
   border-color: var(--color--lime);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 48px rgba(210, 255, 0, 0.18);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(210, 255, 0, 0.2);
 }
 
 .helmet-card-img {
@@ -986,26 +1086,26 @@ body.modern-home::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.58) contrast(118%);
-  transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
+  filter: brightness(0.62) contrast(120%);
+  transition: transform 0.7s cubic-bezier(0.65, 0.05, 0, 1), filter 0.7s ease;
   z-index: 1;
 }
 
 .helmet-card:hover .helmet-card-img {
-  transform: scale(1.09);
-  filter: brightness(0.78) contrast(125%);
+  transform: scale(1.12);
+  filter: brightness(0.82) contrast(128%);
 }
 
 .helmet-card-veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(12, 13, 16, 0.22) 0%, rgba(12, 13, 16, 0.65) 60%, rgba(12, 13, 16, 0.94) 100%);
+  background: linear-gradient(180deg, rgba(9, 11, 12, 0.2) 0%, rgba(9, 11, 12, 0.65) 58%, rgba(9, 11, 12, 0.95) 100%);
   z-index: 2;
   transition: background 0.4s ease;
 }
 
 .helmet-card:hover .helmet-card-veil {
-  background: linear-gradient(180deg, rgba(12, 13, 16, 0.1) 0%, rgba(12, 13, 16, 0.48) 55%, rgba(12, 13, 16, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(9, 11, 12, 0.08) 0%, rgba(9, 11, 12, 0.46) 55%, rgba(9, 11, 12, 0.88) 100%);
 }
 
 .helmet-card-content {
@@ -1022,34 +1122,239 @@ body.modern-home::before {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   color: var(--color--lime);
-  background: rgba(17, 18, 22, 0.85);
-  border: 1px solid rgba(210, 255, 0, 0.4);
-  padding: 4px 10px;
+  background: rgba(14, 18, 15, 0.9);
+  border: 1px solid rgba(210, 255, 0, 0.45);
+  padding: 5px 12px;
   border-radius: 4px;
 }
 
 .helmet-card-title {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-family: var(--font-serif-wa);
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   font-weight: 900;
   color: #fff;
+  transition: color 0.3s ease;
+}
+
+.helmet-card:hover .helmet-card-title {
+  color: var(--color--lime);
 }
 
 .helmet-card-desc {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--color--green-off-white-2);
-  line-height: 1.6;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   NEW: THE ART OF KYUDO (PHOTO GALLERY SHOWCASE)
+   弓道の写真が圧倒的に映えるフルブリード・ビジュアルセクション
+   ========================================================================== */
+.s.home-gallery {
+  padding: var(--padding--xlarge) 0;
+  background-color: var(--color--black);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.c.home-gallery {
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+}
+
+.gallery-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 45px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color--dark-green-card);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.65, 0.05, 0, 1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.gallery-item:hover {
+  border-color: var(--color--lime);
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(210, 255, 0, 0.25);
+}
+
+/* Span layouts for dramatic magazine-style collage */
+.gallery-item.col-8 {
+  grid-column: span 8;
+  height: 480px;
+}
+
+.gallery-item.col-4 {
+  grid-column: span 4;
+  height: 480px;
+}
+
+.gallery-item.col-4-mid {
+  grid-column: span 4;
+  height: 380px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72) contrast(120%);
+  transition: transform 0.7s cubic-bezier(0.65, 0.05, 0, 1), filter 0.7s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.95) contrast(125%);
+}
+
+.gallery-item-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(0deg, rgba(9, 11, 12, 0.95) 0%, rgba(9, 11, 12, 0.4) 70%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item-title {
+  font-family: var(--font-serif-wa);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.gallery-item-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color--lime);
+  letter-spacing: 0.15em;
+}
+
+.gallery-zoom-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(210, 255, 0, 0.15);
+  border: 1px solid var(--color--lime);
+  color: var(--color--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-zoom-icon {
+  background: var(--color--lime);
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* Lightbox Modal for Full-Res Kyudo Photos */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 11, 12, 0.96);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 40px;
+}
+
+.lightbox-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(210, 255, 0, 0.3);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95);
+}
+
+.lightbox-caption {
+  margin-top: 16px;
+  font-family: var(--font-serif-wa);
+  font-size: 1.15rem;
+  color: #fff;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+  background: var(--color--lime);
+  border-color: var(--color--lime);
+  color: #000;
+  transform: rotate(90deg);
 }
 
 /* ==========================================================================
    IMPACT CALLOUT BANNER (.s.is-lando-exe) - CINEMATIC DOJO PANORAMA
    ========================================================================== */
 .s.is-lando-exe {
-  padding: 130px 0;
+  padding: 140px 0;
   background-color: var(--color--black);
   position: relative;
   overflow: hidden;
@@ -1063,27 +1368,27 @@ body.modern-home::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.25;
-  filter: contrast(120%) brightness(0.85);
+  opacity: 0.3;
+  filter: contrast(125%) brightness(0.85);
   z-index: 1;
   transition: transform 0.8s ease;
 }
 
 .is-lando-exe:hover .is-lando-exe-bg {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .is-lando-exe-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(12, 13, 16, 0.68) 0%, rgba(12, 13, 16, 0.95) 80%);
+  background: radial-gradient(circle at center, rgba(9, 11, 12, 0.65) 0%, rgba(9, 11, 12, 0.94) 80%);
   z-index: 2;
 }
 
 .c.is-lando-exe {
   position: relative;
   z-index: 3;
-  max-width: 920px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 var(--padding--container);
   text-align: center;
@@ -1104,10 +1409,10 @@ body.modern-home::before {
 }
 
 .is-lando-exe p {
-  font-size: 1.1rem;
-  color: var(--color--green-off-white-2);
-  line-height: 1.85;
-  margin-bottom: 36px;
+  font-size: 1.15rem;
+  color: var(--color--green-off-white-1);
+  line-height: 1.9;
+  margin-bottom: 38px;
 }
 
 /* ==========================================================================
@@ -1137,42 +1442,44 @@ body.modern-home::before {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 28px;
+  padding: 22px 30px;
   background-color: var(--color--black);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.54rem;
+  border-radius: 0.65rem;
   text-decoration: none;
   color: #fff;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .modern-news-link:hover {
   border-color: var(--color--lime);
-  transform: translateX(8px);
-  box-shadow: 0 10px 30px rgba(210, 255, 0, 0.15);
+  transform: translateX(10px);
+  box-shadow: 0 10px 35px rgba(210, 255, 0, 0.18);
 }
 
 .modern-news-date {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--color--lime);
   background: rgba(210, 255, 0, 0.12);
   border: 1px solid rgba(210, 255, 0, 0.35);
-  padding: 4px 12px;
+  padding: 4px 14px;
   border-radius: 4px;
   white-space: nowrap;
 }
 
 .modern-news-text {
   flex: 1;
-  font-size: 1rem;
+  font-size: 1.02rem;
   font-weight: 600;
+  color: var(--color--white);
 }
 
 .modern-news-arrow {
   font-family: var(--font-mono);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 800;
   color: var(--color--lime);
 }
@@ -1195,20 +1502,22 @@ body.modern-home::before {
 .collabs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-top: 36px;
+  gap: 22px;
+  margin-top: 38px;
 }
 
 .collabs-box {
   background-color: var(--color--dark-green);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.54rem;
-  padding: 24px 20px;
-  transition: border-color 0.3s ease;
+  border-radius: 0.65rem;
+  padding: 26px 22px;
+  transition: all 0.3s ease;
 }
 
 .collabs-box:hover {
   border-color: var(--color--lime);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
 
 .collabs-label {
@@ -1216,7 +1525,7 @@ body.modern-home::before {
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--color--lime);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   margin-bottom: 8px;
   text-transform: uppercase;
 }
@@ -1225,15 +1534,17 @@ body.modern-home::before {
   font-size: 1.15rem;
   font-weight: 700;
   color: #fff;
+  line-height: 1.4;
 }
 
 /* ==========================================================================
    FOOTER (.s.is-footer) - EXACT LANDO NORRIS FULL FOOTER
    ========================================================================== */
 .s.is-footer {
-  padding: 80px 0 40px;
+  padding: 90px 0 45px;
   background-color: var(--color--black);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
 }
 
 .c.is-footer {
@@ -1243,7 +1554,7 @@ body.modern-home::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 50px;
   text-align: center;
 }
 
@@ -1251,12 +1562,12 @@ body.modern-home::before {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 32px;
+  gap: 36px;
 }
 
 .footer-nav-list a {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1271,9 +1582,9 @@ body.modern-home::before {
 
 .text-impact-sm-mona.footer {
   font-family: var(--font-serif-wa);
-  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-size: clamp(2.5rem, 5.8vw, 4.6rem);
   font-weight: 900;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--color--white);
   line-height: 1.1;
 }
@@ -1284,36 +1595,38 @@ body.modern-home::before {
 
 .footer-bottom-copy {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
   color: var(--color--dark-green-tint-2);
 }
 
 /* Back to top button */
 .back-to-top {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
+  bottom: 26px;
+  right: 26px;
+  width: 48px;
+  height: 48px;
   background: var(--color--lime);
   color: var(--color--black);
   border: none;
-  border-radius: 0.54rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+  border-radius: 0.6rem;
+  font-size: 1.3rem;
+  font-weight: 900;
   cursor: pointer;
   display: none;
   z-index: 100;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(210, 255, 0, 0.4);
 }
 
 .back-to-top:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(210, 255, 0, 0.7);
 }
 
 /* ==========================================================================
-   RESPONSIVE QUERIES
+   RESPONSIVE DESIGN (MOBILE & TABLET OPTIMIZATION)
    ========================================================================== */
 @media (max-width: 1024px) {
   .otot-home-layout {
@@ -1321,6 +1634,12 @@ body.modern-home::before {
   }
   .helmet-grid-layout {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery-item.col-8,
+  .gallery-item.col-4,
+  .gallery-item.col-4-mid {
+    grid-column: span 6;
+    height: 380px;
   }
   .collabs-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1331,6 +1650,9 @@ body.modern-home::before {
 }
 
 @media (max-width: 768px) {
+  .nav {
+    padding: 1rem 1.2rem;
+  }
   .home-hero-next-race-w,
   .home-hero-left-intel-w {
     display: none;
@@ -1338,13 +1660,24 @@ body.modern-home::before {
   .helmet-grid-layout {
     grid-template-columns: 1fr;
   }
+  .gallery-item.col-8,
+  .gallery-item.col-4,
+  .gallery-item.col-4-mid {
+    grid-column: span 12;
+    height: 300px;
+  }
   .collabs-grid {
     grid-template-columns: 1fr;
   }
   .nav-menu-inner {
     grid-template-columns: 1fr;
   }
-  .nav-menu-preview-img {
+  .nav-menu-preview-wrapper {
     display: none;
+  }
+  .home-hero-btn-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
   }
 }

@@ -1,0 +1,426 @@
+/* ==========================================================================
+   RYUSYOKAI KYUDO - SUBPAGE ARCHITECTURE
+   Unified luxury aesthetic matching ikyf.vercel.app & index.html
+   ========================================================================== */
+
+/* Subpage Base Body */
+body.subpage {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  line-height: 1.85;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.subpage header {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  padding: calc(env(safe-area-inset-top, 0px) + 1.2rem) 5vw 1.2rem;
+  align-items: center;
+}
+
+body.subpage main {
+  flex: 1 0 auto;
+  position: relative;
+  z-index: 10;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 7rem);
+}
+
+@media (max-width: 899px) {
+  body.subpage header {
+    padding: calc(env(safe-area-inset-top, 0px) + 1rem) 5vw 1rem;
+  }
+  body.subpage main {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 6rem);
+  }
+}
+
+/* Atmospheric subtle background gradient */
+.subpage-bg-glow {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(183, 155, 224, 0.12) 0%, rgba(20, 18, 28, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subpage Hero Banner */
+.subpage-hero {
+  position: relative;
+  padding: 3.5rem 1.5rem 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(20, 18, 28, 0.4) 0%, rgba(20, 18, 28, 0.8) 100%);
+}
+
+.subpage-hero .eyebrow {
+  display: inline-block;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.subpage-hero h1 {
+  font-family: "Shippori Mincho", "Yu Mincho", serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  margin: 0 0 0.8rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.subpage-hero .subtitle {
+  font-size: 14px;
+  color: var(--sub);
+  letter-spacing: 0.08em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Breadcrumbs */
+.breadcrumbs-wrap {
+  max-width: 960px;
+  margin: 0 auto 1.2rem;
+  padding: 0.6rem 1.5rem;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--sub);
+  position: relative;
+  z-index: 5;
+}
+
+.breadcrumbs-wrap a {
+  color: var(--sub);
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs-wrap a:hover {
+  color: var(--accent);
+}
+
+.breadcrumbs-wrap .separator {
+  margin: 0 0.5rem;
+  opacity: 0.4;
+}
+
+/* Main Container */
+.subpage-container {
+  width: 90%;
+  max-width: 960px;
+  margin: 2.5rem auto 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Headings */
+.subpage-container h2 {
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  margin: 2.5rem 0 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.subpage-container h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 1.1em;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.subpage-container h3 {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin: 2rem 0 1rem;
+}
+
+/* Luxury Glass Cards (.card-glass, .result-card, .joho-card, .guidelines-card) */
+.card-glass,
+.result-card,
+.joho-card,
+.guidelines-card {
+  background: rgba(28, 24, 38, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(243, 238, 248, 0.1);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.card-glass:hover,
+.result-card:hover,
+.joho-card:hover,
+.guidelines-card:hover {
+  border-color: rgba(183, 155, 224, 0.35);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 0 16px rgba(183, 155, 224, 0.1);
+  transform: translateY(-2px);
+}
+
+.result-card h3,
+.joho-card h3,
+.guidelines-card h4 {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin: 0 0 0.8rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.8rem;
+}
+
+.result-card p,
+.joho-card p,
+.guidelines-card p {
+  color: rgba(243, 238, 248, 0.85);
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 0.8rem;
+}
+
+.result-card p strong,
+.joho-card p strong {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline dotted var(--accent);
+}
+
+.result-card p:last-child,
+.joho-card p:last-child,
+.guidelines-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* File / Document download links */
+.card-glass a,
+.joho-card a,
+.guidelines-card a {
+  color: var(--accent);
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.card-glass a:hover,
+.joho-card a:hover,
+.guidelines-card a:hover {
+  opacity: 0.8;
+}
+
+.download-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: rgba(183, 155, 224, 0.1);
+  border: 1px solid rgba(183, 155, 224, 0.3);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 13.5px;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+
+.download-link-btn:hover {
+  background: rgba(183, 155, 224, 0.2);
+  border-color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* Lists (.guidelines-list, .schedule-list) */
+.guidelines-list,
+.schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.guidelines-list li,
+.schedule-list li {
+  margin: 0;
+}
+
+.guidelines-list li a,
+.schedule-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.4rem;
+  background: rgba(28, 24, 38, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(243, 238, 248, 0.1);
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.guidelines-list li a::after,
+.schedule-list li a::after {
+  content: "→";
+  font-family: "Share Tech Mono", monospace;
+  font-size: 16px;
+  color: var(--accent);
+  margin-left: 1rem;
+  transition: transform 0.25s ease;
+}
+
+.guidelines-list li a:hover,
+.schedule-list li a:hover {
+  background: rgba(183, 155, 224, 0.08);
+  border-color: rgba(183, 155, 224, 0.4);
+  transform: translateX(4px);
+  color: #ffffff;
+}
+
+.guidelines-list li a:hover::after,
+.schedule-list li a:hover::after {
+  transform: translateX(4px);
+}
+
+/* Contact page layout (Form + Info + Map) */
+.form-wrapper {
+  background: rgba(28, 24, 38, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(243, 238, 248, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.8rem 0 2.5rem;
+  overflow: hidden;
+}
+
+.form-wrapper iframe {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+}
+
+.info-map-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .info-map-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-card {
+  background: rgba(28, 24, 38, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(243, 238, 248, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.info-card h3 {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.15rem;
+  color: #ffffff;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.8rem;
+  margin: 0 0 0.6rem;
+}
+
+.info-card p {
+  color: var(--sub);
+  font-size: 14.5px;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
+}
+
+.map-wrapper {
+  background: rgba(28, 24, 38, 0.65);
+  border: 1px solid rgba(243, 238, 248, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 350px;
+}
+
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  border: none;
+}
+
+/* Beginner page image presentation */
+.intro-image {
+  margin: 1.2rem 0 1.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.intro-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(243, 238, 248, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.intro-image img:hover {
+  transform: scale(1.01);
+  border-color: rgba(183, 155, 224, 0.4);
+}
+
+/* Active navigation item highlight */
+.nav a.active {
+  color: var(--accent);
+  position: relative;
+}
+
+.nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}

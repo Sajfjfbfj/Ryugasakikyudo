@@ -1,0 +1,1140 @@
+/* ==========================================================================
+   IKYF (ikyf.vercel.app) ARCHITECTURE FOR RYUSYOKAI KYUDO CLUB
+   公益財団法人 全日本弓道連盟 プロトタイプデザイン完全準拠
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg: #14121c;
+  --ink: #f3eef8;
+  --accent: #b79be0;
+  --sub: rgba(243, 238, 248, 0.72);
+  --line: rgba(243, 238, 248, 0.18);
+  --glass: rgba(20, 18, 28, 0.88);
+  --accent-glow: rgba(183, 155, 224, 0.25);
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14121c;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14121c;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  background-color: var(--bg);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  line-height: 1.8;
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+/* ==========================================================================
+   LOADING & VEIL & PROGRESS SHOOTER
+   ========================================================================== */
+#ld {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 7vw calc(env(safe-area-inset-bottom, 0px) + 6vh);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.8s ease;
+}
+
+#ld.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#ld div {
+  font-size: clamp(56px, 14vw, 160px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-family: "Share Tech Mono", "Shippori Mincho", serif;
+}
+
+#ld small {
+  font-size: 0.35em;
+  margin-left: 0.15em;
+  color: var(--sub);
+}
+
+/* Scroll Arrow Track Shooter */
+#sh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--accent);
+  z-index: 90;
+  transition: transform 0.1s linear;
+}
+
+#pt {
+  position: fixed;
+  top: -3px;
+  left: 0;
+  z-index: 90;
+  border-left: 9px solid var(--accent);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FULLSCREEN BACKGROUND LAYERS & VEIL (情景レイヤー・静寂・道場・ヴェール)
+   ========================================================================== */
+.fb-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+#scene1Wrap {
+  z-index: 0;
+  opacity: 1;
+}
+
+#scene2Wrap {
+  z-index: 0;
+  opacity: 0;
+}
+
+/* [静寂] シーン1：デスクトップ標準 */
+.fb-scene1-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+}
+
+.fb-scene1-bg {
+  display: none; /* スマホ専用アンビエント */
+}
+
+.fb-scene1 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.7) contrast(1.1);
+}
+
+/* [道場] シーン2：デスクトップ標準 */
+.fb-scene2-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+}
+
+.fb-scene2 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  filter: brightness(0.68) contrast(1.12);
+}
+
+.veil {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s linear;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION
+   ========================================================================== */
+header {
+  position: fixed;
+  z-index: 80;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: calc(env(safe-area-inset-top, 0px) + 3vh) 5vw 2vh;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  text-shadow: 0 1px 16px rgba(20, 18, 28, 0.7);
+  transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease, text-shadow 0.35s ease;
+}
+
+header.scrolled {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--line);
+  text-shadow: none;
+}
+
+header.menu-open {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+  backdrop-filter: none !important;
+  text-shadow: 0 1px 16px rgba(20, 18, 28, 0.7);
+}
+
+.mark b {
+  display: block;
+  font-size: 19px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+}
+
+.mark span {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--sub);
+  display: block;
+  margin-top: 2px;
+}
+
+.nav {
+  display: none;
+  gap: 2.2em;
+  align-items: center;
+}
+
+.nav button, .nav a {
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  padding: 0.5em 0;
+  position: relative;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.nav button::after, .nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav button:hover::after, .nav button.on::after,
+.nav a:hover::after, .nav a.on::after {
+  transform: scaleX(1);
+}
+
+#mb {
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  padding: 0.4em 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+@media (min-width: 900px) {
+  .nav {
+    display: flex;
+  }
+  #mb {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   MEGA CURTAIN MENU (#cur)
+   ========================================================================== */
+#cur {
+  position: fixed;
+  z-index: 70;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-height: 100vh;
+  overflow: auto;
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0);
+  padding: calc(env(safe-area-inset-top, 0px) + 13vh) 7vw 6vh;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 6.5vw),
+              linear-gradient(135deg, #3c2a68, #231942);
+  transition: clip-path 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.65s ease;
+}
+
+#cur.open {
+  visibility: visible;
+  clip-path: inset(0 0 0% 0);
+}
+
+/* モバイル版メニューリスト（PC版ナビと完全同一の項目構成） */
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem 0 2rem;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0.6rem;
+  font-family: "Shippori Mincho", "Yu Mincho", serif;
+  font-size: clamp(16px, 4.5vw, 19px);
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  border-bottom: 1px solid rgba(243, 238, 248, 0.12);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.mobile-nav-item::after {
+  content: "→";
+  font-family: "Share Tech Mono", monospace;
+  font-size: 1rem;
+  color: var(--accent);
+  opacity: 0.7;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item:active {
+  color: #fff;
+  padding-left: 1rem;
+  border-bottom-color: var(--accent);
+  background: rgba(183, 155, 224, 0.05);
+}
+
+.mobile-nav-item:hover::after {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.mobile-nav-item.active {
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+
+.mobile-search-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(243, 238, 248, 0.12);
+  width: 100%;
+  text-align: left;
+}
+
+.grp {
+  display: none;
+}
+
+.grp.on {
+  display: grid;
+  grid-template-columns: minmax(10em, 1fr) 3fr;
+  gap: 4vw;
+  margin-bottom: 3vh;
+}
+
+.grp h3 {
+  margin: 0;
+  font-size: clamp(26px, 3.8vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+}
+
+.grp h3 button {
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: default;
+}
+
+.grp ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 4vw;
+}
+
+.grp li {
+  break-inside: avoid;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.grp a {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.7em 0;
+  font-size: clamp(15px, 1.5vw, 19px);
+  letter-spacing: 0.12em;
+}
+
+.grp a::after {
+  content: "";
+  height: 1px;
+  width: 0;
+  background: #fff;
+  transition: width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.grp a:hover::after, .grp a:focus-visible::after {
+  width: 2.6em;
+}
+
+.util {
+  margin-top: 5vh;
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.82);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 2.5vh;
+}
+
+.util a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 899px) {
+  .grp, .grp.on {
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .grp h3 {
+    font-size: 19px;
+  }
+  .grp h3 button {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.9em 0;
+    cursor: pointer;
+  }
+  .grp h3 button::after {
+    content: "＋";
+  }
+  .grp.on h3 button::after {
+    content: "－";
+  }
+  .grp ul {
+    display: none;
+    columns: 1;
+    padding-bottom: 0.6em;
+  }
+  .grp.on ul {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   HERO OVERLAY UI (#ui) - VERTICAL TITLE & SEASONS SWITCH
+   ========================================================================== */
+#ui {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.title {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 14vh);
+  right: 7vw;
+  writing-mode: vertical-rl;
+  font-size: clamp(32px, 6.4vw, 72px);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  line-height: 1.5;
+  text-shadow: 0 2px 24px rgba(20, 18, 28, 0.75);
+  margin: 0;
+}
+
+.cap {
+  position: absolute;
+  left: 7vw;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 6vh);
+  max-width: min(80vw, 28em);
+  pointer-events: auto;
+}
+
+.cap p {
+  margin: 0 0 1.2em;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--sub);
+  text-shadow: 0 1px 14px rgba(20, 18, 28, 0.85);
+}
+
+.seasons {
+  display: flex;
+  gap: 1.8em;
+}
+
+.seasons button {
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  color: var(--sub);
+  padding: 0.3em 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.4s, border-color 0.4s;
+}
+
+.seasons button[aria-pressed="true"] {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+.spacer {
+  height: 250vh;
+}
+
+/* ==========================================================================
+   STICKY HORIZONTAL GALLERY (#g, .stick, #tr, .card)
+   ========================================================================== */
+#g {
+  position: relative;
+  z-index: 3;
+  height: 380vh;
+}
+
+.stick {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.head {
+  position: absolute;
+  left: 7vw;
+  top: calc(env(safe-area-inset-top, 0px) + 16vh);
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--sub);
+  text-shadow: 0 1px 12px rgba(20, 18, 28, 0.9);
+}
+
+#tr {
+  position: absolute;
+  left: 0;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 7vh);
+  display: flex;
+  gap: 4vw;
+  padding: 0 7vw;
+  will-change: transform;
+  align-items: flex-end;
+}
+
+.lab {
+  writing-mode: vertical-rl;
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  flex: none;
+  align-self: center;
+  color: var(--ink);
+  text-shadow: 0 2px 14px rgba(20, 18, 28, 0.8);
+}
+
+.card {
+  display: block;
+  flex: none;
+  width: clamp(220px, 24vw, 340px);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card:nth-child(odd) {
+  transform: translateY(-5vh);
+}
+
+.card:nth-child(odd):hover, .card:nth-child(odd):focus-visible {
+  transform: translateY(calc(-5vh - 8px));
+}
+
+.card:nth-child(even):hover, .card:nth-child(even):focus-visible {
+  transform: translateY(-8px);
+}
+
+.ph {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #201c2c;
+  border-radius: 4px;
+  box-shadow: 0 12px 32px rgba(10, 8, 16, 0.45);
+  transition: box-shadow 0.6s ease;
+}
+
+.card:hover .ph, .card:focus-visible .ph {
+  box-shadow: 0 18px 42px var(--accent-glow), 0 14px 36px rgba(10, 8, 16, 0.7);
+}
+
+.ph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(20, 18, 28, 0.45) 100%);
+  opacity: 0.35;
+  transition: opacity 0.6s ease;
+}
+
+.card:hover .ph::after, .card:focus-visible .ph::after {
+  opacity: 0.5;
+}
+
+.ph i {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  will-change: transform, opacity;
+}
+
+/* Layer A: Default Photo */
+.ph .a {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Layer B: Revealed Photo on Hover */
+.ph .b {
+  opacity: 0;
+  filter: contrast(1.06) saturate(1.12);
+  transform: scale(1.02);
+  transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card:hover .a, .card:focus-visible .a {
+  transform: scale(1.05);
+}
+
+.card:hover .b, .card:focus-visible .b {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+figcaption {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+  padding-top: 0.9em;
+  font-size: 16px;
+  letter-spacing: 0.14em;
+}
+
+figcaption span {
+  color: var(--sub);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   CONTENT AFTER GALLERY (.after)
+   ======================================================================== */
+.after {
+  position: relative;
+  z-index: 3;
+  background: var(--bg);
+  padding: 14vh 7vw calc(env(safe-area-inset-bottom, 0px) + 8vh);
+}
+
+.after section {
+  max-width: 56em;
+  margin: 0 auto 14vh;
+}
+
+.after h2 {
+  margin: 0 0 1.2em;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5em;
+}
+
+/* News & Transmissions */
+.news {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news li {
+  display: grid;
+  grid-template-columns: 8em 1fr;
+  gap: 1.2em;
+  padding: 1.1em 0;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.news li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.news time {
+  color: var(--sub);
+  letter-spacing: 0.08em;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.news a:hover {
+  color: var(--accent);
+}
+
+.more {
+  display: inline-block;
+  margin-top: 1.6em;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.2em;
+  letter-spacing: 0.2em;
+  font-size: 14px;
+}
+
+.notice {
+  margin: 2.2em 0 0;
+  padding: 1.2em 1.4em;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.8;
+  background: rgba(183, 155, 224, 0.05);
+}
+
+/* Dojo Profile Specification Grid */
+.dojo-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 15px;
+}
+
+.dojo-specs-table tr {
+  border-bottom: 1px solid var(--line);
+}
+
+.dojo-specs-table th {
+  text-align: left;
+  padding: 1em 1em 1em 0;
+  color: var(--sub);
+  width: 25%;
+  font-weight: 500;
+}
+
+.dojo-specs-table td {
+  padding: 1em 0;
+  line-height: 1.8;
+}
+
+/* Search Dropdown Modal */
+.search-modal-wrap {
+  position: fixed;
+  top: 80px;
+  right: 5vw;
+  width: min(90vw, 420px);
+  background: rgba(20, 18, 28, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 16px;
+  z-index: 99;
+  display: none;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+}
+
+.search-modal-wrap.open {
+  display: block;
+}
+
+.search-input-box {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input-box input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.search-input-box button {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-results-box {
+  margin-top: 12px;
+  max-height: 360px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.search-result-entry {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.search-result-entry h4 {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.search-result-entry p {
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.5;
+}
+
+/* Lightbox Modal */
+.ikyf-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 12, 20, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 30px;
+}
+
+.ikyf-lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ikyf-lightbox-inner {
+  max-width: 1100px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.ikyf-lightbox-inner img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
+}
+
+.ikyf-lightbox-cap {
+  margin-top: 16px;
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-align: center;
+}
+
+.ikyf-lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: var(--sub);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ikyf-lightbox-close:hover {
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  max-width: 56em;
+  margin: 0 auto;
+  font-size: 13px;
+  line-height: 2;
+  color: var(--sub);
+}
+
+footer ul {
+  list-style: none;
+  margin: 0 0 1.6em;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1.8em;
+}
+
+footer a:hover {
+  color: var(--ink);
+}
+
+footer p,
+.copyright {
+  border-top: 1px solid var(--line);
+  padding-top: 2em;
+  margin-top: 2em;
+  text-align: center;
+  color: var(--sub);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   FLOATING BACK-TO-TOP BUTTON (ページ最上部へ戻るボタン)
+   ========================================================================== */
+.back-to-top {
+  position: fixed !important;
+  bottom: 2.2rem;
+  right: 2.2rem;
+  width: 48px;
+  height: 48px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 24, 38, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  border: 1px solid rgba(243, 238, 248, 0.22);
+  border-radius: 50%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              visibility 0.35s ease,
+              transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--accent);
+  color: #14121c;
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(183, 155, 224, 0.45);
+}
+
+.back-to-top:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .back-to-top {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (スマホ・タブレット表示の最適化)
+   ========================================================================== */
+@media (max-width: 768px), (orientation: portrait) and (max-width: 900px) {
+  /* [静寂] スマホで画像が切れない最適化表示 */
+  .fb-scene1-wrap {
+    overflow: hidden;
+    background: radial-gradient(circle at center, #262232 0%, #14121c 100%);
+  }
+
+  /* 背景のソフトなアンビエント（余白を上質に埋める） */
+  .fb-scene1-bg {
+    display: block;
+    position: absolute;
+    inset: -15%;
+    width: 130%;
+    height: 130%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(32px) brightness(0.35);
+    opacity: 0.65;
+    transform: scale(1.1);
+    pointer-events: none;
+  }
+
+  /* メインの的・龍翔会バナー：スマホ画面で100%切れることなく全景が鮮明に収まる */
+  .fb-scene1 {
+    position: relative;
+    inset: auto;
+    width: 92vw;
+    max-width: 480px;
+    height: auto;
+    max-height: 40vh;
+    object-fit: contain;
+    filter: brightness(0.92) contrast(1.08) drop-shadow(0 12px 36px rgba(0, 0, 0, 0.75));
+    border-radius: 6px;
+    margin-top: -6vh; /* 縦書きタイトルとキャプションの間にバランスよく配置 */
+  }
+
+  /* [道場] スマホ表示：射手が画面中央に美しく収まる構図 */
+  .fb-scene2 {
+    object-position: 58% center;
+    filter: brightness(0.64) contrast(1.15);
+  }
+
+  /* 縦書きタイトルのスマホ最適化 */
+  .title {
+    top: calc(env(safe-area-inset-top, 0px) + 11vh);
+    right: 5vw;
+    font-size: clamp(24px, 6.4vw, 32px);
+    letter-spacing: 0.22em;
+    line-height: 1.45;
+    text-shadow: 0 2px 20px rgba(10, 8, 16, 0.95), 0 0 10px rgba(20, 18, 28, 0.9);
+  }
+
+  /* キャプションと切替ボタンのスマホ最適化 */
+  .cap {
+    left: 6vw;
+    right: 6vw;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.5vh);
+    max-width: 100%;
+  }
+
+  .cap p {
+    font-size: 13.5px;
+    line-height: 1.8;
+    margin-bottom: 0.9em;
+    text-shadow: 0 1px 12px rgba(10, 8, 16, 0.95);
+  }
+
+  .seasons {
+    gap: 1.4em;
+  }
+
+  .seasons button {
+    font-size: 18px;
+    letter-spacing: 0.18em;
+  }
+
+  /* 横スクロールギャラリーのスマホ調整 */
+  .head {
+    top: calc(env(safe-area-inset-top, 0px) + 12vh);
+    left: 6vw;
+    font-size: 13px;
+  }
+
+  #tr {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 5vh);
+    padding: 0 6vw;
+    gap: 6vw;
+  }
+
+  .card {
+    width: clamp(200px, 68vw, 280px);
+  }
+
+  /* お知らせ・フッターのスマホ調整 */
+  .news li {
+    grid-template-columns: 1fr;
+    gap: 0.3em;
+  }
+
+  .mark b {
+    font-size: 16px;
+  }
+}
+

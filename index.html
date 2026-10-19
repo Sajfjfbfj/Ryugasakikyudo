@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>龍翔会 弓道｜茨城県弓道連盟 龍ヶ崎支部</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/home-modern.css">
   
-  <!-- SEO & メタ情報 -->
-  <meta name="description" content="茨城県弓道連盟 龍ヶ崎支部 龍翔会の公式ホームページ。初心者教室、稽古日程、大会・審査要項、大会成績などをご案内。日本の和と伝統武道の精神を受け継ぐ龍ヶ崎の弓道拠点。">
+  <!-- SEO & OGP -->
+  <meta name="description" content="茨城県弓道連盟 龍ヶ崎支部 龍翔会の公式ホームページ。弓道は一人でも楽しめる武道であり、平常心と集中力を養う礼の道。初心者教室、稽古日程、大会・審査要項、大会成績などをご案内。">
   <meta name="keywords" content="弓道, 茨城, 龍翔会, 龍ヶ崎弓道, 弓道場, 初心者教室, 審査会, 大会要項">
-  
-  <!-- OGP -->
   <meta property="og:title" content="龍翔会 弓道｜茨城県弓道連盟 龍ヶ崎支部">
-  <meta property="og:description" content="茨城県弓道連盟 龍ヶ崎支部 龍翔会。伝統と求道が交差する、静寂と集中の武道空間。">
+  <meta property="og:description" content="茨城県弓道連盟 龍ヶ崎支部 龍翔会。静寂と集中の武道空間。礼に始まり、礼に終わる。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ryugasakikyudo.vercel.app/">
   <meta property="og:image" content="assets/img/4x/ヘッダー用.jpg">
   
-  <!--- ファビコン -->
+  <!-- ファビコン -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
   <link rel="manifest" href="assets/img/manifest.json">
-  <meta name="theme-color" content="#111112">
+  <meta name="theme-color" content="#14121c">
+
+  <!-- IKYF Style Sheet -->
+  <link rel="stylesheet" href="css/ikyf-style.css">
 
   <!-- OneSignal -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -36,1300 +34,688 @@
       });
     });
   </script>
-
-  <!-- GSAP & Three.js (Lando Norris 3D WebGL Engine) -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body class="modern-home">
+<body>
 
-<!-- ==========================================================================
-     NAVIGATION (.nav) - EXACT LANDO NORRIS FIXED BAR
-     ========================================================================== -->
-<nav class="nav">
-  <a href="index.html" class="nav-brand-link" title="龍翔会 ホーム">
-    <img src="assets/img/龍翔会.png" alt="龍翔会 ロゴ">
-    <span class="nav-brand-text">RYUSYOKAI</span>
-  </a>
-
-  <div class="nav-middle">
-    KYUDO FEDERATION
+  <!-- ローディング演出 (#ld) -->
+  <div id="ld">
+    <div><span id="pc">0</span><small>%</small></div>
   </div>
 
-  <div class="btn-layout is-nav">
-    <button class="btn-w" id="searchTriggerBtn">SEARCH</button>
-    <button class="nav-ham" id="navHamBtn" aria-label="メニュー開閉">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <!-- スクロール進捗シューター (#sh, #pt) -->
+  <div id="sh"></div>
+  <div id="pt"></div>
+
+  <!-- 背景ビジュアルレイヤー (静寂・道場・ヴェール) -->
+  <div id="scene1Wrap" class="fb-layer fb-scene1-wrap">
+    <img src="assets/img/4x/header_ryusyokai.jpg" alt="" class="fb-scene1-bg" aria-hidden="true">
+    <img src="assets/img/4x/header_ryusyokai.jpg" alt="龍翔会 弓道" class="fb-scene1">
+  </div>
+  <div id="scene2Wrap" class="fb-layer fb-scene2-wrap">
+    <img src="assets/img/DSC_0240.jpg" alt="龍翔会 道場稽古風景" class="fb-scene2">
+  </div>
+  <div class="veil" id="veil"></div>
+
+  <!-- ========================================================================
+       固定ヘッダー (header)
+       ======================================================================== -->
+  <header id="mainHeader">
+    <a class="mark" href="index.html">
+      <b>龍翔会 弓道</b>
+      <span>茨城県弓道連盟 龍ヶ崎支部</span>
+    </a>
+    <nav class="nav" id="topNav" aria-label="メインメニュー">
+      <a href="pages/beginner/index.html">初心者教室</a>
+      <a href="pages/schedule/index.html">県連等スケジュール</a>
+      <a href="pages/tournament/index.html">大会審査要項</a>
+      <a href="pages/seiseki/index.html">大会審査成績</a>
+      <a href="pages/members/index.html">会員専用情報</a>
+      <a href="pages/contact/index.html">お問い合わせ</a>
+      <button id="searchTriggerBtn">検索</button>
+    </nav>
+    <button id="mb" aria-expanded="false" aria-controls="cur">メニュー</button>
+  </header>
+
+  <!-- ========================================================================
+       モバイル版メニュー (#cur) - PC版ナビゲーションと同一構成
+       ======================================================================== -->
+  <div id="cur" aria-label="モバイルメニュー">
+    <div class="mobile-nav-list">
+      <a href="index.html" class="mobile-nav-item active">ホーム</a>
+      <a href="pages/beginner/index.html" class="mobile-nav-item">初心者教室</a>
+      <a href="pages/schedule/index.html" class="mobile-nav-item">県連等スケジュール</a>
+      <a href="pages/tournament/index.html" class="mobile-nav-item">大会審査要項</a>
+      <a href="pages/seiseki/index.html" class="mobile-nav-item">大会審査成績</a>
+      <a href="pages/members/index.html" class="mobile-nav-item">会員専用情報</a>
+      <a href="pages/contact/index.html" class="mobile-nav-item">お問い合わせ</a>
+      <button id="mobileSearchTriggerBtn" class="mobile-nav-item mobile-search-btn">検索</button>
+    </div>
   </div>
 
   <!-- 検索ドロップダウンモーダル -->
-  <div class="nav-search-modal" id="searchModal">
-    <div class="nav-search-box">
+  <div class="search-modal-wrap" id="searchModal">
+    <div class="search-input-box">
       <input type="text" id="searchInput" placeholder="要項、審査、日程を検索...">
       <button id="searchBtn">探す</button>
     </div>
-    <div id="searchResults"></div>
+    <div class="search-results-box" id="searchResults"></div>
   </div>
-</nav>
 
-<!-- フルスクリーンオーバーレイメニュー -->
-<div class="nav-overlay" id="navOverlay">
-  <div class="nav-menu-inner">
-    <div>
-      <img src="assets/img/DSC_0240.jpg" alt="龍翔会 道場風景" class="nav-menu-preview-img" id="navPreviewImg">
+  <!-- ========================================================================
+       ヒーローオーバーレイ UI (#ui) - 縦書きタイトル ＆ 季節・情景切替
+       ======================================================================== -->
+  <div id="ui">
+    <h1 class="title" id="ttl">静寂を穿つ、<br>龍翔の一矢。</h1>
+    <div class="cap">
+      <p id="line">
+        「礼に始まり、礼に終わる」。<br>
+        弓道は己の心と向き合い、平常心を養う武道であり求道の道。<br>
+        スクロールすると、弓道の深奥が移ろいます。
+      </p>
+      <div class="seasons">
+        <button id="btnAki" aria-pressed="true">静寂</button>
+        <button id="btnHaru" aria-pressed="false">道場</button>
+      </div>
     </div>
-    <ul class="nav-menu-links">
-      <li><a href="index.html" data-img="assets/img/DSC_0240.jpg">01 // ホーム</a></li>
-      <li><a href="pages/tournament/index.html" data-img="assets/img/24697911_s.jpg">02 // 大会・審査要項</a></li>
-      <li><a href="pages/seiseki/index.html" data-img="assets/img/5171030_s.jpg">03 // 大会・審査成績</a></li>
-      <li><a href="pages/beginner/index.html" data-img="assets/img/30961622_s.jpg">04 // 初心者教室</a></li>
-      <li><a href="pages/schedule/index.html" data-img="assets/img/26230334_s.jpg">05 // スケジュール</a></li>
-      <li><a href="pages/members/index.html" data-img="assets/img/24794886_s.jpg">06 // 会員専用</a></li>
-      <li><a href="pages/contact/index.html" data-img="assets/img/DSC_0240.jpg">07 // お問い合わせ</a></li>
-    </ul>
   </div>
-</div>
 
-<main>
-  <!-- ==========================================================================
-       SECTION #1: HERO (.s.home-hero) - EXACT LANDO NORRIS 3D CANVAS & HUD
-       ========================================================================== -->
-  <section class="s home-hero" id="heroSection">
-    <!-- Lando Norris 特大バックグラウンド・アウトライン文字 (深度レイヤー1) -->
-    <div class="hero-bg-outline-text" id="heroBgOutline">RYUSYOKAI</div>
+  <!-- スクロール長さを稼ぐためのスペーサー -->
+  <div class="spacer"></div>
 
-    <!-- 3Dインタラクティブ WebGL キャンバス (Three.js 3D 弓道オブジェクト - 深度レイヤー2) -->
-    <div class="gl-canvas" id="glCanvasWrap">
-      <canvas id="threeCanvas"></canvas>
-    </div>
+  <!-- ========================================================================
+       横スクロール・フォトギャラリー (#g, .stick, #tr, .card)
+       写真に触れると「もう一つの瞬間」へと滑らかに入れ替わる
+       ======================================================================== -->
+  <section id="g" aria-label="龍翔会 各部案内">
+    <div class="stick">
+      <p class="head">
+        写真に触れると、同じ場所・所作の<br>もう一つの瞬間に入れ替わります。
+      </p>
+      <div id="tr">
+        <div class="lab">龍翔会 案内 // DIRECTORY</div>
 
-    <!-- 射手シルエット & 和の気迫レイヤー -->
-    <div class="hero-archer-silhouette" id="heroArcher">
-      <img src="assets/img/26229848_s.jpg" alt="龍翔会 弓道射手">
-      <div class="hero-archer-kanji">正射必中</div>
-    </div>
-
-    <div class="c home-hero">
-
-      <!-- 左HUDウィジェット: DOJO INTEL -->
-      <div class="home-hero-left-intel-w" id="heroLeftIntel">
-        <div class="home-hero-intel-thumb">
-          <img src="assets/img/DSC_0240.jpg" alt="龍ヶ崎中学校 弓道場">
-          <div class="intel-thumb-badge">DOJO CAM</div>
-        </div>
-        <div class="text-eyebrow">DOJO INTEL // 龍ヶ崎拠点</div>
-        <div class="home-hero-left-intel-title">近的 28m / 6人立</div>
-        <div class="home-hero-left-intel-desc">
-          龍ヶ崎中学校 弓道場<br>
-          火・木・土 19:00〜<br>
-          日曜 10:00〜
-        </div>
-        <div class="home-hero-left-intel-coords">
-          LAT 35.9282° N / LON 140.1526° E
-        </div>
-      </div>
-
-      <!-- 中央特大タイポグラフィ（Lando Norris スタイル） -->
-      <div class="home-hero-center-text" id="heroCenterText">
-        <div class="text-eyebrow" style="margin-bottom: 12px; font-size: 0.8rem;">
-          IBARAKI RYUGASAKI // OFFICIAL KYUDO CLUB
-        </div>
-        <h1 class="text-impact-hero">
-          RYU<span class="highlight">SYO</span>KAI
-        </h1>
-        <div class="home-hero-kanji-sub">龍翔会 弓道</div>
-        <p class="home-hero-tagline">
-          静寂を穿つ一筋の矢、龍の如く翔ける。<br>
-          伝統と求道が交差する、茨城県龍ヶ崎市の弓道拠点。
-        </p>
-        <div class="home-hero-btn-group">
-          <a href="pages/tournament/index.html" class="btn-w">大会・審査要項 ➔</a>
-          <a href="pages/schedule/index.html" class="btn-w" style="background: transparent; color: #fff; border-color: rgba(255,255,255,0.3);">稽古日程表</a>
-        </div>
-      </div>
-
-      <!-- 右HUDウィジェット: EXACT Lando Norris Next Race Widget -->
-      <div class="home-hero-next-race-w" id="heroRightWidget">
-        <div class="home-hero-next-race-outline">
-          <svg viewBox="0 0 119 244" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M118.5 6v232a5.5 5.5 0 0 1-5.5 5.5H6A5.5 5.5 0 0 1 .5 238V25A5.5 5.5 0 0 1 6 19.5h46.346c4.695 0 9.167-2 12.297-5.498l7.46-8.337A15.5 15.5 0 0 1 83.653.5H113a5.5 5.5 0 0 1 5.5 5.5Z" stroke="currentColor"/>
-          </svg>
-        </div>
-        <div class="home-hero-next-race-top">
-          <div class="text-eyebrow">NEXT EVENT</div>
-        </div>
-        <div class="home-hero-next-race-row">
-          <a href="pages/tournament/index.html">
-            <div class="home-hero-next-race-date">令和8年 9.27 (日)</div>
-            <div class="home-hero-next-race-event-title">第33回 県南大会</div>
-            <div class="home-hero-next-race-sub">取手グリーンスポーツ</div>
-          </a>
-        </div>
-        <div class="home-hero-next-race-line"></div>
-        <div class="home-hero-next-race-row">
-          <div class="text-eyebrow">茨城県弓道連盟</div>
-          <div class="home-hero-next-race-sub">龍ヶ崎支部 龍翔会</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SECTION #2: MARQUEE (.s.home-marquee) - EXACT LANDO NORRIS CONTINUOUS RUNNER
-       ========================================================================== -->
-  <section class="s home-marquee">
-    <div class="marquee-adv-layout">
-      <div class="marquee-adv-top-layout">
-        <img src="assets/img/cropped-龍翔会-1.png" alt="龍翔会 印" class="marquee-signature-img">
-        <div class="text-eyebrow">MESSAGE FROM RYUSYOKAI // 正射必中</div>
-      </div>
-      <div class="text-impact-lg-mona marquee-adv">
-        <span><strong>RYUSYOKAI</strong> // 茨城県弓道連盟 龍ヶ崎支部</span>
-        <span><strong>正射必中</strong> // SEISHA HITCHU</span>
-        <span>一射絶命 // ONE ARROW ONE LIFE</span>
-        <span><strong>礼に始まり礼に終わる</strong> // ETIQUETTE & DISCIPLINE</span>
-        <span>射法八節 // EIGHT STAGES OF SHOOTING</span>
-        <span><strong>近的 二十八米</strong> // 28M PRECISION</span>
-        <span>TRADITIONAL JAPANESE ARCHERY // RYUSYOKAI KYUDO CLUB</span>
-        <span><strong>RYUSYOKAI</strong> // 茨城県弓道連盟 龍ヶ崎支部</span>
-        <span><strong>正射必中</strong> // SEISHA HITCHU</span>
-        <span>一射絶命 // ONE ARROW ONE LIFE</span>
-        <span><strong>礼に始まり礼に終わる</strong> // ETIQUETTE & DISCIPLINE</span>
-        <span>射法八節 // EIGHT STAGES OF SHOOTING</span>
-        <span><strong>近的 二十八米</strong> // 28M PRECISION</span>
-        <span>TRADITIONAL JAPANESE ARCHERY // RYUSYOKAI KYUDO CLUB</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SECTION #3: OTOT (.s.is-otot-home) - "ON TRACK" & "OFF TRACK" SPLIT LAYOUT
-       ========================================================================== -->
-  <section class="s is-otot-home">
-    <div class="c is-otot-home">
-      <div class="otot-home-layout">
-        
-        <!-- ON TRACK: 競技・大会・審査 -->
-        <a href="pages/tournament/index.html" class="otot-home-card">
-          <img src="assets/img/24697911_s.jpg" alt="和弓 競技" class="otot-card-bg-img">
-          <div class="otot-card-veil"></div>
-          <div class="otot-card-content">
-            <div>
-              <div class="text-eyebrow" style="margin-bottom: 8px;">
-                COMPETITION & EXAMS <span class="otot-card-kanji-badge">競技・審査</span>
-              </div>
-              <h2 class="text-impact-reg-brier">ON</h2>
-              <h2 class="text-impact-reg-mona line-increase">TRACK</h2>
-            </div>
-            <div>
-              <p class="text-body-reg-mona">
-                令和8年度・7年度の<strong>大会実施要項</strong>、関東地域連合審査会案内、参加申込書および昇段・的中成績。
-              </p>
-              <div class="otot-card-action" style="margin-top: 20px;">
-                大会・審査要項を見る ➔
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!-- OFF TRACK: 道場・教室・会員 -->
-        <a href="pages/beginner/index.html" class="otot-home-card">
-          <img src="assets/img/30961622_s.jpg" alt="道場 的場" class="otot-card-bg-img">
-          <div class="otot-card-veil"></div>
-          <div class="otot-card-content">
-            <div>
-              <div class="text-eyebrow" style="margin-bottom: 8px;">
-                COMMUNITY & EDUCATION <span class="otot-card-kanji-badge">道場・修養</span>
-              </div>
-              <h2 class="text-impact-reg-brier">OFF</h2>
-              <h2 class="text-impact-reg-mona line-increase">TRACK</h2>
-            </div>
-            <div>
-              <p class="text-body-reg-mona">
-                初めての方のための<strong>初心者教室</strong>、月間稽古日程表、会員専用ポータル、見学・入門のお問い合わせ。
-              </p>
-              <div class="otot-card-action" style="margin-top: 20px;">
-                道場案内・初心者教室へ ➔
-              </div>
-            </div>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SECTION #4: HELMETS HALL OF FAME (.s.home-helmets) - 6 PORTAL CARDS
-       ========================================================================== -->
-  <section class="s home-helmets" id="portalSection">
-    <div class="c home-helmets">
-      <div class="helmets-header">
-        <div class="text-eyebrow" style="margin-bottom: 12px;">SECTION DIRECTORY // 道場案内</div>
-        <h2 class="text-title-lg-mona">
-          DOJO <span>PORTAL</span>
-        </h2>
-        <h2 class="text-title-lg-mona" style="color: var(--color--green-off-white-2); font-size: clamp(2rem, 4vw, 3.4rem);">
-          HALL OF KYUDO
-        </h2>
-      </div>
-
-      <div class="helmet-grid-layout">
         <!-- 01 初心者教室 -->
-        <a href="pages/beginner/index.html" class="helmet-card">
-          <img src="assets/img/30961622_s.jpg" alt="初心者教室 垜の霞的" class="helmet-card-img">
-          <div class="helmet-card-veil"></div>
-          <div class="helmet-card-content">
-            <span class="helmet-card-tag">// 01 • EDUCATION</span>
-            <div>
-              <h3 class="helmet-card-title">初心者教室</h3>
-              <p class="helmet-card-desc">初めての方も安心。礼法・弓具の扱いから射法八節の基本まで丁寧にご案内します。</p>
-            </div>
+        <a href="pages/beginner/index.html" class="card">
+          <div class="ph">
+            <i class="a" style="background-image: url('assets/img/30961622_s.jpg');"></i>
+            <i class="b" style="background-image: url('assets/img/kyudo_draw_archer.png');"></i>
           </div>
+          <figcaption>初心者教室 <span>// 01 BEGINNER</span></figcaption>
         </a>
 
-        <!-- 02 スケジュール -->
-        <a href="pages/schedule/index.html" class="helmet-card">
-          <img src="assets/img/26230334_s.jpg" alt="スケジュール ゆがけと会" class="helmet-card-img">
-          <div class="helmet-card-veil"></div>
-          <div class="helmet-card-content">
-            <span class="helmet-card-tag">// 02 • CALENDAR</span>
-            <div>
-              <h3 class="helmet-card-title">スケジュール</h3>
-              <p class="helmet-card-desc">月間の道場稽古日、県連行事予定、中央審査会・全国大会の年間日程表。</p>
-            </div>
+        <!-- 02 県連等スケジュール -->
+        <a href="pages/schedule/index.html" class="card">
+          <div class="ph">
+            <i class="a" style="background-image: url('assets/img/26230334_s.jpg');"></i>
+            <i class="b" style="background-image: url('assets/img/5171030_s.jpg');"></i>
           </div>
+          <figcaption>県連等スケジュール <span>// 02 SCHEDULE</span></figcaption>
         </a>
 
-        <!-- 03 大会・審査要項 -->
-        <a href="pages/tournament/index.html" class="helmet-card">
-          <img src="assets/img/24697911_s.jpg" alt="大会・審査要項 和弓の美" class="helmet-card-img">
-          <div class="helmet-card-veil"></div>
-          <div class="helmet-card-content">
-            <span class="helmet-card-tag">// 03 • TOURNAMENTS</span>
-            <div>
-              <h3 class="helmet-card-title">大会・審査要項</h3>
-              <p class="helmet-card-desc">令和8年度・7年度の大会実施要項、関東地域連合審査会案内、参加申込書等。</p>
-            </div>
+        <!-- 03 大会審査要項 -->
+        <a href="pages/tournament/index.html" class="card">
+          <div class="ph">
+            <i class="a" style="background-image: url('assets/img/24697911_s.jpg');"></i>
+            <i class="b" style="background-image: url('assets/img/26229848_s.jpg');"></i>
           </div>
+          <figcaption>大会審査要項 <span>// 03 TOURNAMENTS</span></figcaption>
         </a>
 
-        <!-- 04 大会・審査成績 -->
-        <a href="pages/seiseki/index.html" class="helmet-card">
-          <img src="assets/img/22209849_s.jpg" alt="大会・審査成績 猛禽鷹羽の矢" class="helmet-card-img">
-          <div class="helmet-card-veil"></div>
-          <div class="helmet-card-content">
-            <span class="helmet-card-tag">// 04 • HONORS</span>
-            <div>
-              <h3 class="helmet-card-title">大会・審査成績</h3>
-              <p class="helmet-card-desc">会員の段位認許・昇段審査合格速報、各種弓道大会における入賞・的中記録。</p>
-            </div>
+        <!-- 04 大会審査成績 -->
+        <a href="pages/seiseki/index.html" class="card">
+          <div class="ph">
+            <i class="a" style="background-image: url('assets/img/22209849_s.jpg');"></i>
+            <i class="b" style="background-image: url('assets/img/mato1.jpg');"></i>
           </div>
+          <figcaption>大会審査成績 <span>// 04 RESULTS</span></figcaption>
         </a>
 
-        <!-- 05 会員専用 -->
-        <a href="pages/members/index.html" class="helmet-card">
-          <img src="assets/img/24794886_s.jpg" alt="会員専用 射場本座の射手" class="helmet-card-img">
-          <div class="helmet-card-veil"></div>
-          <div class="helmet-card-content">
-            <span class="helmet-card-tag">// 05 • MEMBERS</span>
-            <div>
-              <h3 class="helmet-card-title">会員専用</h3>
-              <p class="helmet-card-desc">総会議事録、支部内連絡事項、大会出席簿・登録手続きのご案内。</p>
-            </div>
+        <!-- 05 会員専用情報 -->
+        <a href="pages/members/index.html" class="card">
+          <div class="ph">
+            <i class="a" style="background-image: url('assets/img/24794886_s.jpg');"></i>
+            <i class="b" style="background-image: url('assets/img/DSC_0240.jpg');"></i>
           </div>
+          <figcaption>会員専用情報 <span>// 05 MEMBERS</span></figcaption>
         </a>
 
         <!-- 06 お問い合わせ -->
-        <a href="pages/contact/index.html" class="helmet-card">
-          <img src="assets/img/5171030_s.jpg" alt="お問い合わせ 鹿革ゆがけ" class="helmet-card-img">
-          <div class="helmet-card-veil"></div>
-          <div class="helmet-card-content">
-            <span class="helmet-card-tag">// 06 • CONTACT</span>
-            <div>
-              <h3 class="helmet-card-title">お問い合わせ</h3>
-              <p class="helmet-card-desc">稽古見学のお申し込み、入門相談、弓道場へのアクセス情報・フォーム。</p>
-            </div>
+        <a href="pages/contact/index.html" class="card">
+          <div class="ph">
+            <i class="a" style="background-image: url('assets/img/ryugasaki_dojo_lawn.jpg');"></i>
+            <i class="b" style="background-image: url('assets/img/kyudo_shado_archer.png');"></i>
           </div>
+          <figcaption>お問い合わせ <span>// 06 CONTACT</span></figcaption>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================================================
-       SECTION #5: IMPACT BANNER (.s.is-lando-exe) - WORLD CHAMPION CALLOUT
-       ========================================================================== -->
-  <section class="s is-lando-exe">
-    <img src="assets/img/DSC_0240.jpg" alt="龍翔会 道場風景" class="is-lando-exe-bg">
-    <div class="is-lando-exe-overlay"></div>
-    <div class="c is-lando-exe">
-      <div class="text-eyebrow" style="margin-bottom: 16px;">THE CORE DISCIPLINE // 龍翔会の精神</div>
-      <h2 class="text-impact-lg-mona reduce">
-        正射必中 // <span>SEISHA HITCHU</span>
-      </h2>
-      <p>
-        「礼に始まり、礼に終わる」。<br>
-        弓を引くことは、自己の心と向き合い、無念無想の静寂へと至る修養の道。<br>
-        龍翔会は、古の精神と現代の求道が交差する、茨城県龍ヶ崎市の伝統武道拠点です。
-      </p>
-      <a href="pages/contact/index.html" class="btn-w">見学・入門のお問い合わせ ➔</a>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SECTION #6: SPECIFICATIONS (.s.is-home-collabs)
-       ========================================================================== -->
-  <section class="s is-home-collabs">
-    <div class="c is-home-collabs">
-      <div class="text-eyebrow">DOJO PROFILE & SPECIFICATIONS</div>
-      <h2 class="text-title-lg-mona">
-        龍翔会 <span>スペック</span>
-      </h2>
-      <div class="collabs-grid">
-        <div class="collabs-box">
-          <div class="collabs-label">AFFILIATION</div>
-          <div class="collabs-val">茨城県弓道連盟 龍ヶ崎支部</div>
-        </div>
-        <div class="collabs-box">
-          <div class="collabs-label">DOJO FACILITY</div>
-          <div class="collabs-val">龍ヶ崎中学校 弓道場 (近的28m)</div>
-        </div>
-        <div class="collabs-box">
-          <div class="collabs-label">PRACTICE DAYS</div>
-          <div class="collabs-val">毎週 火・木・土 & 第1/3日曜</div>
-        </div>
-        <div class="collabs-box">
-          <div class="collabs-label">ADMISSION & VISIT</div>
-          <div class="collabs-val">見学・入門 随時受付中</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SECTION #7: WHAT'S UP / NEWS FEED (.s.is-callout-socials)
-       ========================================================================== -->
-  <section class="s is-callout-socials" id="newsSection">
-    <div class="c is-callout-socials">
-      <div class="text-eyebrow">LATEST TRANSMISSIONS</div>
-      <h2 class="text-title-lg-mona">
-        WHAT'S <span>UP</span>
-      </h2>
-      <p style="color: var(--color--green-off-white-2); margin-top: 8px;">
-        最新の更新情報・大会要項・審査合格速報
-      </p>
-
-      <ul id="news-list" class="modern-news-list">
-        <li class="modern-news-item">
-          <a href="pages/tournament/index.html" class="modern-news-link">
-            <span class="modern-news-date">10.19</span>
-            <span class="modern-news-text">令和8年度 大会・審査要項（三十三間堂大的、中野杯、関東地域連合審査等）を更新しました</span>
-            <span class="modern-news-arrow">VIEW ➔</span>
-          </a>
+  <!-- ========================================================================
+       下部コンテンツセクション (.after)
+       ======================================================================== -->
+  <div class="after">
+    <!-- 支部からのお知らせ -->
+    <section id="newsSection">
+      <h2>支部からのお知らせ</h2>
+      <ul class="news" id="newsList">
+        <li>
+          <time>10.19</time>
+          <a href="pages/tournament/index.html">令和8年度 大会・審査要項（三十三間堂大的、中野杯、関東地域連合審査等）を更新いたしました。</a>
         </li>
-        <li class="modern-news-item">
-          <a href="pages/seiseki/index.html" class="modern-news-link">
-            <span class="modern-news-date">01.25</span>
-            <span class="modern-news-text">大会・審査成績を更新しました</span>
-            <span class="modern-news-arrow">VIEW ➔</span>
-          </a>
+        <li>
+          <time>01.25</time>
+          <a href="pages/seiseki/index.html">大会・審査成績を更新いたしました。</a>
         </li>
-        <li class="modern-news-item">
-          <a href="pages/seiseki/index.html" class="modern-news-link">
-            <span class="modern-news-date">01.19</span>
-            <span class="modern-news-text">大会・審査成績を更新しました</span>
-            <span class="modern-news-arrow">VIEW ➔</span>
-          </a>
+        <li>
+          <time>01.19</time>
+          <a href="pages/seiseki/index.html">大会・審査成績を更新いたしました。</a>
         </li>
-        <li class="modern-news-item">
-          <a href="pages/members/index.html" class="modern-news-link">
-            <span class="modern-news-date">01.19</span>
-            <span class="modern-news-text">会員専用ページを更新しました</span>
-            <span class="modern-news-arrow">VIEW ➔</span>
-          </a>
+        <li>
+          <time>01.19</time>
+          <a href="pages/members/index.html">会員専用ページを更新いたしました。</a>
         </li>
       </ul>
-    </div>
-  </section>
-</main>
+      <a class="more" href="pages/tournament/index.html">要項・審査案内一覧へ</a>
+      <div class="notice" id="upcoming-events-container">
+        <strong style="display: block; margin-bottom: 0.6em; color: var(--accent);">【次回主要行事】</strong>
+        <div id="upcoming-tournament-box" style="margin-bottom: 0.8em; line-height: 1.8;">
+          <span style="font-weight: 600; color: #fff;">［大会］</span> 令和8年10月25日(日) 第18回 かすみがうら市長杯弓道大会<br>
+          <span style="font-size: 13px; color: var(--sub);">会場：かすみがうら市多目的運動広場 弓道場</span><br>
+          <a href="assets/PDF/第18回かすみがうら市長杯案内.pdf" target="_blank" rel="noopener" style="text-decoration: underline; color: var(--accent); font-size: 13px;">▶ 大会案内 (PDF)</a>
+        </div>
+        <div id="upcoming-exam-box" style="margin-bottom: 0.8em; line-height: 1.8;">
+          <span style="font-weight: 600; color: #fff;">［審査］</span> 令和8年11月15日(日) 令和8年度 第3回【東京】関東地域連合審査会<br>
+          <span style="font-size: 13px; color: var(--sub);">会場：明治神宮至誠館・全日本弓道連盟中央道場</span><br>
+          <a href="assets/Excel/R8.11.15 第３回【東京】関東地域連連合審査実施要項等(茨城用).xlsx" target="_blank" rel="noopener" style="text-decoration: underline; color: var(--accent); font-size: 13px;">▶ 審査実施要項等 (Excel)</a>
+        </div>
+        <div style="border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 0.6em; margin-top: 0.6em;">
+          <a href="pages/tournament/index.html" style="text-decoration: underline; color: var(--sub); font-size: 13px;">大会・審査 実施要項一覧・過去のアーカイブはこちら</a>
+        </div>
+      </div>
+    </section>
 
-<!-- ==========================================================================
-     FOOTER (.s.is-footer) - EXACT LANDO NORRIS FULL FOOTER
-     ========================================================================== -->
-<footer class="s is-footer">
-  <div class="c is-footer">
-    <div class="footer-nav-list">
-      <a href="index.html">Home</a>
-      <a href="pages/tournament/index.html">On Track (要項・成績)</a>
-      <a href="pages/beginner/index.html">Off Track (初心者教室)</a>
-      <a href="pages/schedule/index.html">Calendar (日程)</a>
-      <a href="pages/members/index.html">Members Only</a>
-      <a href="pages/contact/index.html">Contact & Access</a>
-    </div>
+    <!-- 道場プロフィール・仕様スペック -->
+    <section>
+      <h2>龍翔会 道場案内</h2>
+      <table class="dojo-specs-table">
+        <tr>
+          <th>所属組織</th>
+          <td>茨城県弓道連盟 龍ヶ崎支部 龍翔会</td>
+        </tr>
+        <tr>
+          <th>活動拠点</th>
+          <td>龍ヶ崎市立 龍ヶ崎中学校 弓道場（〒301-0837 茨城県龍ヶ崎市根町3777）<br>近的 28m / 5人立</td>
+        </tr>
+        <tr>
+          <th>稽古日程</th>
+          <td>
+            毎週 火曜日・木曜日・土曜日 19:00〜21:00<br>
+            第1・第3 日曜日 10:00〜12:00
+          </td>
+        </tr>
+        <tr>
+          <th>入門・見学</th>
+          <td>
+            初心者教室は毎年6月をめどに開催しており、見学は随時受け付けております。<br>
+            弓道用具をお持ちでない方も安心してご相談ください。
+          </td>
+        </tr>
+      </table>
+      <a class="more" href="pages/contact/index.html">見学申し込み・お問い合わせフォームへ</a>
+    </section>
 
-    <h2 class="text-impact-sm-mona footer">
-      礼に始まり、<span>礼に終わる。</span>
-    </h2>
+    <!-- フッター -->
+    <footer>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="pages/tournament/index.html">大会・審査要項</a></li>
+        <li><a href="pages/seiseki/index.html">大会・審査成績</a></li>
+        <li><a href="pages/beginner/index.html">初心者教室</a></li>
+        <li><a href="pages/schedule/index.html">稽古日程表</a></li>
+        <li><a href="pages/members/index.html">会員専用</a></li>
+        <li><a href="pages/contact/index.html">お問い合わせ・アクセス</a></li>
+        <li><a href="https://ryusyokai.blogspot.com" target="_blank" rel="noopener">過去のブログ</a></li>
+      </ul>
+      <ul>
+        <li>茨城県弓道連盟 龍ヶ崎支部 龍翔会</li>
+        <li>活動場所：茨城県龍ヶ崎市根町3777 龍ヶ崎中学校弓道場</li>
+        <li>最寄駅：関東鉄道竜ヶ崎線 龍ヶ崎駅より徒歩14分</li>
+      </ul>
+      <p class="copyright">
+        &copy; 2026 茨城県弓道連盟 龍ヶ崎支部 龍翔会
+      </p>
+    </footer>
+    <button id="backToTop" class="back-to-top" aria-label="ページトップへ戻る" title="ページ最上部へ戻る">↑</button>
+  </div>
 
-    <a href="pages/contact/index.html" class="btn-w">お問い合わせ・見学申し込み ➔</a>
-
-    <div class="footer-bottom-copy">
-      &copy; 2026 RYUSYOKAI KYUDO CLUB // IBARAKI RYUGASAKI. ALL RIGHTS RESERVED.
+  <!-- 高解像度写真ライトボックス -->
+  <div class="ikyf-lightbox" id="lightboxModal">
+    <div class="ikyf-lightbox-inner">
+      <button class="ikyf-lightbox-close" id="lightboxClose" aria-label="閉じる">✕</button>
+      <img src="" alt="" id="lightboxImg">
+      <div class="ikyf-lightbox-cap" id="lightboxCap"></div>
     </div>
   </div>
-</footer>
 
-<button id="backToTop" class="back-to-top" aria-label="トップへ戻る">↑</button>
-
-<!-- ==========================================================================
-     SCRIPTS: FULL FUNCTIONALITY & LANDO NORRIS ANIMATIONS
-     ========================================================================== -->
-<!-- メニュー開閉 & プレビュー切り替え -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const hamBtn = document.getElementById("navHamBtn");
-  const overlay = document.getElementById("navOverlay");
-  const previewImg = document.getElementById("navPreviewImg");
-  const menuLinks = document.querySelectorAll(".nav-menu-links a");
-
-  hamBtn.addEventListener("click", () => {
-    hamBtn.classList.toggle("active");
-    overlay.classList.toggle("active");
-  });
-
-  menuLinks.forEach(link => {
-    link.addEventListener("mouseenter", () => {
-      const img = link.getAttribute("data-img");
-      if (img && previewImg) {
-        previewImg.src = img;
+  <!-- ========================================================================
+       スクリプト：ローディング・横スクロール・メニュー・検索・切替
+       ======================================================================== -->
+  <script>
+  (function(){
+    // 1. ローディングカウントアップ (0% -> 100%)
+    const ld = document.getElementById('ld');
+    const pc = document.getElementById('pc');
+    let count = 0;
+    const interval = setInterval(() => {
+      count += Math.floor(Math.random() * 20) + 10;
+      if (count >= 100) {
+        count = 100;
+        clearInterval(interval);
+        pc.textContent = count;
+        setTimeout(() => {
+          ld.classList.add('loaded');
+        }, 300);
+      } else {
+        pc.textContent = count;
       }
-    });
+    }, 40);
 
-    link.addEventListener("click", () => {
-      hamBtn.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-  });
+    // 2. メインスクロール・情景切替アニメーションループ (https://ikyf.vercel.app/ 準拠)
+    const header = document.getElementById('mainHeader');
+    const sh = document.getElementById('sh');
+    const pt = document.getElementById('pt');
+    const veil = document.getElementById('veil');
+    const ui = document.getElementById('ui');
+    const ttl = document.getElementById('ttl');
+    const line = document.getElementById('line');
+    const btnAki = document.getElementById('btnAki');
+    const btnHaru = document.getElementById('btnHaru');
+    const scene1 = document.getElementById('scene1Wrap');
+    const scene2 = document.getElementById('scene2Wrap');
+    const gSection = document.getElementById('g');
+    const tr = document.getElementById('tr');
 
-  // 検索モーダル制御
-  const searchTrigger = document.getElementById("searchTriggerBtn");
-  const searchModal = document.getElementById("searchModal");
-  searchTrigger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    searchModal.classList.toggle("active");
-  });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clamp = (val) => Math.min(1, Math.max(0, val));
+    const heroLen = () => window.innerHeight * 1.5;
 
-  document.addEventListener("click", (e) => {
-    if (!searchModal.contains(e.target) && e.target !== searchTrigger) {
-      searchModal.classList.remove("active");
-    }
-  });
-});
-</script>
+    let curSeason = 0;
+    const state = { m: 0 };
 
-<!-- 更新情報の自動生成スクリプト -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const newsList = document.getElementById("news-list");
-  if (!newsList) return;
-
-  fetch('updates.json')
-    .then(res => res.json())
-    .then(data => {
-      data.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      newsList.innerHTML = '';
-      data.slice(0, 5).forEach(update => {
-        const li = document.createElement("li");
-        li.className = "modern-news-item";
-
-        const a = document.createElement("a");
-        a.className = "modern-news-link";
-        a.href = update.url;
-
-        const date = new Date(update.date);
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-
-        a.innerHTML = `
-          <span class="modern-news-date">${month}.${day}</span>
-          <span class="modern-news-text">${update.page}を更新しました</span>
-          <span class="modern-news-arrow">VIEW ➔</span>
-        `;
-
-        li.appendChild(a);
-        newsList.appendChild(li);
-      });
-    })
-    .catch(err => console.error("更新情報の読み込みに失敗しました:", err));
-});
-</script>
-
-<script>
-  const backToTop = document.getElementById("backToTop");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      backToTop.style.display = "block";
-    } else {
-      backToTop.style.display = "none";
-    }
-  });
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-</script>
-
-<!-- 全文検索機能 -->
-<script>
-const siteData = [
-  {
-    "title": "【千葉】関東地域連合審査会（11/30）実施要項",
-    "description": "令和7年度 千葉 関東地域連合審査会 実施要項",
-    "file": "assets/Excel/【県外用】令和7年度千葉関東地域連合審査会-実施要項-.xlsx"
-  },
-  {
-    "title": "【東京】関東地域連合審査会（11/16）実施要項",
-    "description": "令和7年度 東京 関東地域連合審査会 実施要項",
-    "file": "assets/Excel/R7.11.16-第３回【東京】関東地域連連合審査実施要項等-1.xlsx"
-  },
-  {
-    "title": "【取手】関東地域連合審査会（10/5）案内",
-    "description": "令和7年度 茨城 取手 関東地域連合審査会 案内",
-    "file": "assets/Excel/令和７年度【茨城】関東地域連合審査要項_r1.xls"
-  },
-  {
-    "title": "第32回県南弓道大会（9/28）要項",
-    "description": "第32回 県南弓道大会 実施要項",
-    "file": "assets/PDF/第32回県南大会案内一般-1.pdf"
-  },
-  {
-    "title": "第36回国宝松本城奉射弓道大会（11/3）要項",
-    "description": "第36回 国宝松本城奉射弓道大会 実施要項",
-    "file": "assets/PDF/R7_国宝松本城奉射弓道大会_実施要項-1.pdf"
-  },
-  {
-    "title": "北信越・福島南部連合審査案内",
-    "description": "令和7年度 北信越・福島南部連合審査 実施要項",
-    "file": "assets/Excel/【開催案内】令和7年度北信越地区連合審査会【飯田】（実施要項、答案用紙、添書、受審者一覧）-2.xlsx"
-  },
-  {
-    "title": "県民総体兼国スポ選考会要項",
-    "description": "令和7年度 県民総体 兼 国スポ選考会 実施要項",
-    "file": "assets/PDF/2025年05月10日　県民総体_大会要項.pdf"
-  },
-  {
-    "title": "春季大会実施要項",
-    "description": "令和7年度 春季大会 実施要項",
-    "file": "assets/PDF/2025年04月05日　春季大会_大会要項.pdf"
-  },
-  {
-    "title": "第7回伊勢神宮奉納弓道大会 要項",
-    "description": "第7回 伊勢 神宮奉納弓道大会 大会要領",
-    "file": "assets/PDF/（３）第７回伊勢「神宮奉納弓道大会」大会要領（参加者説明資料.pdf"
-  },
-  {
-    "title": "水戸観梅大会のご案内",
-    "description": "日時: 令和7年3月22日 / 場所: 東日本技術研究所 弓道場 / 参加費: 1,000円（昼食含む） / 支部内〆切: 令和7年2月27日",
-    "file": null
-  },
-  {
-    "title": "第57回 土浦桜まつり弓道大会のご案内",
-    "description": "日時: 令和7年3月30日 9時～ / 場所: 土浦市立武道館弓道場 / 受付: 8時15分～8時45分 / 参加費: 1,000円（昼食含む） / 種目: 個人競技 射詰一手 競射四つ矢 / 団体競技 / 支部内〆切: 令和7年2月22日",
-    "file": null
-  },
-  {
-    "title": "令和7年度 第1回【八郷】一般審査会結果",
-    "description": "7/20（日）開催。田島さん 四段合格。",
-    "file": null
-  },
-  {
-    "title": "第46回 神栖市弓道大会 成績報告",
-    "description": "5/11(日)開催。8位入賞：岡田さん。",
-    "file": null
-  },
-  {
-    "title": "鹿島神宮弓道大会 成績報告",
-    "description": "4/29(火)開催。個人5位：渡邊さん、個人11位：岡田さん。",
-    "file": null
-  },
-  {
-    "title": "令和7年度【山梨】関東地域連合審査会結果",
-    "description": "4/27開催。鈴木さん 四段合格。",
-    "file": null
-  },
-  {
-    "title": "令和7年度 春季大会結果",
-    "description": "鈴木さん 奨励賞。",
-    "file": null
-  },
-  {
-    "title": "令和6年度【名古屋】定期中央審査会結果",
-    "description": "岡田先生 錬士六段 合格。",
-    "file": null
-  },
-  {
-    "title": "令和6年度 第四回【東京】関東地域連合審査会結果",
-    "description": "李 鳳善さん 五段合格。",
-    "file": null
-  },
-  {
-    "title": "第41回 県西弓道大会 成績報告",
-    "description": "令和7年2月9日開催。準優勝：大脇さん。",
-    "file": null
-  },
-  {
-    "title": "令和6年度 県南追儺射会 成績報告",
-    "description": "2/2(日)開催。射詰め賞 阿部さん、入賞 田島さん、2位 大脇さん。",
-    "file": null
-  },
-  {
-    "title": "令和6年度 第3回 一般審査会（土浦）結果",
-    "description": "奥野さん 弐段合格。",
-    "file": null
-  },
-  {
-    "title": "令和6年度 新年射会 成績報告",
-    "description": "1/12(日)開催。鈴木さん 成人女子三段以下の部 5位。",
-    "file": null
-  },
-  {
-    "title": "令和6年度 第2回 一般審査会（取手）結果",
-    "description": "丸山さん 初段、鈴木さん 参段、有田さん 参段 合格。",
-    "file": null
-  },
-  {
-    "title": "令和7年度 県連・全弓連スケジュール",
-    "description": "県連スケジュール（茨城県弓道連盟）、全国大会年間スケジュール（全日本弓道連盟）、中央審査会年間スケジュール（全日本弓道連盟）、関東地域連合審査予定表",
-    "file": null
-  },
-  {
-    "title": "令和6年度 県連・全弓連スケジュール",
-    "description": "県連スケジュール（令和6年度）、全国大会年間スケジュール、中央審査会年間スケジュール、関東地域連合審査予定表（令和6年度）",
-    "file": null
-  },
-  {
-    "title": "大会出席簿について",
-    "description": "龍翔会の皆様\n\n先月から道場に貼ってあるかと思いますが、大会の出席簿について新しく作りましたので、今後はそちらを使っていただけると幸いです。",
-    "file": "assets/PDF/龍翔会　大会申し込み.pdf"
-  },
-  {
-    "title": "県登録支部名の変更について",
-    "description": "龍翔会の皆様\n\n県登録支部名についてのアンケートにご協力をありがとうございました。その結果、どちらでもよいと回答された方が半数を占めました。\n\nそこで、5月31日、道場に於いて話し合い、今年度から「市」を省き、「龍ケ崎支部」と変更することとなりました。ご了承ください。よろしくお願いいたします。",
-    "file": null
-  },
-  {
-    "title": "総会議事録について",
-    "description": "総会当日はご多用の中お集まりいただき、ありがとうございました。\n\n議事録を道場内に3月いっぱい掲示しておきますのでご確認ください。\n\nまた、入会届がまだの方は、スポーツ保険等の関係上、3月22日(土)までにご持参をお願いいたします。",
-    "file": null
-  },
-  {
-    "title": "令和7年度(案)",
-    "description": "龍翔会の皆様へ\n\n3月16日10時から令和7年度に向けての総会を実施します。当日ご参加いただけない方は、3月16日までに会費をご持参ください。よろしくお願いいたします。\n\nまた、継続されるかどうかのご連絡を支部長か会員までお願いいたします。ご連絡がない場合は、残念ながら継続の手続きができませんのでご了承ください。",
-    "file": [
-      "assets/PDF/IMG_2192-3.pdf",
-      "assets/PDF/IMG_2192-2.pdf",
-      "assets/PDF/IMG_2192-1.pdf"
-    ]
-  },
-  {
-    "title": "総会開催前に",
-    "description": "3月16日に総会を予定しております。当日までにご意見をいただきたく思います。\n\n（以下、長文意見を掲載）\n・龍翔会の中で県連龍ケ崎市支部に登録されていない方が増加\n・会費、役員等は総会で議決すべき事項\n・部活動の外部委託の話もあり時間がかかる可能性あり\n\nご面倒でもご協力をお願いいたします。これはあくまで一つの意見です。皆様からのご意見をどうぞよろしくお願いします。",
-    "file": null
-  },
-  {
-    "title": "お問い合わせ",
-    "description": "お問い合わせは下記フォームからお願いします。",
-    "form": "https://docs.google.com/forms/d/e/1FAIpQLSfl7FGrwlo43TF8zVCPCwCB0ndTWom7y8t09x4CSG0hGdGsdw/viewform?embedded=true",
-    "access": {
-      "最寄駅": "関東鉄道竜ヶ崎線龍ヶ崎駅より徒歩14分",
-      "活動拠点": "〒301-0837 茨城県龍ヶ崎市根町3777 龍ヶ崎中学校弓道場",
-      "活動日": "毎週 火曜、木曜、土曜 19:00~21:00\n第一、第三 日曜 10:00~12:00"
-    },
-    "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25846.109282315432!2d140.15264908771445!3d35.92828454163967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60227be371ed967f%3A0xc8c413ddf8a18b38!2z6b6N44Kx5bSO5biC56uL6b6N44Kx5bSO5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1756951037498!5m2!1sja!2sjp"
-  },
-  {
-    "title": "初心者教室について",
-    "description": "龍翔会の初心者教室では、弓道の基本から丁寧に指導いたします。姿勢や礼儀作法も含め、初めての方でも安心してご参加いただけます。",
-    "sections": [
-      {
-        "subtitle": "見学について",
-        "description": "稽古の見学は随時受け付けております。ご希望の方はお問い合わせページよりご連絡ください。",
-        "link": "contact/index.html",
-        "image": "assets/img/見学受付中.png"
-      },
-      {
-        "subtitle": "過去の初心者教室の様子",
-        "description": "過去の活動の記録はブログにまとめています。",
-        "link": "https://ryusyokai.blogspot.com",
-        "image": "assets/img/名称未設定-11.png"
-      }
-    ]
-  }
-];
-
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const searchResults = document.getElementById('searchResults');
-
-if (searchBtn && searchInput && searchResults) {
-  searchBtn.addEventListener('click', () => {
-    const query = searchInput.value.toLowerCase().trim();
-    searchResults.innerHTML = '';
-    if (!query) return;
-
-    const results = siteData.filter(item => {
-      const mainText = item.title + ' ' + item.description;
-      const sectionText = item.sections ? item.sections.map(s => s.subtitle + ' ' + s.description).join(' ') : '';
-      return mainText.toLowerCase().includes(query) || sectionText.toLowerCase().includes(query);
-    });
-
-    if (results.length === 0) {
-      searchResults.innerHTML = '<div class="search-item"><p>該当する情報は見つかりませんでした。</p></div>';
-      return;
-    }
-
-    results.forEach(item => {
-      const div = document.createElement('div');
-      div.classList.add('search-item');
-
-      let content = `<h3>${item.title}</h3><p>${item.description}</p>`;
-
-      if (item.file) {
-        if (Array.isArray(item.file)) {
-          content += '<ul>' + item.file.map(f => `<li><a href="${f}" target="_blank">📄 PDF</a></li>`).join('') + '</ul>';
-        } else {
-          content += `<p><a href="${item.file}" target="_blank">📄 資料を開く</a></p>`;
-        }
-      }
-
-      if (item.form) {
-        content += `<iframe src="${item.form}" width="100%" height="400" frameborder="0"></iframe>`;
-      }
-
-      if (item.access) {
-        content += '<div class="access-info">';
-        for (const key in item.access) {
-          content += `<p><strong>${key}:</strong> ${item.access[key]}</p>`;
-        }
-        content += '</div>';
-      }
-
-      if (item.map) {
-        content += `<iframe src="${item.map}" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
-      }
-
-      if (item.sections) {
-        item.sections.forEach(sec => {
-          content += `<h4>${sec.subtitle}</h4><p>${sec.description}</p>`;
-          if (sec.link) content += `<p><a href="${sec.link}" target="_blank">リンクはこちら</a></p>`;
-          if (sec.image) content += `<img src="${sec.image}" alt="${sec.subtitle}" style="max-width:200px;">`;
-        });
-      }
-
-      div.innerHTML = content;
-      searchResults.appendChild(div);
-    });
-  });
-
-  searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      searchBtn.click();
-    }
-  });
-}
-</script>
-
-<!-- ==========================================================================
-     EXACT LANDO NORRIS 3D WEBGL HERO CANVAS (Three.js) & GSAP MOTIONS
-     ========================================================================== -->
-<script>
-(function initThreeHero() {
-  const canvas = document.getElementById('threeCanvas');
-  const container = document.getElementById('glCanvasWrap');
-  if (!canvas || !container || typeof THREE === 'undefined') return;
-
-  // Scene & Camera
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-  camera.position.set(0, 0, 7.5);
-
-  // WebGL Renderer with High-Performance Antialiasing
-  const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    alpha: true,
-    antialias: true,
-    powerPreference: 'high-performance'
-  });
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  // Root Group for All 3D Objects
-  const rootGroup = new THREE.Group();
-  scene.add(rootGroup);
-
-  // 1. Procedural High-Res Kasumi-Mato (霞的) Texture
-  function createKasumiMatoTexture() {
-    const size = 1024;
-    const c = document.createElement('canvas');
-    c.width = size;
-    c.height = size;
-    const ctx = c.getContext('2d');
-    const cx = size / 2;
-    const cy = size / 2;
-
-    // Official Kasumi-mato ring proportions (Diameter 36cm, Radius 18cm)
-    const rings = [
-      { r: 18.0, color: '#f5f5ee' }, // 5. 外白
-      { r: 14.4, color: '#0d0f12' }, // 4. 外黒
-      { r: 10.8, color: '#f5f5ee' }, // 3. 中白
-      { r: 7.2,  color: '#0d0f12' }, // 2. 中黒
-      { r: 3.6,  color: '#f5f5ee' }  // 1. 的芯 (中央白)
+    const titles = [
+      '静寂を穿つ、<br>龍翔の一矢。',
+      '研ぎ澄ます心、<br>至誠の一射。'
+    ];
+    const lines = [
+      '「礼に始まり、礼に終わる」。<br>弓道は己の心と向き合い、平常心を養う武道であり求道の道。<br>スクロールすると、弓道の深奥が移ろいます。',
+      '龍ヶ崎市弓道場にて日々修練を重ねる龍翔会。<br>初心者から有段者まで、互いに切磋琢磨し、<br>和敬の心で弓の道を歩んでいます。'
     ];
 
-    const maxR = cx - 18;
-    // Outer wood base rim
-    ctx.fillStyle = '#181b15';
-    ctx.fillRect(0, 0, size, size);
-
-    // Draw concentric target circles
-    rings.forEach(ring => {
-      const pxR = (ring.r / 18.0) * maxR;
-      ctx.beginPath();
-      ctx.arc(cx, cy, pxR, 0, Math.PI * 2);
-      ctx.fillStyle = ring.color;
-      ctx.fill();
-    });
-
-    // Subtle washi paper concentric hairline rings
-    for (let i = 1; i < 18; i++) {
-      ctx.strokeStyle = 'rgba(210, 255, 0, 0.08)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.arc(cx, cy, (i / 18.0) * maxR, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-
-    // Outer neon lime border hairline
-    ctx.strokeStyle = '#d2ff00';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Center Gold / Lime Bullseye Pin
-    ctx.fillStyle = '#d2ff00';
-    ctx.beginPath();
-    ctx.arc(cx, cy, 7, 0, Math.PI * 2);
-    ctx.fill();
-
-    const texture = new THREE.CanvasTexture(c);
-    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    return texture;
-  }
-
-  const matoTexture = createKasumiMatoTexture();
-
-  // 2. 3D Mato Disc Geometry & Materials
-  const matoRadius = 2.45;
-  const matoThickness = 0.24;
-  const discGeo = new THREE.CylinderGeometry(matoRadius, matoRadius, matoThickness, 64);
-
-  const sideMat = new THREE.MeshStandardMaterial({
-    color: 0x191c16,
-    roughness: 0.7,
-    metalness: 0.3
-  });
-  const frontMat = new THREE.MeshStandardMaterial({
-    map: matoTexture,
-    roughness: 0.45,
-    metalness: 0.08
-  });
-
-  // Load authentic Kasumi-mato photo texture
-  const texLoader = new THREE.TextureLoader();
-  texLoader.load('assets/img/33106892_s.jpg', (loadedTex) => {
-    loadedTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    frontMat.map = loadedTex;
-    frontMat.needsUpdate = true;
-  });
-
-  const backMat = new THREE.MeshStandardMaterial({
-    color: 0x141712,
-    roughness: 0.85,
-    metalness: 0.1
-  });
-
-  // Cylinder faces: [0: side, 1: top (front), 2: bottom (back)]
-  const matoDisc = new THREE.Mesh(discGeo, [sideMat, frontMat, backMat]);
-  matoDisc.rotation.x = Math.PI / 2;
-  rootGroup.add(matoDisc);
-
-  // Signature Lando Norris Electric Lime Outer Bezel Ring
-  const limeBezelGeo = new THREE.TorusGeometry(matoRadius + 0.03, 0.032, 16, 64);
-  const limeBezelMat = new THREE.MeshStandardMaterial({
-    color: 0xd2ff00,
-    emissive: 0xd2ff00,
-    emissiveIntensity: 0.8,
-    roughness: 0.15,
-    metalness: 0.85
-  });
-  const limeBezel = new THREE.Mesh(limeBezelGeo, limeBezelMat);
-  rootGroup.add(limeBezel);
-
-  // 3. 3D Traditional Kyudo Arrow (矢 - Ya)
-  const arrowGroup = new THREE.Group();
-
-  // Bamboo Shaft (箆 - No)
-  const shaftLength = 5.8;
-  const shaftGeo = new THREE.CylinderGeometry(0.035, 0.035, shaftLength, 16);
-  const shaftMat = new THREE.MeshStandardMaterial({
-    color: 0xd6a55c,
-    roughness: 0.35,
-    metalness: 0.25
-  });
-  const shaft = new THREE.Mesh(shaftGeo, shaftMat);
-  arrowGroup.add(shaft);
-
-  // Steel Arrowhead (板付 - Itatsuki)
-  const tipGeo = new THREE.ConeGeometry(0.075, 0.4, 16);
-  const tipMat = new THREE.MeshStandardMaterial({
-    color: 0x888888,
-    roughness: 0.18,
-    metalness: 0.95
-  });
-  const tip = new THREE.Mesh(tipGeo, tipMat);
-  tip.position.y = -shaftLength / 2 - 0.2;
-  tip.rotation.x = Math.PI;
-  arrowGroup.add(tip);
-
-  // 3 Raptor Fletching Feathers (羽根 - Hane)
-  const featherGroup = new THREE.Group();
-  const featherWidth = 0.18;
-  const featherHeight = 0.95;
-  const featherGeo = new THREE.PlaneGeometry(featherWidth, featherHeight);
-  const featherMat = new THREE.MeshStandardMaterial({
-    color: 0xf4f4f0,
-    side: THREE.DoubleSide,
-    roughness: 0.65,
-    metalness: 0.08
-  });
-
-  for (let i = 0; i < 3; i++) {
-    const f = new THREE.Mesh(featherGeo, featherMat);
-    f.position.y = shaftLength / 2 - 0.58;
-    f.rotation.y = (i * Math.PI * 2) / 3;
-    f.position.x = Math.cos((i * Math.PI * 2) / 3) * (featherWidth / 2 + 0.02);
-    f.position.z = Math.sin((i * Math.PI * 2) / 3) * (featherWidth / 2 + 0.02);
-    featherGroup.add(f);
-  }
-  arrowGroup.add(featherGroup);
-
-  // Nock (筈 - Hazu) with electric lime accent
-  const hazuGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.2, 16);
-  const hazuMat = new THREE.MeshStandardMaterial({
-    color: 0xd2ff00,
-    emissive: 0xd2ff00,
-    emissiveIntensity: 0.9,
-    roughness: 0.2,
-    metalness: 0.6
-  });
-  const hazu = new THREE.Mesh(hazuGeo, hazuMat);
-  hazu.position.y = shaftLength / 2 + 0.1;
-  arrowGroup.add(hazu);
-
-  // Angle arrow dynamically piercing target
-  arrowGroup.position.set(0.18, 0.12, 0.22);
-  arrowGroup.rotation.set(-0.35, 0.28, 0.42);
-  rootGroup.add(arrowGroup);
-
-  // 4. Gyroscopic Telemetry Reticle Rings
-  const reticleGroup = new THREE.Group();
-
-  // Fine outer gold ring
-  const ring1Geo = new THREE.TorusGeometry(3.15, 0.012, 16, 80);
-  const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x8a997a, transparent: true, opacity: 0.35 });
-  const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-  reticleGroup.add(ring1);
-
-  // Mid lime reticle ring tilted
-  const ring2Geo = new THREE.TorusGeometry(3.5, 0.016, 16, 80);
-  const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xd2ff00, transparent: true, opacity: 0.45 });
-  const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-  ring2.rotation.x = 0.45;
-  reticleGroup.add(ring2);
-
-  rootGroup.add(reticleGroup);
-
-  // 5. Floating Glowing Dust Particles (130 particles)
-  const particleCount = 130;
-  const particleGeo = new THREE.BufferGeometry();
-  const posArray = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    posArray[i] = (Math.random() - 0.5) * 15;
-    posArray[i + 1] = (Math.random() - 0.5) * 11;
-    posArray[i + 2] = (Math.random() - 0.5) * 8 - 1;
-  }
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  const particleMat = new THREE.PointsMaterial({
-    size: 0.065,
-    color: 0xd2ff00,
-    transparent: true,
-    opacity: 0.55,
-    blending: THREE.AdditiveBlending
-  });
-  const particles = new THREE.Points(particleGeo, particleMat);
-  scene.add(particles);
-
-  // 6. Professional Studio Lighting Setup
-  const ambientLight = new THREE.AmbientLight(0x283222, 1.4);
-  scene.add(ambientLight);
-
-  const mainLight = new THREE.DirectionalLight(0xffffff, 2.3);
-  mainLight.position.set(5, 7, 6);
-  scene.add(mainLight);
-
-  // Signature electric lime rim light from side/back
-  const limeRimLight = new THREE.PointLight(0xd2ff00, 3.8, 18);
-  limeRimLight.position.set(-5, -2, -3);
-  scene.add(limeRimLight);
-
-  const softFill = new THREE.PointLight(0x88bbff, 1.0, 15);
-  softFill.position.set(4, -4, 4);
-  scene.add(softFill);
-
-  // 7. Interactive Orbit Drag & Gyro Parallax Tracking
-  let isDragging = false;
-  let prevMouseX = 0;
-  let prevMouseY = 0;
-  let rotVelX = 0;
-  let rotVelY = 0;
-  let targetRotX = 0.12;
-  let targetRotY = -0.15;
-  let mouseNormX = 0;
-  let mouseNormY = 0;
-
-  const onPointerDown = (e) => {
-    isDragging = true;
-    prevMouseX = e.clientX || (e.touches && e.touches[0].clientX);
-    prevMouseY = e.clientY || (e.touches && e.touches[0].clientY);
-  };
-
-  const onPointerMove = (e) => {
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-
-    const rect = container.getBoundingClientRect();
-    mouseNormX = (clientX - rect.left) / rect.width - 0.5;
-    mouseNormY = (clientY - rect.top) / rect.height - 0.5;
-
-    if (isDragging) {
-      const deltaX = clientX - prevMouseX;
-      const deltaY = clientY - prevMouseY;
-      prevMouseX = clientX;
-      prevMouseY = clientY;
-
-      rotVelY += deltaX * 0.006;
-      rotVelX += deltaY * 0.006;
-    }
-  };
-
-  const onPointerUp = () => {
-    isDragging = false;
-  };
-
-  window.addEventListener('mousedown', (e) => {
-    if (e.target.closest('a, button, input')) return;
-    onPointerDown(e);
-  });
-  window.addEventListener('mousemove', onPointerMove);
-  window.addEventListener('mouseup', onPointerUp);
-
-  window.addEventListener('touchstart', (e) => {
-    if (e.target.closest('a, button, input')) return;
-    onPointerDown(e);
-  }, { passive: true });
-  window.addEventListener('touchmove', onPointerMove, { passive: true });
-  window.addEventListener('touchend', onPointerUp);
-
-  // Responsive Viewport Resize
-  const handleResize = () => {
-    if (!container) return;
-    const w = container.clientWidth;
-    const h = container.clientHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    if (w < 768) {
-      camera.position.z = 9.6;
-    } else {
-      camera.position.z = 7.5;
-    }
-  };
-  window.addEventListener('resize', handleResize);
-  handleResize();
-
-  // 8. GSAP Entrance Timeline
-  rootGroup.scale.set(0.01, 0.01, 0.01);
-  if (typeof gsap !== 'undefined') {
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-    // 3D Object Zooms in from Depth
-    tl.to(rootGroup.scale, {
-      x: 1,
-      y: 1,
-      z: 1,
-      duration: 1.8,
-      ease: "back.out(1.3)",
-      delay: 0.1
-    }, 0)
-    // Outline Background Typography Reveal
-    .fromTo("#heroBgOutline",
-      { scale: 0.8, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.8, ease: "expo.out" },
-      0.1
-    )
-    // Center Display Typography Split
-    .fromTo(".text-impact-hero",
-      { y: 70, opacity: 0, letterSpacing: "0.15em" },
-      { y: 0, opacity: 1, letterSpacing: "-0.03em", duration: 1.6, ease: "expo.out" },
-      0.3
-    )
-    .fromTo(".home-hero-kanji-sub",
-      { y: 40, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.5)" },
-      0.5
-    )
-    .fromTo(".home-hero-tagline, .home-hero-btn-group",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 },
-      0.8
-    )
-    // Left & Right HUD Widgets Sharp Slide In
-    .fromTo("#heroLeftIntel",
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1.2 },
-      0.7
-    )
-    .fromTo("#heroRightWidget",
-      { x: 100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1.2 },
-      0.7
-    );
-
-    // Desktop Gyro Parallax on Text & HUD Widgets
-    const heroSection = document.getElementById("heroSection");
-    const centerText = document.getElementById("heroCenterText");
-    const leftIntel = document.getElementById("heroLeftIntel");
-    const rightWidget = document.getElementById("heroRightWidget");
-    const heroArcher = document.getElementById("heroArcher");
-
-    if (heroSection && window.matchMedia("(min-width: 992px)").matches) {
-      heroSection.addEventListener("mousemove", (e) => {
-        const rect = heroSection.getBoundingClientRect();
-        const normX = (e.clientX - rect.left) / rect.width - 0.5;
-        const normY = (e.clientY - rect.top) / rect.height - 0.5;
-
-        gsap.to(centerText, {
-          rotationY: normX * 10,
-          rotationX: -normY * 8,
-          x: normX * 18,
-          y: normY * 14,
-          duration: 0.8,
-          ease: "power2.out"
-        });
-
-        gsap.to(leftIntel, {
-          x: -normX * 14,
-          y: -normY * 14,
-          rotationY: normX * 6,
-          duration: 0.8,
-          ease: "power2.out"
-        });
-
-        gsap.to(rightWidget, {
-          x: normX * 14,
-          y: normY * 14,
-          rotationY: normX * 6,
-          duration: 0.8,
-          ease: "power2.out"
-        });
-
-        if (heroArcher) {
-          gsap.to(heroArcher, {
-            x: normX * 22,
-            y: -normY * 16,
-            duration: 0.9,
-            ease: "power2.out"
-          });
-        }
+    // スムーズスクロール移動 (ikyf go関数)
+    function go(y) {
+      window.scrollTo({
+        top: y,
+        behavior: reduce ? 'auto' : 'smooth'
       });
+    }
 
-      heroSection.addEventListener("mouseleave", () => {
-        gsap.to([centerText, leftIntel, rightWidget], {
-          rotationY: 0,
-          rotationX: 0,
-          x: 0,
-          y: 0,
-          duration: 1.2,
-          ease: "power3.out"
-        });
-        if (heroArcher) {
-          gsap.to(heroArcher, {
-            x: 0,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out"
-          });
+    // 情景更新 (スクロール深さに応じて自動切り替え)
+    function setSeason(i) {
+      if (i === curSeason) return;
+      curSeason = i;
+      if (btnAki) btnAki.setAttribute('aria-pressed', i === 0);
+      if (btnHaru) btnHaru.setAttribute('aria-pressed', i === 1);
+
+      if (line) {
+        line.style.transition = 'opacity 0.35s ease';
+        line.style.opacity = '0';
+      }
+      if (ttl) {
+        ttl.style.transition = 'opacity 0.35s ease';
+        ttl.style.opacity = '0';
+      }
+      setTimeout(() => {
+        if (line) {
+          line.innerHTML = lines[i];
+          line.style.opacity = '1';
+        }
+        if (ttl) {
+          ttl.innerHTML = titles[i];
+          ttl.style.opacity = '1';
+        }
+      }, 350);
+    }
+
+    // ボタンクリック時はスクロール位置を移動（ボタン単体でDOM置換せず、スクロールと連動）
+    if (btnAki) {
+      btnAki.addEventListener('click', () => go(0));
+    }
+    if (btnHaru) {
+      btnHaru.addEventListener('click', () => go(heroLen()));
+    }
+
+    // 毎フレーム更新ループ (RAF)
+    function frame() {
+      const y = window.scrollY;
+      const h = window.innerHeight;
+      const p = clamp(y / heroLen());
+
+      // スムーズ補間
+      state.m += (p - state.m) * (reduce ? 1 : 0.08);
+
+      // 0.5を超えたら自動で[道場]に、戻ったら[静寂]に切り替え
+      setSeason(state.m > 0.5 ? 1 : 0);
+
+      // 背景レイヤーのクロスフェード (静寂 -> 道場)
+      if (scene1) {
+        scene1.style.opacity = (1 - state.m).toFixed(3);
+        scene1.style.transform = `scale(${(1 + state.m * 0.04).toFixed(4)})`;
+      }
+      if (scene2) {
+        scene2.style.opacity = state.m.toFixed(3);
+        scene2.style.transform = `scale(${(1.04 - state.m * 0.04).toFixed(4)})`;
+      }
+
+      // ヒーローUIのフェードアウト (ギャラリー手前で静かに消える)
+      const fade = 1 - clamp((y - heroLen()) / (h * 0.4));
+      if (ui) {
+        ui.style.opacity = fade.toFixed(3);
+        ui.style.pointerEvents = fade < 0.05 ? 'none' : 'auto';
+      }
+
+      // ヘッダー背景ブラー切り替え
+      if (header) {
+        header.classList.toggle('scrolled', fade < 0.85);
+      }
+
+      // 背景ヴェールの透過制御
+      if (veil) {
+        veil.style.opacity = (clamp((y - h * 1.2) / (h * 0.8)) * 0.78).toFixed(3);
+      }
+
+      // スティッキー横スクロールトラック (#g -> #tr)
+      if (gSection && tr) {
+        const gp = clamp((y - gSection.offsetTop) / (gSection.offsetHeight - h));
+        const maxTranslate = Math.max(0, tr.scrollWidth - window.innerWidth + (window.innerWidth * 0.1));
+        tr.style.transform = `translateX(${(-gp * maxTranslate).toFixed(1)}px)`;
+      }
+
+      // 進捗シューター矢印 (#sh, #pt)
+      const maxScroll = document.documentElement.scrollHeight - h;
+      const pr = maxScroll > 0 ? clamp(y / maxScroll) : 0;
+      if (sh) sh.style.transform = `scaleX(${pr.toFixed(4)})`;
+      if (pt) pt.style.transform = `translateX(${(pr * (window.innerWidth - 9)).toFixed(1)}px)`;
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    // 3. メガカーテンメニュー開閉 (#cur)
+    const cur = document.getElementById('cur');
+    const curtainTrigger = document.getElementById('curtainTriggerBtn');
+    const mobileBtn = document.getElementById('mb');
+
+    function toggleCurtain() {
+      const isOpen = cur.classList.contains('open');
+      if (isOpen) {
+        cur.classList.remove('open');
+        header.classList.remove('menu-open');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        cur.classList.add('open');
+        header.classList.add('menu-open');
+        mobileBtn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    if (curtainTrigger) curtainTrigger.addEventListener('click', toggleCurtain);
+    if (mobileBtn) mobileBtn.addEventListener('click', toggleCurtain);
+
+    // 6. 検索モーダル制御
+    const searchTrigger = document.getElementById('searchTriggerBtn');
+    const mobileSearchTrigger = document.getElementById('mobileSearchTriggerBtn');
+    const searchModal = document.getElementById('searchModal');
+
+    function openSearchModal(e) {
+      if (e) e.stopPropagation();
+      if (cur && cur.classList.contains('open')) {
+        toggleCurtain();
+      }
+      if (searchModal) {
+        searchModal.classList.toggle('open');
+        const sInput = document.getElementById('searchInput');
+        if (searchModal.classList.contains('open') && sInput) {
+          sInput.focus();
+        }
+      }
+    }
+
+    if (searchTrigger) searchTrigger.addEventListener('click', openSearchModal);
+    if (mobileSearchTrigger) mobileSearchTrigger.addEventListener('click', openSearchModal);
+
+    if (searchModal) {
+      document.addEventListener('click', (e) => {
+        if (!searchModal.contains(e.target) && e.target !== searchTrigger && e.target !== mobileSearchTrigger) {
+          searchModal.classList.remove('open');
         }
       });
     }
-  }
 
-  // 9. Render & Animation Loop
-  let clock = new THREE.Clock();
+    // 7. 更新情報自動取得 (updates.json)
+    const newsList = document.getElementById('newsList');
+    if (newsList) {
+      fetch('updates.json')
+        .then(res => res.json())
+        .then(data => {
+          data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          newsList.innerHTML = '';
+          data.slice(0, 5).forEach(update => {
+            const li = document.createElement('li');
+            const date = new Date(update.date);
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
 
-  function animate() {
-    requestAnimationFrame(animate);
-    const elapsedTime = clock.getElapsedTime();
-
-    // Inertia damping & drag rotation
-    rootGroup.rotation.y += rotVelY;
-    rootGroup.rotation.x += rotVelX;
-    rotVelX *= 0.94;
-    rotVelY *= 0.94;
-
-    // Gentle idle spin & gyro parallax tilt
-    if (!isDragging) {
-      targetRotY += 0.002;
-      rootGroup.rotation.y += (targetRotY + mouseNormX * 0.55 - rootGroup.rotation.y) * 0.04;
-      rootGroup.rotation.x += (targetRotX + mouseNormY * 0.45 - rootGroup.rotation.x) * 0.04;
+            li.innerHTML = `
+              <time>${m}.${d}</time>
+              <a href="${update.url}">${update.page}を更新いたしました。</a>
+            `;
+            newsList.appendChild(li);
+          });
+        })
+        .catch(err => console.log('更新情報読み込み:', err));
     }
 
-    // Subtle breathing float
-    rootGroup.position.y = Math.sin(elapsedTime * 1.2) * 0.12;
+    // 8. 全文検索機能 (siteData)
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchResults = document.getElementById('searchResults');
 
-    // Reticle counter-rotations
-    ring1.rotation.z = elapsedTime * 0.15;
-    ring2.rotation.z = -elapsedTime * 0.2;
-    ring2.rotation.y = Math.sin(elapsedTime * 0.5) * 0.3;
+    const siteData = [
+      {
+        "title": "【千葉】関東地域連合審査会（11/30）実施要項",
+        "description": "令和7年度 千葉 関東地域連合審査会 実施要項",
+        "file": "assets/Excel/【県外用】令和7年度千葉関東地域連合審査会-実施要項-.xlsx"
+      },
+      {
+        "title": "【東京】関東地域連合審査会（11/16）実施要項",
+        "description": "令和7年度 東京 関東地域連合審査会 実施要項",
+        "file": "assets/Excel/R7.11.16-第３回【東京】関東地域連連合審査実施要項等-1.xlsx"
+      },
+      {
+        "title": "【取手】関東地域連合審査会（10/5）案内",
+        "description": "令和7年度 茨城 取手 関東地域連合審査会 案内",
+        "file": "assets/Excel/令和７年度【茨城】関東地域連合審査要項_r1.xls"
+      },
+      {
+        "title": "第32回県南弓道大会（9/28）要項",
+        "description": "第32回 県南弓道大会 実施要項",
+        "file": "assets/PDF/第32回県南大会案内一般-1.pdf"
+      },
+      {
+        "title": "第36回国宝松本城奉射弓道大会（11/3）要項",
+        "description": "第36回 国宝松本城奉射弓道大会 実施要項",
+        "file": "assets/PDF/R7_国宝松本城奉射弓道大会_実施要項-1.pdf"
+      },
+      {
+        "title": "北信越・福島南部連合審査案内",
+        "description": "令和7年度 北信越・福島南部連合審査 実施要項",
+        "file": "assets/Excel/【開催案内】令和7年度北信越地区連合審査会【飯田】（実施要項、答案用紙、添書、受審者一覧）-2.xlsx"
+      },
+      {
+        "title": "県民総体兼国スポ選考会要項",
+        "description": "令和7年度 県民総体 兼 国スポ選考会 実施要項",
+        "file": "assets/PDF/2025年05月10日　県民総体_大会要項.pdf"
+      },
+      {
+        "title": "春季大会実施要項",
+        "description": "令和7年度 春季大会 実施要項",
+        "file": "assets/PDF/2025年04月05日　春季大会_大会要項.pdf"
+      },
+      {
+        "title": "第7回伊勢神宮奉納弓道大会 要項",
+        "description": "第7回 伊勢 神宮奉納弓道大会 大会要領",
+        "file": "assets/PDF/（３）第７回伊勢「神宮奉納弓道大会」大会要領（参加者説明資料.pdf"
+      },
+      {
+        "title": "水戸観梅大会のご案内",
+        "description": "日時: 令和7年3月22日 / 場所: 東日本技術研究所 弓道場 / 参加費: 1,000円（昼食含む） / 支部内〆切: 令和7年2月27日",
+        "file": null
+      },
+      {
+        "title": "第57回 土浦桜まつり弓道大会のご案内",
+        "description": "日時: 令和7年3月30日 9時～ / 場所: 土浦市立武道館弓道場 / 受付: 8時15分～8時45分 / 参加費: 1,000円（昼食含む） / 種目: 個人競技 射詰一手 競射四つ矢 / 団体競技 / 支部内〆切: 令和7年2月22日",
+        "file": null
+      },
+      {
+        "title": "令和7年度 第1回【八郷】一般審査会結果",
+        "description": "7/20（日）開催。田島さん 四段合格。",
+        "file": null
+      },
+      {
+        "title": "第46回 神栖市弓道大会 成績報告",
+        "description": "5/11(日)開催。8位入賞：岡田さん。",
+        "file": null
+      },
+      {
+        "title": "鹿島神宮弓道大会 成績報告",
+        "description": "4/29(火)開催。個人5位：渡邊さん、個人11位：岡田さん。",
+        "file": null
+      },
+      {
+        "title": "令和7年度【山梨】関東地域連合審査会結果",
+        "description": "4/27開催。鈴木さん 四段合格。",
+        "file": null
+      },
+      {
+        "title": "令和7年度 春季大会結果",
+        "description": "鈴木さん 奨励賞。",
+        "file": null
+      },
+      {
+        "title": "令和6年度【名古屋】定期中央審査会結果",
+        "description": "岡田先生 錬士六段 合格。",
+        "file": null
+      },
+      {
+        "title": "令和6年度 第四回【東京】関東地域連合審査会結果",
+        "description": "李 鳳善さん 五段合格。",
+        "file": null
+      },
+      {
+        "title": "第41回 県西弓道大会 成績報告",
+        "description": "令和7年2月9日開催。準優勝：大脇さん。",
+        "file": null
+      },
+      {
+        "title": "令和6年度 県南追儺射会 成績報告",
+        "description": "2/2(日)開催。射詰め賞 阿部さん、入賞 田島さん、2位 大脇さん。",
+        "file": null
+      },
+      {
+        "title": "令和6年度 第3回 一般審査会（土浦）結果",
+        "description": "奥野さん 弐段合格。",
+        "file": null
+      },
+      {
+        "title": "令和6年度 新年射会 成績報告",
+        "description": "1/12(日)開催。鈴木さん 成人女子三段以下の部 5位。",
+        "file": null
+      },
+      {
+        "title": "令和6年度 第2回 一般審査会（取手）結果",
+        "description": "丸山さん 初段、鈴木さん 参段、有田さん 参段 合格。",
+        "file": null
+      },
+      {
+        "title": "大会出席簿について",
+        "description": "龍翔会の皆様\n\n先月から道場に貼ってあるかと思いますが、大会の出席簿について新しく作りましたので、今後はそちらを使っていただけると幸いです。",
+        "file": "assets/PDF/龍翔会　大会申し込み.pdf"
+      },
+      {
+        "title": "お問い合わせ・見学案内",
+        "description": "龍翔会への入門・見学のお問い合わせ、道場へのアクセスについて。",
+        "form": "https://docs.google.com/forms/d/e/1FAIpQLSfl7FGrwlo43TF8zVCPCwCB0ndTWom7y8t09x4CSG0hGdGsdw/viewform?embedded=true"
+      }
+    ];
 
-    // Floating particles drift
-    particles.rotation.y = elapsedTime * 0.03;
-    particles.rotation.x = Math.sin(elapsedTime * 0.02) * 0.1;
+    if (searchBtn && searchInput && searchResults) {
+      searchBtn.addEventListener('click', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        searchResults.innerHTML = '';
+        if (!query) return;
 
-    renderer.render(scene, camera);
-  }
+        const results = siteData.filter(item => {
+          return (item.title + ' ' + item.description).toLowerCase().includes(query);
+        });
 
-  animate();
-})();
-</script>
+        if (results.length === 0) {
+          searchResults.innerHTML = '<div class="search-result-entry"><p>該当する情報は見つかりませんでした。</p></div>';
+          return;
+        }
 
+        results.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'search-result-entry';
+          let html = `<h4>${item.title}</h4><p>${item.description}</p>`;
+          if (item.file) {
+            html += `<p><a href="${item.file}" target="_blank" style="color:var(--accent);">📄 資料を開く</a></p>`;
+          }
+          div.innerHTML = html;
+          searchResults.appendChild(div);
+        });
+      });
+
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchBtn.click();
+      });
+    }
+
+    // 9. Back to Top (最上部へスムーズスクロール)
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+      function checkScroll() {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      }
+
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+
+      backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  })();
+  </script>
+  <!-- 大会・審査スケジュールの自動更新スクリプト -->
+  <script src="js/events-data.js"></script>
 </body>
 </html>
