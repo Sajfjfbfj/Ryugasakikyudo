@@ -1,116 +1,126 @@
-/* ========================================================
-   LANDO NORRIS (landonorris.com) INTERACTIVE HERO x JAPANESE WA
-   龍翔会 弓道 (RYUSYOKAI KYUDO)
-   High-Precision Athletic Typography, 3D Gyro Parallax, HUD Telemetry
-======================================================== */
+/* ==========================================================================
+   LANDO NORRIS (landonorris.com) AUTHENTIC REPLICA ARCHITECTURE
+   Adapted for 龍翔会 弓道 (RYUSYOKAI KYUDO CLUB)
+   Layout, Typography, Animations, and Components exactly matching landonorris.com
+   ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+JP:wght@600;900&family=Oswald:wght@500;700;800&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --c-bg: #07080b;
-  --c-bg-card: rgba(13, 16, 23, 0.85);
-  --c-card-border: rgba(255, 255, 255, 0.08);
-  --c-card-hover: rgba(20, 26, 38, 0.95);
-  
-  /* Lando Norris Athletic Accent x 日本の朱赤 */
-  --c-vermilion: #e60033;
-  --c-vermilion-glow: rgba(230, 0, 51, 0.45);
-  --c-vermilion-dim: rgba(230, 0, 51, 0.15);
-  
-  --c-cyan: #00f0ff;
-  --c-cyan-glow: rgba(0, 240, 255, 0.35);
-  --c-cyan-dim: rgba(0, 240, 255, 0.12);
-  
-  --c-gold: #c5a059;
-  --c-text-main: #f5f6f8;
-  --c-text-sub: #b2bac7;
-  --c-text-muted: #5e6b7d;
+  /* Lando Norris Core Palette */
+  --color--black: #111112;
+  --color--dark-green: #1a1e16;
+  --color--dark-green-tint-1: #282c20;
+  --color--dark-green-tint-2: #535450;
+  --color--lime: #d2ff00;       /* Lando Norris Electric Neon Lime */
+  --color--lime-off: #b2c73a;
+  --color--white: #f4f4ed;      /* Washi Off-White */
+  --color--green-off-white-1: #dde1d2;
+  --color--green-off-white-2: #b4b8a5;
+  --color--grey-on-track: #b9bbad;
+  --color--vermilion: #e60033;  /* Japanese Traditional Wa Accent */
+
+  /* Spacing & Fluid Scaling */
+  --gap: 1.25rem;
+  --gap-med: 2rem;
+  --padding--container: 1.5rem;
+  --padding--xlarge: 5rem;
+  --padding--med: 3rem;
+  --fluid-container: 1400px;
+  --animation-default: 0.75s cubic-bezier(0.65, 0.05, 0, 1);
+
+  /* Typography Scale */
+  --text--impact: clamp(4.5rem, 11vw, 9.5rem);
+  --text--title-lg: clamp(2.8rem, 6vw, 5.2rem);
+  --text--h1: 4rem;
+  --text--h2: 3rem;
+  --text--h3: 1.8rem;
   
   --font-display: "Oswald", "Impact", "Helvetica Neue", sans-serif;
-  --font-serif-wa: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-mono: "Share Tech Mono", "Consolas", monospace;
+  --font-serif-wa: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+  --font-mono: "Share Tech Mono", monospace;
   --font-sans: "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
-body.modern-home {
-  background-color: var(--c-bg) !important;
-  color: var(--c-text-main) !important;
-  font-family: var(--font-sans);
-  overflow-x: hidden;
+/* Base resets matching Webflow & Lando Norris */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  line-height: 1.65;
 }
 
-/* Background Subtle Grid Texture */
-body.modern-home::before {
-  content: "";
+body.modern-home {
+  background-color: var(--color--black) !important;
+  color: var(--color--white) !important;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   NAVIGATION (.nav) - EXACT LANDO NORRIS FIXED BAR
+   ========================================================================== */
+.nav {
   position: fixed;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ========================================================
-   MODERN MINIMALIST HEADER
-======================================================== */
-.modern-header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: rgba(7, 8, 11, 0.9);
+  inset: 0 0 auto;
+  z-index: 120;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  background: rgba(17, 17, 18, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 1000;
-  padding: 12px 28px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
 }
 
-.modern-header .logo-brand a {
+.nav-brand-link {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-decoration: none;
-  color: #fff;
+  color: inherit;
 }
 
-.modern-header .logo-brand img {
+.nav-brand-link img {
   height: 42px;
   width: auto;
-  filter: drop-shadow(0 0 12px var(--c-vermilion-glow));
-  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(210, 255, 0, 0.35));
 }
 
-.modern-header .logo-brand:hover img {
-  transform: scale(1.05);
+.nav-brand-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--color--white);
 }
 
-.modern-header .logo-brand-tag {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  color: var(--c-vermilion);
-  text-transform: uppercase;
+.nav-middle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color--lime);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(210, 255, 0, 0.08);
+  border: 1px solid rgba(210, 255, 0, 0.25);
+  padding: 4px 14px;
+  border-radius: 999px;
 }
 
-.modern-header .logo-brand-tag::before {
+.nav-middle::before {
   content: "●";
-  font-size: 0.5rem;
-  color: var(--c-cyan);
-  animation: pulse-dot 2s infinite ease-in-out;
+  font-size: 0.6rem;
+  animation: pulse-dot 1.8s infinite ease-in-out;
 }
 
 @keyframes pulse-dot {
@@ -118,160 +128,162 @@ body.modern-home::before {
   50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Search bar with angled bevel */
-.modern-search-wrap {
-  position: relative;
-  flex: 1;
-  max-width: 440px;
-}
-
-.modern-search-box {
+.btn-layout.is-nav {
   display: flex;
   align-items: center;
-  background: rgba(18, 22, 30, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
-  padding: 4px 6px;
-  transition: all 0.3s ease;
-  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  gap: 14px;
 }
 
-.modern-search-box:focus-within {
-  border-color: var(--c-vermilion);
-  box-shadow: 0 0 16px var(--c-vermilion-glow);
-  background: rgba(22, 28, 40, 0.95);
-}
-
-.modern-search-box input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-size: 0.88rem;
-  padding: 6px 12px;
-  letter-spacing: 0.05em;
-}
-
-.modern-search-box input::placeholder {
-  color: var(--c-text-muted);
-}
-
-.modern-search-box button {
-  background: var(--c-vermilion);
-  color: #fff;
-  border: none;
-  outline: none;
+/* Lando Norris .btn-w Button */
+.btn-w {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.85rem;
+  padding: 0 1.4rem;
+  background-color: var(--color--lime);
+  color: var(--color--black);
+  border: 1px solid var(--color--lime);
+  border-radius: 0.54rem;
   font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  padding: 6px 14px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.65, 0.05, 0, 1);
 }
 
-.modern-search-box button:hover {
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0 12px #fff;
+.btn-w:hover {
+  background-color: var(--color--white);
+  border-color: var(--color--white);
+  color: var(--color--black);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(210, 255, 0, 0.35);
 }
 
-/* Search results dropdown */
-#searchResults {
+/* Hamburger button */
+.nav-ham {
+  width: 2.85rem;
+  height: 2.85rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.54rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-ham:hover {
+  border-color: var(--color--lime);
+  background: rgba(210, 255, 0, 0.1);
+}
+
+.nav-ham span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--color--white);
+  transition: all 0.3s ease;
+}
+
+.nav-ham.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background-color: var(--color--lime);
+}
+.nav-ham.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-ham.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background-color: var(--color--lime);
+}
+
+/* Search bar modal dropdown */
+.nav-search-modal {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  background: rgba(10, 12, 17, 0.98);
-  border: 1px solid var(--c-vermilion);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.85);
-  max-height: 480px;
-  overflow-y: auto;
-  z-index: 10000;
+  right: 2rem;
+  width: 380px;
+  background: rgba(17, 17, 18, 0.98);
+  border: 1px solid var(--color--lime);
+  border-radius: 0.54rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  padding: 12px;
+  z-index: 1000;
+  display: none;
+}
+
+.nav-search-modal.active {
+  display: block;
+}
+
+.nav-search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-search-box input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 8px 12px;
   border-radius: 4px;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.nav-search-box button {
+  background: var(--color--lime);
+  color: #000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 #searchResults:empty {
   display: none;
 }
 
-.search-item {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+#searchResults {
+  margin-top: 12px;
+  max-height: 360px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
 }
 
-.search-item:last-child {
-  border-bottom: none;
+.search-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .search-item h3 {
-  margin: 0 0 6px;
-  font-size: 1rem;
-  color: var(--c-vermilion);
+  font-size: 0.95rem;
+  color: var(--color--lime);
 }
 
 .search-item p {
-  margin: 0 0 8px;
-  font-size: 0.88rem;
-  color: var(--c-text-sub);
+  font-size: 0.82rem;
+  color: var(--color--green-off-white-2);
 }
 
-.search-item a {
-  color: var(--c-cyan);
-  text-decoration: underline;
-}
-
-/* Hamburger overlay button */
-.hamburger-overlay {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  width: 44px;
-  height: 44px;
-  padding: 8px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  transition: all 0.3s ease;
-  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-}
-
-.hamburger-overlay:hover {
-  border-color: var(--c-vermilion);
-  box-shadow: 0 0 12px var(--c-vermilion-glow);
-}
-
-.hamburger-overlay__line {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #fff;
-  transition: all 0.3s ease;
-}
-
-.hamburger-overlay.active .hamburger-overlay__line:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-  background: var(--c-vermilion);
-}
-
-.hamburger-overlay.active .hamburger-overlay__line:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-overlay.active .hamburger-overlay__line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-  background: var(--c-vermilion);
-}
-
-/* Navigation overlay */
+/* Fullscreen Menu Overlay */
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(6, 7, 10, 0.96);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  z-index: 999;
+  background: rgba(17, 17, 18, 0.97);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 110;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,664 +297,665 @@ body.modern-home::before {
   visibility: visible;
 }
 
-.nav-overlay__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.nav-menu-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+  width: 90%;
+  gap: 40px;
+  align-items: center;
 }
 
-.nav-overlay__link {
+.nav-menu-preview-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.nav-menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-menu-links a {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
-  letter-spacing: 0.15em;
-  color: #fff;
+  color: var(--color--white);
   text-decoration: none;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   transition: all 0.3s ease;
-  position: relative;
   display: inline-block;
 }
 
-.nav-overlay__link::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--c-vermilion);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
+.nav-menu-links a:hover {
+  color: var(--color--lime);
+  transform: translateX(12px);
 }
 
-.nav-overlay__link:hover {
-  color: var(--c-vermilion);
-  transform: scale(1.06);
-}
-
-.nav-overlay__link:hover::after {
-  width: 80%;
-}
-
-/* ========================================================
-   LANDO NORRIS SIGNATURE HERO SECTION (Full Motion Experience)
-======================================================== */
-.lando-hero {
+/* ==========================================================================
+   HERO SECTION (.s.home-hero) - EXACT LANDO NORRIS ARCHITECTURE
+   ========================================================================== */
+.s.home-hero {
   position: relative;
-  min-height: calc(100vh - 70px);
+  min-height: 100vh !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.c.home-hero {
+  width: 100%;
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
-  padding: 60px 24px 90px;
-  box-sizing: border-box;
-  perspective: 1200px;
-  background: radial-gradient(circle at 50% 50%, rgba(22, 28, 42, 0.9) 0%, rgba(7, 8, 11, 0.98) 75%);
+  justify-content: center;
+  min-height: calc(100vh - 100px);
 }
 
-/* Dynamic Interactive Spotlight following Mouse Cursor */
-.hero-spotlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 0, 51, 0.12), transparent 60%);
-  pointer-events: none;
-  z-index: 1;
-  transition: opacity 0.4s ease;
-}
-
-/* Hero Background Layer: Asanoha Pattern + Calligraphy Texture */
-.hero-bg-art {
+/* 3D GL Canvas & Center Stance Model */
+.gl-canvas {
   position: absolute;
   inset: 0;
-  background: url('../assets/img/4x/ヘッダー用.jpg') center center / cover no-repeat;
-  opacity: 0.16;
-  filter: contrast(130%) grayscale(20%);
   pointer-events: none;
   z-index: 1;
-}
-
-/* Continuous Rotating Kyudo Kasumi Target Reticle (Outer & Inner) */
-.hero-target-reticle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(88vw, 760px);
-  height: min(88vw, 760px);
-  border-radius: 50%;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-  z-index: 2;
-  animation: reticle-spin 70s linear infinite;
-}
-
-.hero-target-reticle::before {
-  content: "";
-  position: absolute;
-  inset: 18%;
-  border-radius: 50%;
-  border: 1px solid rgba(230, 0, 51, 0.28);
-  box-shadow: 0 0 50px rgba(230, 0, 51, 0.12);
-}
-
-.hero-target-reticle::after {
-  content: "";
-  position: absolute;
-  inset: 42%;
-  border-radius: 50%;
-  border: 1.5px solid rgba(0, 240, 255, 0.35);
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.18);
-  animation: reticle-spin-rev 40s linear infinite;
-}
-
-@keyframes reticle-spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes reticle-spin-rev {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-/* Crosshair Laser Lines across the Screen (Targeting HUD) */
-.hero-crosshair-h {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 20%, rgba(0,240,255,0.25) 50%, rgba(255,255,255,0.08) 80%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.hero-crosshair-v {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 20%, rgba(230,0,51,0.25) 50%, rgba(255,255,255,0.08) 80%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Giant Background Outline Typography (Lando Norris Signature Behind Layer) */
-.hero-bg-outline-text {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-display);
-  font-size: clamp(6.5rem, 17vw, 18rem);
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 2;
-  user-select: none;
-  text-transform: uppercase;
-  will-change: transform;
-}
-
-/* Hero Inner Grid Layout */
-.hero-inner-container {
-  position: relative;
-  z-index: 4;
-  width: 100%;
-  max-width: 1360px;
-  display: grid;
-  grid-template-columns: 290px 1fr 290px;
-  align-items: center;
-  gap: 36px;
-  transform-style: preserve-3d;
-}
-
-/* Center Stage: Hero Centerpiece with 3D Parallax Tilt */
-.hero-center-typography {
-  text-align: center;
-  position: relative;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-/* Center Archer Silhouette & Floating Circle Visual */
-.hero-center-visual-wrap {
-  position: relative;
-  width: min(340px, 60vw);
-  height: min(340px, 60vw);
-  margin: 0 auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform-style: preserve-3d;
 }
 
-.hero-visual-avatar-img {
+.hero-3d-model-wrap {
+  position: relative;
+  width: min(440px, 75vw);
+  height: min(440px, 75vw);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-3d-model-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  filter: contrast(115%) brightness(0.9);
   box-shadow: 
-    0 0 50px rgba(0, 0, 0, 0.9),
-    0 0 30px var(--c-vermilion-dim);
-  filter: contrast(110%) brightness(0.9);
-  transition: filter 0.4s ease, transform 0.4s ease;
+    0 0 60px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(210, 255, 0, 0.15);
 }
 
-.hero-center-typography:hover .hero-visual-avatar-img {
-  filter: contrast(120%) brightness(1);
-  transform: scale(1.03);
-}
-
-.hero-visual-ring-svg {
+/* Rotating Targeting Reticle */
+.hero-reticle-ring {
   position: absolute;
-  inset: -12px;
-  width: calc(100% + 24px);
-  height: calc(100% + 24px);
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px dashed rgba(210, 255, 0, 0.4);
+  animation: reticle-spin 50s linear infinite;
   pointer-events: none;
-  animation: ring-rotate 25s linear infinite;
 }
 
-@keyframes ring-rotate {
+@keyframes reticle-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.hero-eyebrow {
-  display: inline-flex;
+/* EXACT Lando Norris Next Race HUD Widget (.home-hero-next-race-w) */
+.home-hero-next-race-w {
+  position: absolute;
+  right: var(--gap);
+  bottom: var(--gap);
+  z-index: 20;
+  width: 130px;
+  height: 250px;
+  color: var(--color--dark-green-tint-2);
+  padding: 16px 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-hero-next-race-outline {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.home-hero-next-race-outline svg {
+  width: 100%;
+  height: 100%;
+  color: var(--color--lime);
+}
+
+.home-hero-next-race-top {
+  display: flex;
   align-items: center;
-  gap: 12px;
+}
+
+.text-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.35em;
-  color: var(--c-cyan);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  padding: 6px 16px;
-  border-radius: 2px;
-}
-
-.hero-seal-stamp {
-  display: inline-block;
-  background: var(--c-vermilion);
-  color: #fff;
-  font-family: var(--font-serif-wa);
-  font-size: 0.75rem;
-  font-weight: 900;
-  padding: 2px 7px;
-  border-radius: 2px;
-  box-shadow: 0 0 14px var(--c-vermilion-glow);
-  letter-spacing: 0.1em;
-}
-
-/* Main Title Typography with 3D Depth */
-.hero-main-title {
-  margin: 0;
-  font-family: var(--font-serif-wa);
-  font-size: clamp(3.6rem, 8.2vw, 6.2rem);
-  font-weight: 900;
+  font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.18em;
-  color: #ffffff;
-  text-shadow: 
-    0 0 25px rgba(255, 255, 255, 0.25),
-    0 15px 45px rgba(0, 0, 0, 0.95);
-  line-height: 1.1;
-  position: relative;
-}
-
-.hero-english-title {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2.5vw, 1.75rem);
-  font-weight: 800;
-  letter-spacing: 0.34em;
-  color: var(--c-text-sub);
-  margin-top: 10px;
   text-transform: uppercase;
+  color: var(--color--lime);
+  line-height: 1;
 }
 
-.hero-english-title span {
-  color: var(--c-vermilion);
+.home-hero-next-race-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.hero-tagline {
-  margin: 18px auto 0;
-  max-width: 600px;
-  font-size: clamp(0.92rem, 1.25vw, 1.05rem);
-  line-height: 1.85;
-  color: var(--c-text-sub);
+.home-hero-next-race-row a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-hero-next-race-line {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 1px;
+  margin: 6px 0;
+}
+
+.home-hero-next-race-event-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color--white);
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+}
+
+.home-hero-next-race-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color--lime);
   letter-spacing: 0.08em;
 }
 
-/* CTA buttons with high-energy magnetic-style hover */
-.hero-action-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 32px;
-  flex-wrap: wrap;
+.home-hero-next-race-sub {
+  font-size: 0.68rem;
+  color: var(--color--green-off-white-2);
+  line-height: 1.3;
 }
 
-.hero-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 34px;
-  background: var(--c-vermilion);
-  color: #ffffff;
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  box-shadow: 0 8px 26px var(--c-vermilion-glow);
-}
-
-.hero-btn-primary:hover {
-  background: #ffffff;
-  color: #07080b;
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 14px 36px rgba(255, 255, 255, 0.45);
-}
-
-.hero-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 30px;
-  background: rgba(14, 18, 26, 0.75);
-  color: #ffffff;
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-}
-
-.hero-btn-secondary:hover {
-  border-color: var(--c-cyan);
-  background: rgba(0, 240, 255, 0.12);
-  color: var(--c-cyan);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 10px 28px var(--c-cyan-glow);
-}
-
-/* Lando Norris HUD Telemetry Cards (Left & Right) */
-.hero-hud-card {
-  background: rgba(11, 14, 21, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--c-card-border);
-  padding: 24px 22px;
-  border-radius: 4px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
-  position: relative;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  will-change: transform;
-}
-
-.hero-hud-card::before {
-  content: "";
+/* Left Telemetry Box (Dojo Intel) */
+.home-hero-left-intel-w {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 28px;
-  background: var(--c-vermilion);
+  left: var(--gap);
+  bottom: var(--gap);
+  z-index: 20;
+  width: 160px;
+  background: rgba(26, 30, 22, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(210, 255, 0, 0.3);
+  border-radius: 0.54rem;
+  padding: 16px 14px;
 }
 
-.hero-hud-right::before {
-  background: var(--c-cyan);
-}
-
-.hero-hud-card:hover {
-  border-color: var(--c-vermilion);
-  box-shadow: 0 24px 60px var(--c-vermilion-dim);
-}
-
-.hero-hud-right:hover {
-  border-color: var(--c-cyan);
-  box-shadow: 0 24px 60px var(--c-cyan-dim);
-}
-
-.hero-hud-badge {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  color: var(--c-vermilion);
+.home-hero-left-intel-w .text-eyebrow {
   margin-bottom: 8px;
 }
 
-.hero-hud-right .hero-hud-badge {
-  color: var(--c-cyan);
-}
-
-.hero-hud-title {
-  margin: 0 0 14px;
-  font-size: 1.1rem;
+.home-hero-left-intel-title {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
-  color: #ffffff;
+  color: #fff;
+  margin-bottom: 6px;
 }
 
-.hero-hud-detail {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 18px;
-  font-size: 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  color: var(--c-text-sub);
+.home-hero-left-intel-desc {
+  font-size: 0.72rem;
+  color: var(--color--green-off-white-2);
+  line-height: 1.4;
 }
 
-.hero-hud-detail li strong {
-  display: inline-block;
-  font-family: var(--font-mono);
-  width: 50px;
-  color: var(--c-text-muted);
-  font-size: 0.75rem;
+/* Center Giant Hero Typography (Exact Lando Norris Font Scale) */
+.home-hero-center-text {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.text-impact-hero {
+  font-family: var(--font-display);
+  font-size: var(--text--impact);
+  font-weight: 900;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
+  line-height: 0.88;
+  color: var(--color--white);
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
 }
 
-.hero-hud-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--c-vermilion);
-  text-decoration: none;
-  transition: transform 0.2s ease, color 0.2s ease;
+.text-impact-hero .highlight {
+  color: var(--color--lime);
 }
 
-.hero-hud-right .hero-hud-link {
-  color: var(--c-cyan);
+.home-hero-kanji-sub {
+  font-family: var(--font-serif-wa);
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: var(--color--white);
+  margin-top: 14px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
-.hero-hud-link:hover {
-  transform: translateX(6px);
-  color: #ffffff;
+.home-hero-tagline {
+  max-width: 580px;
+  margin: 18px auto 0;
+  font-size: 0.95rem;
+  color: var(--color--green-off-white-2);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
 }
 
-/* Animated Scroll Indicator */
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 24px;
+.home-hero-btn-group {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
-  color: var(--c-text-muted);
-  z-index: 4;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
 }
 
-.hero-scroll-line {
-  width: 1.5px;
-  height: 38px;
-  background: linear-gradient(180deg, var(--c-vermilion), transparent);
-  animation: scroll-drop 2s infinite ease-in-out;
-}
-
-@keyframes scroll-drop {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  50.1% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-
-/* ========================================================
-   RUNNING MARQUEE TICKER TAPE
-======================================================== */
-.marquee-ticker-wrap {
+/* ==========================================================================
+   MARQUEE SECTION (.s.home-marquee) - EXACT LANDO NORRIS CONTINUOUS RUNNER
+   ========================================================================== */
+.s.home-marquee {
   width: 100%;
-  overflow: hidden;
-  background: #0d0f15;
+  background-color: var(--color--dark-green);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 14px 0;
+  padding: 1.5rem 0;
+  overflow: hidden;
   position: relative;
   z-index: 10;
-  white-space: nowrap;
 }
 
-.marquee-ticker-content {
-  display: inline-block;
+.marquee-adv-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.marquee-adv-top-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.marquee-signature-img {
+  height: 28px;
+  width: auto;
+  filter: drop-shadow(0 0 8px var(--color--lime));
+}
+
+.text-impact-lg-mona.marquee-adv {
   white-space: nowrap;
-  animation: marquee-run 32s linear infinite;
+  display: flex;
+  animation: lando-marquee 32s linear infinite;
   font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: var(--c-text-sub);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color--white);
 }
 
-.marquee-ticker-content span {
+.text-impact-lg-mona.marquee-adv span {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
-  margin-right: 36px;
+  gap: 24px;
+  padding-right: 48px;
 }
 
-.marquee-ticker-content .highlight {
-  color: var(--c-vermilion);
+.text-impact-lg-mona.marquee-adv strong {
+  color: var(--color--lime);
 }
 
-.marquee-ticker-content .accent {
-  color: var(--c-cyan);
-}
-
-@keyframes marquee-run {
+@keyframes lando-marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* ========================================================
-   SECTIONS: NEWS, DIRECTORY, SPECS
-======================================================== */
-.modern-section {
+/* ==========================================================================
+   OTOT SECTION (.s.is-otot-home) - "ON TRACK" & "OFF TRACK" SPLIT LAYOUT
+   ========================================================================== */
+.s.is-otot-home {
+  position: relative;
+  padding: var(--padding--xlarge) 0;
+  background-color: var(--color--black);
+}
+
+.c.is-otot-home {
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+}
+
+.otot-home-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--gap) * 3);
+}
+
+.otot-home-card {
+  position: relative;
+  height: 520px;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 40px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.4s cubic-bezier(0.65, 0.05, 0, 1);
+}
+
+.otot-home-card:hover {
+  border-color: var(--color--lime);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(210, 255, 0, 0.2);
+}
+
+.otot-card-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
+  filter: brightness(0.4) contrast(110%);
+  z-index: 1;
+}
+
+.otot-home-card:hover .otot-card-bg-img {
+  transform: scale(1.08);
+  filter: brightness(0.55) contrast(120%);
+}
+
+.otot-card-content {
   position: relative;
   z-index: 2;
-  padding: 96px 24px;
-  max-width: 1360px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.sec-header {
-  margin-bottom: 44px;
-  position: relative;
+.text-impact-reg-brier {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  color: var(--color--lime);
+  line-height: 0.9;
+  text-transform: uppercase;
 }
 
-.sec-eyebrow {
+.text-impact-reg-mona.line-increase {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  color: var(--color--white);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.text-body-reg-mona {
+  font-size: 1.05rem;
+  color: var(--color--green-off-white-1);
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+.otot-card-action {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  color: var(--c-vermilion);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.sec-eyebrow::before {
-  content: "//";
-  color: var(--c-vermilion);
-  font-weight: 900;
-}
-
-.sec-title {
-  margin: 0;
-  font-family: var(--font-serif-wa);
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: #ffffff;
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.sec-title-en {
+  gap: 10px;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 800;
-  letter-spacing: 0.25em;
-  color: var(--c-text-muted);
+  color: var(--color--lime);
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
-.sec-line {
-  margin-top: 16px;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, var(--c-vermilion) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 100%);
+.otot-home-card:hover .otot-card-action {
+  color: #fff;
+  transform: translateX(8px);
 }
 
-/* ========================================================
-   UPDATES & NEWS SECTION
-======================================================== */
+/* ==========================================================================
+   HELMETS HALL OF FAME / DOJO DIRECTORY (.s.home-helmets)
+   ========================================================================== */
+.s.home-helmets {
+  padding: var(--padding--xlarge) 0;
+  background-color: var(--color--dark-green);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.c.home-helmets {
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+}
+
+.helmets-header {
+  margin-bottom: 48px;
+}
+
+.text-title-lg-mona {
+  font-family: var(--font-display);
+  font-size: var(--text--title-lg);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--color--white);
+}
+
+.text-title-lg-mona span {
+  color: var(--color--lime);
+}
+
+.helmet-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.helmet-card {
+  position: relative;
+  height: 380px;
+  background-color: var(--color--black);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.65, 0.05, 0, 1);
+}
+
+.helmet-card:hover {
+  border-color: var(--color--lime);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(210, 255, 0, 0.18);
+}
+
+.helmet-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) contrast(115%);
+  transition: transform 0.6s cubic-bezier(0.65, 0.05, 0, 1), filter 0.6s ease;
+  z-index: 1;
+}
+
+.helmet-card:hover .helmet-card-img {
+  transform: scale(1.1);
+  filter: brightness(0.6) contrast(125%);
+}
+
+.helmet-card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.helmet-card-tag {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color--lime);
+  background: rgba(17, 17, 18, 0.85);
+  border: 1px solid rgba(210, 255, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.helmet-card-title {
+  margin: 0 0 8px;
+  font-family: var(--font-serif-wa);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.helmet-card-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color--green-off-white-2);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   IMPACT CALLOUT BANNER (.s.is-lando-exe)
+   ========================================================================== */
+.s.is-lando-exe {
+  padding: 100px 0;
+  background-color: var(--color--black);
+  text-align: center;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.c.is-lando-exe {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+}
+
+.text-impact-lg-mona.reduce {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-weight: 900;
+  color: var(--color--white);
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.text-impact-lg-mona.reduce span {
+  color: var(--color--lime);
+}
+
+.is-lando-exe p {
+  font-size: 1.1rem;
+  color: var(--color--green-off-white-2);
+  line-height: 1.85;
+  margin-bottom: 36px;
+}
+
+/* ==========================================================================
+   WHAT'S UP / NEWS FEED (.s.is-callout-socials)
+   ========================================================================== */
+.s.is-callout-socials {
+  padding: var(--padding--xlarge) 0;
+  background-color: var(--color--dark-green);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.c.is-callout-socials {
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
+}
+
 .modern-news-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.modern-news-item {
-  position: relative;
+  margin-top: 36px;
 }
 
 .modern-news-link {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 26px;
-  background: var(--c-bg-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--c-card-border);
-  border-radius: 4px;
+  padding: 20px 28px;
+  background-color: var(--color--black);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.54rem;
   text-decoration: none;
   color: #fff;
   transition: all 0.3s ease;
-  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 }
 
 .modern-news-link:hover {
-  background: var(--c-card-hover);
-  border-color: var(--c-vermilion);
+  border-color: var(--color--lime);
   transform: translateX(8px);
-  box-shadow: 0 8px 28px var(--c-vermilion-dim);
+  box-shadow: 0 10px 30px rgba(210, 255, 0, 0.15);
 }
 
 .modern-news-date {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--c-vermilion);
-  background: rgba(230, 0, 51, 0.12);
-  border: 1px solid rgba(230, 0, 51, 0.35);
+  color: var(--color--lime);
+  background: rgba(210, 255, 0, 0.12);
+  border: 1px solid rgba(210, 255, 0, 0.35);
   padding: 4px 12px;
-  border-radius: 2px;
-  letter-spacing: 0.1em;
+  border-radius: 4px;
   white-space: nowrap;
 }
 
@@ -950,301 +963,183 @@ body.modern-home::before {
   flex: 1;
   font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--c-text-main);
 }
 
 .modern-news-arrow {
   font-family: var(--font-mono);
   font-size: 0.88rem;
   font-weight: 800;
-  color: var(--c-vermilion);
-  transition: transform 0.2s ease;
+  color: var(--color--lime);
 }
 
-.modern-news-link:hover .modern-news-arrow {
-  transform: translateX(6px);
+/* ==========================================================================
+   SPECIFICATIONS SECTION (.s.is-home-collabs)
+   ========================================================================== */
+.s.is-home-collabs {
+  padding: var(--padding--xlarge) 0;
+  background-color: var(--color--black);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ========================================================
-   DIRECTORY CARDS GRID
-======================================================== */
-.modern-grid-directory {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
+.c.is-home-collabs {
+  max-width: var(--fluid-container);
+  margin: 0 auto;
+  padding: 0 var(--padding--container);
 }
 
-.dir-card {
-  position: relative;
-  height: 330px;
-  background: #0d1017;
-  border: 1px solid var(--c-card-border);
-  border-radius: 4px;
-  overflow: hidden;
-  text-decoration: none;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px 26px;
-  box-sizing: border-box;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-}
-
-.dir-card-bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
-  filter: brightness(0.35) grayscale(20%);
-  z-index: 1;
-}
-
-.dir-card:hover .dir-card-bg-img {
-  transform: scale(1.1);
-  filter: brightness(0.55) contrast(1.1);
-}
-
-.dir-card-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
-}
-
-.dir-card:hover {
-  border-color: var(--c-cyan);
-  transform: translateY(-8px);
-  box-shadow: 0 20px 48px rgba(0, 240, 255, 0.22);
-}
-
-.dir-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.dir-card-num {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 800;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
-  transition: color 0.3s ease, -webkit-text-stroke 0.3s ease;
-}
-
-.dir-card:hover .dir-card-num {
-  color: var(--c-cyan);
-  -webkit-text-stroke: 1px var(--c-cyan);
-}
-
-.dir-card-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--c-cyan);
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.dir-card-title {
-  margin: 0 0 10px;
-  font-family: var(--font-serif-wa);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 0.06em;
-}
-
-.dir-card-desc {
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--c-text-sub);
-  line-height: 1.6;
-}
-
-.dir-card-action {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--c-cyan);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-  transition: transform 0.2s ease;
-}
-
-.dir-card:hover .dir-card-action {
-  transform: translateX(6px);
-  color: #fff;
-}
-
-/* ========================================================
-   DOJO SPECIFICATIONS GRID
-======================================================== */
-.dojo-specs-grid {
+.collabs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  margin-top: 36px;
 }
 
-.spec-box {
-  background: var(--c-bg-card);
-  backdrop-filter: blur(14px);
-  border: 1px solid var(--c-card-border);
+.collabs-box {
+  background-color: var(--color--dark-green);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.54rem;
   padding: 24px 20px;
-  border-radius: 4px;
-  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
-.spec-box:hover {
-  border-color: var(--c-vermilion);
-  transform: translateY(-4px);
+.collabs-box:hover {
+  border-color: var(--color--lime);
 }
 
-.spec-label {
+.collabs-label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
+  color: var(--color--lime);
   letter-spacing: 0.2em;
-  color: var(--c-vermilion);
   margin-bottom: 8px;
   text-transform: uppercase;
 }
 
-.spec-value {
+.collabs-val {
   font-size: 1.15rem;
   font-weight: 700;
   color: #fff;
-  letter-spacing: 0.04em;
 }
 
-/* ========================================================
-   FOOTER
-======================================================== */
-.modern-footer {
-  background: #050608;
+/* ==========================================================================
+   FOOTER (.s.is-footer) - EXACT LANDO NORRIS FULL FOOTER
+   ========================================================================== */
+.s.is-footer {
+  padding: 80px 0 40px;
+  background-color: var(--color--black);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 60px 24px;
-  position: relative;
-  z-index: 2;
 }
 
-.footer-inner {
-  max-width: 1360px;
+.c.is-footer {
+  max-width: var(--fluid-container);
   margin: 0 auto;
+  padding: 0 var(--padding--container);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 48px;
   text-align: center;
 }
 
-.footer-nav {
+.footer-nav-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 28px;
+  gap: 32px;
 }
 
-.footer-nav a {
+.footer-nav-list a {
   font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
   letter-spacing: 0.12em;
-  color: var(--c-text-sub);
+  text-transform: uppercase;
+  color: var(--color--green-off-white-1);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.footer-nav a:hover {
-  color: var(--c-vermilion);
+.footer-nav-list a:hover {
+  color: var(--color--lime);
 }
 
-.footer-copy {
+.text-impact-sm-mona.footer {
+  font-family: var(--font-serif-wa);
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: var(--color--white);
+  line-height: 1.1;
+}
+
+.text-impact-sm-mona.footer span {
+  color: var(--color--lime);
+}
+
+.footer-bottom-copy {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.2em;
-  color: var(--c-text-muted);
+  color: var(--color--dark-green-tint-2);
 }
 
 /* Back to top button */
 .back-to-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 48px;
-  height: 48px;
-  background: var(--c-vermilion);
-  color: #fff;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--color--lime);
+  color: var(--color--black);
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: none;
+  border-radius: 0.54rem;
   font-size: 1.2rem;
   font-weight: bold;
-  z-index: 900;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px var(--c-vermilion-glow);
-  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  cursor: pointer;
+  display: none;
+  z-index: 100;
+  transition: transform 0.2s ease;
 }
 
 .back-to-top:hover {
-  background: #fff;
-  color: #07080b;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px);
 }
 
-/* ========================================================
-   RESPONSIVE DESIGN
-======================================================== */
+/* ==========================================================================
+   RESPONSIVE QUERIES
+   ========================================================================== */
 @media (max-width: 1024px) {
-  .hero-inner-container {
+  .otot-home-layout {
     grid-template-columns: 1fr;
-    gap: 36px;
   }
-  
-  .hero-hud-card {
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .modern-grid-directory {
+  .helmet-grid-layout {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .dojo-specs-grid {
+  .collabs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-@media (max-width: 680px) {
-  .modern-header {
-    padding: 10px 16px;
-  }
-  
-  .modern-search-wrap {
+  .nav-middle {
     display: none;
   }
+}
 
-  .modern-grid-directory {
+@media (max-width: 768px) {
+  .home-hero-next-race-w,
+  .home-hero-left-intel-w {
+    display: none; /* In Lando Norris mobile, these are toggled or docked */
+  }
+  .helmet-grid-layout {
     grid-template-columns: 1fr;
   }
-
-  .dojo-specs-grid {
+  .collabs-grid {
     grid-template-columns: 1fr;
+  }
+  .nav-menu-inner {
+    grid-template-columns: 1fr;
+  }
+  .nav-menu-preview-img {
+    display: none;
   }
 }
