@@ -92,22 +92,28 @@
   </nav>
 </header>
 
-<!-- LANDO NORRIS INSPIRED HERO SECTION (和モダン融合) -->
+<!-- ========================================================
+     LANDO NORRIS SIGNATURE HERO SECTION (3D Gyro Parallax)
+======================================================== -->
 <section class="lando-hero" id="hero">
-  <!-- 背景麻の葉テクスチャ＆龍翔会書アート -->
+  <!-- マウス追従スポットライト -->
+  <div class="hero-spotlight" id="heroSpotlight"></div>
+
+  <!-- 背景麻の葉文様テクスチャ -->
   <div class="hero-bg-art"></div>
 
-  <!-- 背景道場射手シルエット写真 -->
-  <img src="assets/img/DSC_0240.jpg" alt="道場稽古風景" class="hero-bg-photo">
+  <!-- 十字照準ライン（水平・垂直） -->
+  <div class="hero-crosshair-h"></div>
+  <div class="hero-crosshair-v"></div>
 
-  <!-- 的モチーフの照準サークル -->
-  <div class="hero-target-reticle"></div>
+  <!-- 霞的モチーフの回転照準レティクル -->
+  <div class="hero-target-reticle" id="heroReticle"></div>
 
-  <!-- 巨大アウトライン英字（奥レイヤー） -->
+  <!-- 巨大アウトライン英字（背後レイヤー） -->
   <div class="hero-bg-outline-text" id="heroBgText">RYUSYOKAI</div>
 
   <div class="hero-inner-container">
-    <!-- 左HUD: 拠点・稽古情報 -->
+    <!-- 左HUD: 拠点・稽古情報（Lando Norris コーナーウィジェット風） -->
     <aside class="hero-hud-card hero-hud-left" id="hudLeft">
       <span class="hero-hud-badge">DOJO INTEL // 龍ヶ崎拠点</span>
       <h3 class="hero-hud-title">龍ヶ崎支部 龍翔会</h3>
@@ -119,25 +125,37 @@
       <a href="pages/beginner/index.html" class="hero-hud-link">初心者教室・見学案内 ➔</a>
     </aside>
 
-    <!-- 中央: 特大タイポグラフィ ＆ 和の落款 -->
+    <!-- 中央: 3Dジャイロセンターピース（弓道射手 & タイポグラフィ） -->
     <div class="hero-center-typography" id="heroCenter">
+      <!-- 射手アバター＆回転リング（Lando Norris 3Dヘルメット配置を模倣） -->
+      <div class="hero-center-visual-wrap" id="heroCenterVisual">
+        <img src="assets/img/26229848_s.jpg" alt="弓道 射手" class="hero-visual-avatar-img">
+        <svg class="hero-visual-ring-svg" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(230,0,51,0.5)" stroke-width="1.5" stroke-dasharray="8 6"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(0,240,255,0.4)" stroke-width="1" stroke-dasharray="14 10"/>
+        </svg>
+      </div>
+
       <div class="hero-eyebrow">
         <span>IBARAKI RYUGASAKI // KYUDO CLUB</span>
         <span class="hero-seal-stamp">正射必中</span>
       </div>
-      <h1 class="hero-main-title">龍翔会</h1>
-      <span class="hero-english-title">RYUSYOKAI <span>KYUDO</span> FEDERATION</span>
-      <p class="hero-tagline">
+
+      <h1 class="hero-main-title" id="heroMainTitle">龍翔会</h1>
+      <span class="hero-english-title" id="heroEnglishTitle">RYUSYOKAI <span>KYUDO</span> FEDERATION</span>
+
+      <p class="hero-tagline" id="heroTagline">
         静寂を穿つ一筋の矢、龍の如く翔ける。<br>
         伝統と求道が交差する、茨城県龍ヶ崎市の弓道拠点。
       </p>
-      <div class="hero-action-buttons">
+
+      <div class="hero-action-buttons" id="heroActions">
         <a href="pages/tournament/index.html" class="hero-btn-primary">大会・審査要項</a>
         <a href="pages/schedule/index.html" class="hero-btn-secondary">年間スケジュール</a>
       </div>
     </div>
 
-    <!-- 右HUD: 次回大会情報（NEXT EVENT） -->
+    <!-- 右HUD: 次回大会情報（NEXT EVENT ウィジェット） -->
     <aside class="hero-hud-card hero-hud-right" id="hudRight">
       <span class="hero-hud-badge">NEXT EVENT // 令和8年度</span>
       <h3 class="hero-hud-title">第33回 県南弓道大会</h3>
@@ -150,14 +168,16 @@
     </aside>
   </div>
 
-  <!-- スクロールインジケーター -->
+  <!-- スクロールインジケーター（レーザードロップアニメーション） -->
   <div class="hero-scroll-indicator">
     <div class="hero-scroll-line"></div>
     <span>SCROLL</span>
   </div>
 </section>
 
-<!-- LANDO NORRIS スタイル 流れるマーキーループバナー -->
+<!-- ========================================================
+     LANDO NORRIS SIGNATURE MARQUEE TICKER TAPE
+======================================================== -->
 <div class="marquee-ticker-wrap">
   <div class="marquee-ticker-content">
     <span><strong class="highlight">RYUSYOKAI</strong> // 茨城県弓道連盟 龍ヶ崎支部</span>
@@ -178,155 +198,8 @@
 </div>
 
 <main>
-  <!-- セクション1: 心・技・体 (SHIN-GI-TAI) エディトリアル ＆ 実動動画 -->
-  <section class="modern-section">
-    <div class="sec-header">
-      <div class="sec-eyebrow">THE DISCIPLINE // 弓道の真髄</div>
-      <h2 class="sec-title">
-        心・技・体
-        <span class="sec-title-en">SHIN • GI • TAI</span>
-      </h2>
-      <div class="sec-line"></div>
-    </div>
-
-    <div class="bento-shingitai">
-      <!-- 左: 和のエディトリアル解説 -->
-      <div class="shingitai-editorial">
-        <div class="shingitai-kanji-flank">
-          <div class="vertical-kanji-banner">動中の静</div>
-          <div class="shingitai-content">
-            <h3 class="shingitai-heading">「弓を射るのではなく、弓に射られる」</h3>
-            <p class="shingitai-desc">
-              弓道は、単に的を射抜く競技ではなく、心身の統一と礼節を極める日本の伝統武道です。<br>
-              足踏みから残心に至る「射法八節」の所作を通じ、雑念を払い無我の境地へと至る。<br>
-              龍翔会は、茨城県龍ヶ崎市の歴史ある弓道場にて、初心者から高段位者まで互いに切磋琢磨し、弓の真理を探求しています。
-            </p>
-          </div>
-        </div>
-
-        <div class="shingitai-specs">
-          <div class="shingitai-spec-item">
-            <div class="shingitai-spec-label">RANGE DISTANCE</div>
-            <div class="shingitai-spec-val">近的 28m</div>
-          </div>
-          <div class="shingitai-spec-item">
-            <div class="shingitai-spec-label">TARGET SIZE</div>
-            <div class="shingitai-spec-val">一尺二寸（36cm）</div>
-          </div>
-          <div class="shingitai-spec-item">
-            <div class="shingitai-spec-label">SHOOTING STALLS</div>
-            <div class="shingitai-spec-val">6人立</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 右: 実動ビデオ（3連マルチ画面） -->
-      <div class="shingitai-video-box">
-        <video autoplay muted loop playsinline poster="assets/img/DSC_0240.jpg">
-          <source src="assets/img/MP4/弓道１-online-video-cutter.com_.mp4" type="video/mp4">
-        </video>
-        <div class="video-hud-overlay">
-          <div class="video-hud-top">
-            <span class="video-rec-badge">● LIVE ACTION</span>
-            <span>01 胴造り // 02 引分け // 03 的中</span>
-          </div>
-          <div class="video-hud-bottom">
-            <span>RYUSYOKAI DOJO FOOTAGE</span>
-            <span>1080P // SYNCHRONIZED ARCHERY</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- セクション2: 弓具と所作の美（写真アーカイブ ベントグリッド） -->
-  <section class="modern-section" style="padding-top: 0;">
-    <div class="sec-header">
-      <div class="sec-eyebrow">EQUIPMENT & FORM // 写真で綴る弓道美</div>
-      <h2 class="sec-title">
-        射技と弓具の美
-        <span class="sec-title-en">CRAFT & POSTURE</span>
-      </h2>
-      <div class="sec-line"></div>
-    </div>
-
-    <div class="photo-archive-grid">
-      <!-- 01: 矢羽 -->
-      <div class="craft-card">
-        <img src="assets/img/22209849_s.jpg" alt="矢羽と箆" class="craft-card-img">
-        <div class="craft-card-overlay">
-          <span class="craft-card-tag">// 矢羽 • YA</span>
-          <div class="craft-card-body">
-            <h3 class="craft-card-title">漆黒に映える矢羽と箆</h3>
-            <p class="craft-card-sub">猛禽の羽根と精緻な箆が、寸分の狂いもなく風を切り的へと伸びる。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 02: 和弓 -->
-      <div class="craft-card">
-        <img src="assets/img/24697911_s.jpg" alt="和弓の弓架" class="craft-card-img">
-        <div class="craft-card-overlay">
-          <span class="craft-card-tag">// 弓架 • YUMI</span>
-          <div class="craft-card-body">
-            <h3 class="craft-card-title">和弓の調律と籐巻き</h3>
-            <p class="craft-card-sub">竹と櫨が織りなす和弓。幾重もの籐巻きに職人の魂と伝統美が宿る。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03: 射手の佇まい -->
-      <div class="craft-card">
-        <img src="assets/img/26229848_s.jpg" alt="黒紋付羽織袴の射手" class="craft-card-img">
-        <div class="craft-card-overlay">
-          <span class="craft-card-tag">// 佇まい • STANCE</span>
-          <div class="craft-card-body">
-            <h3 class="craft-card-title">黒紋付羽織袴と残心</h3>
-            <p class="craft-card-sub">身だしなみを正し、礼を尽くす。矢を放った後も呼吸を整え心をとどめる。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 04: 会の緊張感 -->
-      <div class="craft-card">
-        <img src="assets/img/26230334_s.jpg" alt="会の極致" class="craft-card-img">
-        <div class="craft-card-overlay">
-          <span class="craft-card-tag">// 会 • TENSION</span>
-          <div class="craft-card-body">
-            <h3 class="craft-card-title">鹿革の弽と満を持す離れ</h3>
-            <p class="craft-card-sub">頬付け、胸弦。張りつめた静寂の中、心身の機が熟した瞬間に放たれる。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05: 的場と安土 -->
-      <div class="craft-card">
-        <img src="assets/img/30961622_s.jpg" alt="的場と安土" class="craft-card-img">
-        <div class="craft-card-overlay">
-          <span class="craft-card-tag">// 的場 • AZUCHI</span>
-          <div class="craft-card-body">
-            <h3 class="craft-card-title">二十八メートル先の霞的</h3>
-            <p class="craft-card-sub">土盛りの安土に整然と並ぶ的。会心の矢が中心を射抜く快音が響く。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 06: 弽（ゆがけ） -->
-      <div class="craft-card">
-        <img src="assets/img/5171030_s.jpg" alt="紫紐の弽" class="craft-card-img">
-        <div class="craft-card-overlay">
-          <span class="craft-card-tag">// 弓具 • YUGAKE</span>
-          <div class="craft-card-body">
-            <h3 class="craft-card-title">紫紐の鹿革・四つ弽</h3>
-            <p class="craft-card-sub">射手の手と弓弦を結び合わせる唯一無二の相棒。伝統皮革の重み。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- セクション3: 更新情報（TRANSMISSIONS / SYSTEM LOG） -->
-  <section id="news" class="modern-section" style="padding-top: 0;">
+  <!-- 更新情報（TRANSMISSIONS / SYSTEM LOG） -->
+  <section id="news" class="modern-section">
     <div class="sec-header">
       <div class="sec-eyebrow">TRANSMISSIONS // SYSTEM LOG</div>
       <h2 class="sec-title">
@@ -374,7 +247,7 @@
     </ul>
   </section>
 
-  <!-- セクション4: 各ページ案内（PORTAL DIRECTORY） -->
+  <!-- 各ページ案内（PORTAL DIRECTORY） -->
   <section id="links" class="modern-section" style="padding-top: 0;">
     <div class="sec-header">
       <div class="sec-eyebrow">INDEX & DIRECTORY // 六箇所の案内</div>
@@ -484,7 +357,7 @@
     </div>
   </section>
 
-  <!-- セクション5: 道場スペック (DOJO SPECIFICATIONS) -->
+  <!-- 道場スペック (DOJO SPECIFICATIONS) -->
   <section class="modern-section" style="padding-top: 0;">
     <div class="sec-header">
       <div class="sec-eyebrow">DOJO SPECIFICATIONS // 活動概要</div>
@@ -568,7 +441,7 @@
 <!-- スクロール入場アニメーション -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".dir-card, .craft-card, .spec-box");
+  const cards = document.querySelectorAll(".dir-card, .spec-box, .modern-news-item");
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, idx) => {
@@ -915,127 +788,159 @@ if (searchBtn && searchInput && searchResults) {
 }
 </script>
 
-<!-- GSAP ヒーロー演出 & マウスパララックス -->
+<!-- ========================================================
+     LANDO NORRIS SIGNATURE HERO ANIMATION & 3D GYRO PARALLAX
+======================================================== -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  // 1. Lando Norris Cubic-Bezier Opening Intro Sequence
+  const landoEase = "power4.out";
+  const tl = gsap.timeline({ defaults: { ease: landoEase } });
 
-  tl.from(".hero-target-reticle", {
-    scale: 0.6,
-    opacity: 0,
-    duration: 1.4
-  }, 0)
-  .from("#heroBgText", {
-    scale: 1.25,
-    opacity: 0,
-    duration: 1.6,
-    ease: "expo.out"
-  }, 0.2)
-  .from(".hero-eyebrow", {
-    y: -20,
-    opacity: 0,
-    duration: 0.8
-  }, 0.5)
-  .from(".hero-main-title", {
-    y: 60,
-    opacity: 0,
-    scale: 0.9,
-    duration: 1.2,
-    ease: "back.out(1.5)"
-  }, 0.6)
-  .from(".hero-english-title", {
-    y: 20,
-    opacity: 0,
-    duration: 0.8
-  }, 0.9)
-  .from(".hero-tagline", {
-    y: 20,
-    opacity: 0,
-    duration: 0.8
-  }, 1.1)
-  .from(".hero-action-buttons", {
-    y: 20,
-    opacity: 0,
-    duration: 0.8
-  }, 1.2)
-  .from("#hudLeft", {
-    x: -40,
-    opacity: 0,
-    duration: 1
-  }, 0.8)
-  .from("#hudRight", {
-    x: 40,
-    opacity: 0,
-    duration: 1
-  }, 0.8)
-  .from(".hero-scroll-indicator", {
-    opacity: 0,
-    duration: 1
-  }, 1.4);
+  // 背景レティクル出現（縮小からダイナミックスケールイン）
+  tl.fromTo("#heroReticle", 
+    { scale: 0.35, opacity: 0, rotation: -90 },
+    { scale: 1, opacity: 1, rotation: 0, duration: 1.8 }
+  , 0)
+  // 背景巨大英字の迫り出し
+  .fromTo("#heroBgText", 
+    { scale: 1.45, opacity: 0, letterSpacing: "0.3em" },
+    { scale: 1, opacity: 1, letterSpacing: "0.12em", duration: 2, ease: "expo.out" }
+  , 0.2)
+  // 中央の3Dビジュアル（射手アバター）
+  .fromTo("#heroCenterVisual",
+    { scale: 0.5, opacity: 0, y: 50 },
+    { scale: 1, opacity: 1, y: 0, duration: 1.4, ease: "back.out(1.4)" }
+  , 0.4)
+  // アイブロウ（タグ）
+  .fromTo(".hero-eyebrow",
+    { y: -25, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8 }
+  , 0.6)
+  // 龍翔会タイトル（文字の重厚な跳ね上がり）
+  .fromTo("#heroMainTitle",
+    { y: 60, opacity: 0, scale: 0.88 },
+    { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.6)" }
+  , 0.7)
+  // 英語タイトル & タグライン
+  .fromTo("#heroEnglishTitle",
+    { y: 20, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8 }
+  , 0.9)
+  .fromTo("#heroTagline",
+    { y: 20, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8 }
+  , 1.1)
+  // アクションボタン
+  .fromTo("#heroActions",
+    { y: 30, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8 }
+  , 1.2)
+  // 左右HUDカード（画面外からの鋭いスライドイン）
+  .fromTo("#hudLeft",
+    { x: -80, opacity: 0 },
+    { x: 0, opacity: 1, duration: 1.1 }
+  , 0.8)
+  .fromTo("#hudRight",
+    { x: 80, opacity: 0 },
+    { x: 0, opacity: 1, duration: 1.1 }
+  , 0.8)
+  // スクロールインジケーター
+  .fromTo(".hero-scroll-indicator",
+    { opacity: 0, y: -10 },
+    { opacity: 1, y: 0, duration: 0.9 }
+  , 1.4);
 
-  // マウス追従パララックス 3D チルト（PC環境対応）
+  // 2. マウス追従スポットライト & 3D Gyro Parallax（Lando Norris 3D Canvas模倣）
   const heroSection = document.getElementById("hero");
   const heroCenter = document.getElementById("heroCenter");
+  const heroCenterVisual = document.getElementById("heroCenterVisual");
   const heroBgText = document.getElementById("heroBgText");
   const hudLeft = document.getElementById("hudLeft");
   const hudRight = document.getElementById("hudRight");
+  const spotlight = document.getElementById("heroSpotlight");
 
-  if (heroSection && window.matchMedia("(min-width: 1025px)").matches) {
+  if (heroSection) {
     heroSection.addEventListener("mousemove", (e) => {
       const rect = heroSection.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const normX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 ~ +0.5
+      const normY = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 ~ +0.5
 
+      // スポットライト位置のCSS変数更新
+      heroSection.style.setProperty('--mouse-x', `${(normX + 0.5) * 100}%`);
+      heroSection.style.setProperty('--mouse-y', `${(normY + 0.5) * 100}%`);
+
+      // 中央ステージの3Dチルト＆パン
       gsap.to(heroCenter, {
-        rotationY: x * 8,
-        rotationX: -y * 8,
-        x: x * 16,
-        y: y * 16,
-        duration: 0.8,
+        rotationY: normX * 18,
+        rotationX: -normY * 16,
+        x: normX * 26,
+        y: normY * 22,
+        duration: 0.7,
         ease: "power2.out"
       });
 
+      // 中央ビジュアル（射手アバター）の独自深度パララックス
+      gsap.to(heroCenterVisual, {
+        rotationY: normX * 24,
+        rotationX: -normY * 20,
+        x: normX * 36,
+        y: normY * 28,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+
+      // 背後巨大アウトライン英字（逆方向への大きなパララックスで圧倒的奥行き）
       gsap.to(heroBgText, {
-        xPercent: -50 + x * -25,
-        yPercent: -50 + y * -25,
-        duration: 1,
+        xPercent: -50 - normX * 45,
+        yPercent: -50 - normY * 30,
+        rotationY: normX * 6,
+        duration: 1.1,
         ease: "power2.out"
       });
 
+      // 左HUDカードの視差連動
       gsap.to(hudLeft, {
-        x: x * -10,
-        y: y * -10,
-        rotationY: x * 5,
-        rotationX: -y * 5,
+        x: -normX * 18,
+        y: -normY * 18,
+        rotationY: normX * 12,
+        rotationX: -normY * 10,
         duration: 0.8,
         ease: "power2.out"
       });
 
+      // 右HUDカードの視差連動
       gsap.to(hudRight, {
-        x: x * 10,
-        y: y * 10,
-        rotationY: x * 5,
-        rotationX: -y * 5,
+        x: normX * 18,
+        y: normY * 18,
+        rotationY: normX * 12,
+        rotationX: -normY * 10,
         duration: 0.8,
         ease: "power2.out"
       });
     });
 
+    // マウスが外れた際、滑らかに原点へ復帰（慣性ダンピング）
     heroSection.addEventListener("mouseleave", () => {
-      gsap.to([heroCenter, hudLeft, hudRight], {
+      gsap.to([heroCenter, heroCenterVisual, hudLeft, hudRight], {
         rotationY: 0,
         rotationX: 0,
         x: 0,
         y: 0,
-        duration: 1,
+        duration: 1.2,
         ease: "power3.out"
       });
+
       gsap.to(heroBgText, {
         xPercent: -50,
         yPercent: -50,
-        duration: 1,
+        rotationY: 0,
+        duration: 1.2,
         ease: "power3.out"
       });
+
+      heroSection.style.setProperty('--mouse-x', '50%');
+      heroSection.style.setProperty('--mouse-y', '50%');
     });
   }
 });
