@@ -1,0 +1,526 @@
+/* ========================================================
+   LANDO NORRIS INSPIRED FULL REDESIGN - RYUSYOKAI KYUDO
+   Theme: Deep Abyss Black x Cyber Electric Cyan
+======================================================== */
+
+:root {
+  --c-bg: #05080e;
+  --c-bg-card: rgba(10, 18, 30, 0.72);
+  --c-bg-hover: rgba(16, 28, 46, 0.85);
+  --c-cyan: #00f0ff;
+  --c-cyan-glow: rgba(0, 240, 255, 0.35);
+  --c-cyan-dim: rgba(0, 240, 255, 0.12);
+  --c-blue: #0077b6;
+  --c-text-main: #ffffff;
+  --c-text-sub: #b0c8dc;
+  --c-text-muted: #5e7a94;
+  --font-mono: "SF Mono", "Consolas", "Roboto Mono", monospace;
+  --font-sans: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+}
+
+/* 全体ベース */
+body.modern-home {
+  background: var(--c-bg) !important;
+  color: var(--c-text-main) !important;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  line-height: 1.65;
+}
+
+/* 背景サイバーメッシュグリッド */
+body.modern-home::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================================
+   MODERN HEADER & NAVIGATION
+======================================================== */
+.modern-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(5, 8, 14, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+  z-index: 1000;
+  padding: 12px 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.modern-header .logo-brand a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.modern-header .logo-brand img {
+  height: 42px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.modern-header .logo-brand:hover img {
+  transform: scale(1.05);
+}
+
+.modern-header .logo-brand-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+}
+
+/* 検索バー（Lando Norris HUD風） */
+.modern-search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 440px;
+}
+
+.modern-search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(10, 18, 30, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+  padding: 4px 6px;
+  transition: all 0.3s ease;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.modern-search-box:focus-within {
+  border-color: var(--c-cyan);
+  box-shadow: 0 0 18px var(--c-cyan-glow);
+  background: rgba(12, 24, 40, 0.95);
+}
+
+.modern-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 0.88rem;
+  padding: 6px 12px;
+  letter-spacing: 0.05em;
+}
+
+.modern-search-box input::placeholder {
+  color: var(--c-text-muted);
+}
+
+.modern-search-box button {
+  background: var(--c-cyan);
+  color: #05080e;
+  border: none;
+  outline: none;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 6px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modern-search-box button:hover {
+  background: #fff;
+  box-shadow: 0 0 12px #fff;
+}
+
+/* ========================================================
+   SECTION TITLES (TECHNO-HUD TYPOGRAPHY)
+======================================================== */
+.modern-section {
+  position: relative;
+  z-index: 2;
+  padding: 90px 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.sec-header {
+  margin-bottom: 44px;
+  position: relative;
+}
+
+.sec-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.sec-eyebrow::before {
+  content: "//";
+  color: var(--c-cyan);
+  font-weight: 900;
+}
+
+.sec-title {
+  margin: 0;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sec-title-en {
+  font-family: "Impact", "Montserrat", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+}
+
+.sec-line {
+  margin-top: 14px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-cyan) 0%, rgba(0, 240, 255, 0.15) 50%, transparent 100%);
+}
+
+/* ========================================================
+   NEWS / SYSTEM LOG SECTION
+======================================================== */
+.modern-news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modern-news-item {
+  position: relative;
+}
+
+.modern-news-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  background: var(--c-bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.modern-news-link:hover {
+  background: var(--c-bg-hover);
+  border-color: var(--c-cyan);
+  transform: translateX(6px);
+  box-shadow: 0 6px 24px rgba(0, 240, 255, 0.15);
+}
+
+.modern-news-date {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--c-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.modern-news-text {
+  flex: 1;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--c-text-main);
+}
+
+.modern-news-arrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--c-cyan);
+  transition: transform 0.2s ease;
+}
+
+.modern-news-link:hover .modern-news-arrow {
+  transform: translateX(4px);
+}
+
+/* ========================================================
+   DIRECTORY CARDS GRID (Lando Norris ON/OFF Track Style)
+======================================================== */
+.modern-grid-directory {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.dir-card {
+  position: relative;
+  background: var(--c-bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: 6px;
+  padding: 34px 28px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  box-sizing: border-box;
+}
+
+/* Lando Norris 風の角クリップライン */
+.dir-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border-top: 2px solid var(--c-cyan);
+  border-right: 2px solid var(--c-cyan);
+  transition: all 0.3s ease;
+}
+
+.dir-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--c-cyan);
+  border-left: 2px solid var(--c-cyan);
+  transition: all 0.3s ease;
+}
+
+/* 背景透かしナンバー */
+.dir-card-num {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-family: "Impact", "Montserrat", sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(0, 240, 255, 0.08);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: all 0.35s ease;
+}
+
+.dir-card:hover {
+  background: var(--c-bg-hover);
+  border-color: var(--c-cyan);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 240, 255, 0.2);
+}
+
+.dir-card:hover .dir-card-num {
+  color: rgba(0, 240, 255, 0.22);
+  transform: scale(1.1);
+}
+
+.dir-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.dir-card-title {
+  margin: 0 0 10px;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.dir-card-desc {
+  font-size: 0.88rem;
+  color: var(--c-text-sub);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  flex: 1;
+}
+
+.dir-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+  transition: gap 0.2s ease;
+}
+
+.dir-card:hover .dir-card-action {
+  gap: 12px;
+  color: #fff;
+}
+
+/* ========================================================
+   DOJO SPECS / SUMMARY SECTION
+======================================================== */
+.dojo-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.spec-box {
+  background: var(--c-bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: 4px;
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.spec-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--c-cyan);
+}
+
+/* ========================================================
+   MODERN FOOTER
+======================================================== */
+.modern-footer {
+  position: relative;
+  z-index: 2;
+  background: #030508;
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+  padding: 50px 24px 30px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-nav a {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--c-text-sub);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--c-cyan);
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.15em;
+  color: var(--c-text-muted);
+}
+
+/* ========================================================
+   RESPONSIVE (TABLET & MOBILE)
+======================================================== */
+@media screen and (max-width: 1024px) {
+  .modern-grid-directory {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dojo-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .modern-header {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+  .modern-search-wrap {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+  }
+  .modern-grid-directory {
+    grid-template-columns: 1fr;
+  }
+  .dojo-specs-grid {
+    grid-template-columns: 1fr;
+  }
+  .sec-title {
+    font-size: 1.8rem;
+  }
+}

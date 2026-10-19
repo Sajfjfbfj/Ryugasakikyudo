@@ -6,6 +6,7 @@
   <title>龍翔会 弓道</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/home-modern.css">
   <!-- SEO等-->
    
 <!-- 説明文（検索結果に表示されることがある） -->
@@ -50,21 +51,23 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
 </head>
-<body>
+<body class="modern-home">
   
-<div class="header">
-  <h1 class="site-title">
+<header class="modern-header">
+  <div class="logo-brand">
     <a href="index.html">
       <img src="assets/img/龍翔会.png" alt="龍翔会 弓道サイト">
+      <span class="logo-brand-tag">KYUDO CLUB</span>
     </a>
-  </h1>
-<section id="search-section" class="section">
-  <div class="container">
-    <input type="text" id="searchInput" placeholder="検索ワードを入力">
-    <button id="searchBtn">検索</button>
+  </div>
+
+  <div class="modern-search-wrap">
+    <div class="modern-search-box">
+      <input type="text" id="searchInput" placeholder="サイト内を検索（大会、審査、稽古など）">
+      <button id="searchBtn">SEARCH</button>
+    </div>
     <div id="searchResults"></div>
   </div>
-</section>
 
   <button class="hamburger-overlay" aria-label="メニュー" aria-controls="overlay-menu" aria-expanded="false">
     <span class="hamburger-overlay__line"></span>
@@ -85,7 +88,7 @@
       </ul>
     </div>
   </nav>
-</div>
+</header>
 
 
 
@@ -146,37 +149,187 @@
   </section>
 
 
-<main class="container">
-  <!-- 更新情報 -->
-  <section id="news">
-    <h2>更新のお知らせ</h2>
-    <ul id="news-list">
-      <li><a href="pages/tournament/index.html">10月19日 令和8年度 大会・審査要項を更新しました</a></li>
-      <li><a href="pages/seiseki/index.html">1月25日 大会・審査成績を更新しました</a></li>
-      <li><a href="pages/seiseki/index.html">1月19日 大会・審査成績を更新しました</a></li>
-      <li><a href="pages/members/index.html">1月19日 会員専用を更新しました</a></li>
-      <li><a href="pages/seiseki/index.html">11月23日 大会・審査成績を更新しました</a></li>
+<main>
+  <!-- 更新情報（SYSTEM UPDATES） -->
+  <section id="news" class="modern-section">
+    <div class="sec-header">
+      <div class="sec-eyebrow">TRANSMISSIONS // SYSTEM LOG</div>
+      <h2 class="sec-title">
+        更新のお知らせ
+        <span class="sec-title-en">LATEST TRANSMISSIONS</span>
+      </h2>
+      <div class="sec-line"></div>
+    </div>
+    <ul id="news-list" class="modern-news-list">
+      <li class="modern-news-item">
+        <a href="pages/tournament/index.html" class="modern-news-link">
+          <span class="modern-news-date">10.19</span>
+          <span class="modern-news-text">令和8年度 大会・審査要項を更新しました</span>
+          <span class="modern-news-arrow">VIEW ➔</span>
+        </a>
+      </li>
+      <li class="modern-news-item">
+        <a href="pages/seiseki/index.html" class="modern-news-link">
+          <span class="modern-news-date">01.25</span>
+          <span class="modern-news-text">大会・審査成績を更新しました</span>
+          <span class="modern-news-arrow">VIEW ➔</span>
+        </a>
+      </li>
+      <li class="modern-news-item">
+        <a href="pages/seiseki/index.html" class="modern-news-link">
+          <span class="modern-news-date">01.19</span>
+          <span class="modern-news-text">大会・審査成績を更新しました</span>
+          <span class="modern-news-arrow">VIEW ➔</span>
+        </a>
+      </li>
+      <li class="modern-news-item">
+        <a href="pages/members/index.html" class="modern-news-link">
+          <span class="modern-news-date">01.19</span>
+          <span class="modern-news-text">会員専用ページを更新しました</span>
+          <span class="modern-news-arrow">VIEW ➔</span>
+        </a>
+      </li>
+      <li class="modern-news-item">
+        <a href="pages/seiseki/index.html" class="modern-news-link">
+          <span class="modern-news-date">11.23</span>
+          <span class="modern-news-text">大会・審査成績を更新しました</span>
+          <span class="modern-news-arrow">VIEW ➔</span>
+        </a>
+      </li>
     </ul>
   </section>
 
-  <!-- 各ページ入口 -->
-  <section id="links">
-    <h2>各ページへ</h2>
-    <div class="page-links">
-      <a href="pages/beginner/index.html" class="card"><span>初心者教室</span></a>
-      <a href="pages/schedule/index.html" class="card"><span>スケジュール</span></a>
-      <a href="pages/tournament/index.html" class="card"><span>大会・審査要項</span></a>
-      <a href="pages/seiseki/index.html" class="card"><span>大会・審査成績</span></a>
-      <a href="pages/members/index.html" class="card"><span>会員専用</span></a>
-      <a href="pages/contact/index.html" class="card"><span>お問い合わせ</span></a>
+  <!-- 各ページへ（DIRECTORY） -->
+  <section id="links" class="modern-section">
+    <div class="sec-header">
+      <div class="sec-eyebrow">INDEX & DIRECTORY // ナビゲーション</div>
+      <h2 class="sec-title">
+        各ページ案内
+        <span class="sec-title-en">EXPLORE SECTIONS</span>
+      </h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="modern-grid-directory">
+      <!-- 01 初心者教室 -->
+      <a href="pages/beginner/index.html" class="dir-card">
+        <span class="dir-card-num">01</span>
+        <div>
+          <div class="dir-card-eyebrow">// EDUCATION & WELCOME</div>
+          <h3 class="dir-card-title">初心者教室</h3>
+          <p class="dir-card-desc">初めての方も安心。礼法・射法八節の基本から基礎体型まで丁寧にご案内します。</p>
+        </div>
+        <div class="dir-card-action">詳しく見る ➔</div>
+      </a>
+
+      <!-- 02 スケジュール -->
+      <a href="pages/schedule/index.html" class="dir-card">
+        <span class="dir-card-num">02</span>
+        <div>
+          <div class="dir-card-eyebrow">// CALENDAR & PRACTICE</div>
+          <h3 class="dir-card-title">スケジュール</h3>
+          <p class="dir-card-desc">月間の道場稽古日、県連行事予定、中央審査会・全国大会の年間日程表。</p>
+        </div>
+        <div class="dir-card-action">日程を確認 ➔</div>
+      </a>
+
+      <!-- 03 大会・審査要項 -->
+      <a href="pages/tournament/index.html" class="dir-card">
+        <span class="dir-card-num">03</span>
+        <div>
+          <div class="dir-card-eyebrow">// COMPETITIONS & EXAMS</div>
+          <h3 class="dir-card-title">大会・審査要項</h3>
+          <p class="dir-card-desc">令和8年度・7年度の大会実施要項、関東地域連合審査会案内、参加申込書等。</p>
+        </div>
+        <div class="dir-card-action">要項一覧 ➔</div>
+      </a>
+
+      <!-- 04 大会・審査成績 -->
+      <a href="pages/seiseki/index.html" class="dir-card">
+        <span class="dir-card-num">04</span>
+        <div>
+          <div class="dir-card-eyebrow">// ARCHIVES & HONORS</div>
+          <h3 class="dir-card-title">大会・審査成績</h3>
+          <p class="dir-card-desc">会員の段位認許・昇段審査合格速報、各種弓道大会における入賞・的中記録。</p>
+        </div>
+        <div class="dir-card-action">実績を見る ➔</div>
+      </a>
+
+      <!-- 05 会員専用 -->
+      <a href="pages/members/index.html" class="dir-card">
+        <span class="dir-card-num">05</span>
+        <div>
+          <div class="dir-card-eyebrow">// MEMBERS PORTAL</div>
+          <h3 class="dir-card-title">会員専用</h3>
+          <p class="dir-card-desc">総会議事録、支部内連絡事項、大会出席簿・登録手続きのご案内。</p>
+        </div>
+        <div class="dir-card-action">ポータルへ ➔</div>
+      </a>
+
+      <!-- 06 お問い合わせ -->
+      <a href="pages/contact/index.html" class="dir-card">
+        <span class="dir-card-num">06</span>
+        <div>
+          <div class="dir-card-eyebrow">// INQUIRY & ACCESS</div>
+          <h3 class="dir-card-title">お問い合わせ</h3>
+          <p class="dir-card-desc">稽古見学のお申し込み、入門相談、弓道場へのアクセス情報・フォーム。</p>
+        </div>
+        <div class="dir-card-action">連絡する ➔</div>
+      </a>
     </div>
   </section>
 
+  <!-- 道場スペック / DOJO SPECIFICATIONS -->
+  <section class="modern-section" style="padding-top: 0;">
+    <div class="sec-header">
+      <div class="sec-eyebrow">DOJO SPECIFICATIONS // 活動概要</div>
+      <h2 class="sec-title">
+        龍翔会スペック
+        <span class="sec-title-en">CLUB PROFILE</span>
+      </h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="dojo-specs-grid">
+      <div class="spec-box">
+        <div class="spec-label">AFFILIATION</div>
+        <div class="spec-value">茨城県弓道連盟</div>
+      </div>
+      <div class="spec-box">
+        <div class="spec-label">LOCATION</div>
+        <div class="spec-value">龍ヶ崎中学校 弓道場</div>
+      </div>
+      <div class="spec-box">
+        <div class="spec-label">PRACTICE DAYS</div>
+        <div class="spec-value">週 3 回 ＋ 日曜</div>
+      </div>
+      <div class="spec-box">
+        <div class="spec-label">ADMISSION</div>
+        <div class="spec-value">見学・入門 随時可</div>
+      </div>
+    </div>
+  </section>
 </main>
 <button id="backToTop" class="back-to-top">↑</button>
 <!-- フッター -->
-<footer>
-  <p>&copy; 2025 龍翔会 弓道</p>
+<footer class="modern-footer">
+  <div class="footer-inner">
+    <div class="logo-brand">
+      <img src="assets/img/龍翔会.png" alt="龍翔会" style="height: 38px; filter: drop-shadow(0 0 10px rgba(0,240,255,0.4));">
+    </div>
+    <div class="footer-nav">
+      <a href="index.html">ホーム</a>
+      <a href="pages/beginner/index.html">初心者教室</a>
+      <a href="pages/schedule/index.html">スケジュール</a>
+      <a href="pages/tournament/index.html">大会・審査要項</a>
+      <a href="pages/seiseki/index.html">大会・審査成績</a>
+      <a href="pages/members/index.html">会員専用</a>
+      <a href="pages/contact/index.html">お問い合わせ</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 龍翔会 弓道 // ALL RIGHTS RESERVED.
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -206,15 +359,18 @@
   });
 </script>
 <script>
-// ページリンクのスクロールアニメーション
+// ディレクトリカードのスクロール入場アニメーション
 document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".page-links .card");
+  const cards = document.querySelectorAll(".dir-card");
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, idx) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target); // 一度表示されたら監視解除
+        setTimeout(() => {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }, idx * 80);
+        observer.unobserve(entry.target);
       }
     });
   }, {
@@ -222,6 +378,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   cards.forEach(card => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(30px)";
+    card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
     observer.observe(card);
   });
 });
@@ -243,14 +402,22 @@ document.addEventListener("DOMContentLoaded", () => {
       // 最新5件だけ表示
       data.slice(0, 5).forEach(update => {
         const li = document.createElement("li");
+        li.className = "modern-news-item";
+
         const a = document.createElement("a");
+        a.className = "modern-news-link";
         a.href = update.url;
 
         const date = new Date(update.date);
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
 
-        a.textContent = `${month}月${day}日 ${update.page}を更新しました`;
+        a.innerHTML = `
+          <span class="modern-news-date">${month}.${day}</span>
+          <span class="modern-news-text">${update.page}を更新しました</span>
+          <span class="modern-news-arrow">VIEW ➔</span>
+        `;
+
         li.appendChild(a);
         newsList.appendChild(li);
       });
