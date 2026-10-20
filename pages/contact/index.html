@@ -91,121 +91,25 @@
         <h2>お問い合わせフォーム</h2>
         <p style="color: var(--sub); margin-bottom: 1rem;">お問い合わせは下記フォームからお願いします。</p>
 
-        <!-- オリジナル 和モダン お問い合わせフォーム -->
-        <div class="form-wrapper">
-          <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-          
-          <form id="contactForm"
-                action="https://script.google.com/macros/s/AKfycbw2kD5PBH0XKjBbxI7AnF7erawv1BjoyAics4FDXw0-GNDWELcrAZWCfE5rM_TETJQ/exec"
-                method="POST"
-                target="hidden_iframe"
-                class="kyudo-custom-form">
-            
-            <div class="form-intro">
-              <p>稽古の見学、初心者教室への参加、段位・用具についてのご相談など、お気軽にお問い合わせください。<br>
-              必要事項をご入力の上、下部の「送信する」ボタンを押してください。</p>
-            </div>
-
-            <!-- お名前 -->
-            <div class="form-group">
-              <label for="entry_name" class="form-label">
-                <span class="label-title">お名前（氏名）</span>
-                <span class="badge required">必須</span>
-              </label>
-              <input type="text"
-                     id="entry_name"
-                     name="name"
-                     class="form-control"
-                     placeholder="例：山田 太郎"
-                     required>
-            </div>
-
-            <!-- メールアドレス -->
-            <div class="form-group">
-              <label for="entry_email" class="form-label">
-                <span class="label-title">メールアドレス</span>
-                <span class="badge required">必須</span>
-              </label>
-              <input type="email"
-                     id="entry_email"
-                     name="email"
-                     class="form-control"
-                     placeholder="例：yamada@example.com"
-                     required>
-            </div>
-
-            <!-- 段位（経験者のみ） -->
-            <div class="form-group">
-              <label for="entry_dan" class="form-label">
-                <span class="label-title">所有段位</span>
-                <span class="badge optional">経験者のみ・任意</span>
-              </label>
-              <input type="text"
-                     id="entry_dan"
-                     name="dan"
-                     class="form-control"
-                     placeholder="例：初段、弐段、参段、無段 など">
-            </div>
-
-            <!-- 経験年数（複数選択可） -->
-            <div class="form-group">
-              <label class="form-label">
-                <span class="label-title">弓道経験</span>
-                <span class="badge optional">経験者のみ・複数選択可</span>
-              </label>
-              <div class="checkbox-group">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="exp" value="中学校から">
-                  <span class="checkbox-custom"></span>
-                  <span class="checkbox-text">中学校から</span>
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" name="exp" value="高校から">
-                  <span class="checkbox-custom"></span>
-                  <span class="checkbox-text">高校から</span>
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" name="exp" value="大学から">
-                  <span class="checkbox-custom"></span>
-                  <span class="checkbox-text">大学から</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- お問い合わせ内容 -->
-            <div class="form-group">
-              <label for="entry_message" class="form-label">
-                <span class="label-title">お問い合わせ内容</span>
-                <span class="badge required">必須</span>
-              </label>
-              <textarea id="entry_message"
-                        name="message"
-                        class="form-control form-textarea"
-                        rows="6"
-                        placeholder="見学希望の日時、用具の相談、初心者教室についてのご質問など、お気軽にご記入ください。"
-                        required></textarea>
-            </div>
-
-            <!-- 送信ボタンエリア -->
-            <div class="form-footer">
-              <p class="privacy-note">※ ご入力いただいた情報は、お問い合わせへの回答および見学等のご連絡のみに利用いたします。</p>
-              <button type="submit" id="formSubmitBtn" class="form-submit-btn">
-                <span class="btn-text">送信する</span>
-                <span class="btn-spinner"></span>
-              </button>
-            </div>
-          </form>
-
-          <!-- 送信完了メッセージ画面 (初期非表示) -->
-          <div id="formSuccess" class="form-success-card" style="display:none;">
-            <div class="success-icon">✓</div>
-            <h3>お問い合わせを送信いたしました</h3>
-            <p>お問い合わせいただき、誠にありがとうございます。<br>
-            内容を確認の上、担当者より折り返しメールにてご連絡を差し上げます。<br>
-            今しばらくお待ちくださいますようお願いいたします。</p>
-            <div class="success-footer">
-              <button type="button" id="resetFormBtn" class="form-reset-btn">別のお問い合わせを送信する</button>
-            </div>
+        <!-- Googleフォーム公式埋め込み（和モダンフレーム装飾） -->
+        <div class="form-wrapper google-form-frame">
+          <div class="form-frame-header">
+            <span class="form-badge">FORM // お問い合わせ</span>
+            <h3>龍翔会 お問い合わせフォーム</h3>
+            <p>稽古の見学、初心者教室への参加、段位や用具についてのご相談など、お気軽にお問い合わせください。<br>
+            ※送信内容は Googleフォームを通して管理担当者へ直接安全に通知されます。</p>
+          </div>
+          <div class="iframe-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfl7FGrwlo43TF8zVCPCwCB0ndTWom7y8t09x4CSG0hGdGsdw/viewform?embedded=true"
+                    width="100%"
+                    height="980"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="龍翔会 お問い合わせフォーム"
+                    loading="lazy">
+              読み込んでいます…
+            </iframe>
           </div>
         </div>
 

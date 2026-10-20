@@ -185,57 +185,5 @@
         });
       });
     }
-
-    // 4. お問い合わせフォーム送信制御（Googleフォーム裏連携）
-    const contactForm = document.getElementById('contactForm');
-    const hiddenIframe = document.getElementById('hidden_iframe');
-    const formSuccess = document.getElementById('formSuccess');
-    const formSubmitBtn = document.getElementById('formSubmitBtn');
-    const resetFormBtn = document.getElementById('resetFormBtn');
-
-    if (contactForm && hiddenIframe && formSuccess) {
-      let isSubmitting = false;
-
-      function completeSubmission() {
-        if (!isSubmitting) return;
-        isSubmitting = false;
-        contactForm.style.display = 'none';
-        formSuccess.style.display = 'block';
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-
-      contactForm.addEventListener('submit', function () {
-        isSubmitting = true;
-        if (formSubmitBtn) {
-          formSubmitBtn.disabled = true;
-          formSubmitBtn.classList.add('loading');
-          const btnText = formSubmitBtn.querySelector('.btn-text');
-          if (btnText) btnText.textContent = '送信中…';
-        }
-
-        // セーフティフォールバック（iframe load が遅延または抑制された場合でも1.8秒で完了画面へ遷移）
-        setTimeout(function () {
-          completeSubmission();
-        }, 1800);
-      });
-
-      hiddenIframe.addEventListener('load', function () {
-        completeSubmission();
-      });
-
-      if (resetFormBtn) {
-        resetFormBtn.addEventListener('click', function () {
-          contactForm.reset();
-          contactForm.style.display = 'flex';
-          formSuccess.style.display = 'none';
-          if (formSubmitBtn) {
-            formSubmitBtn.disabled = false;
-            formSubmitBtn.classList.remove('loading');
-            const btnText = formSubmitBtn.querySelector('.btn-text');
-            if (btnText) btnText.textContent = '送信する';
-          }
-        });
-      }
-    }
   });
 })();
