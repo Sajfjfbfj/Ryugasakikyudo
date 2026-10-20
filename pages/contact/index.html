@@ -96,7 +96,7 @@
           <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
           
           <form id="contactForm"
-                action="https://docs.google.com/forms/d/e/1FAIpQLSfl7FGrwlo43TF8zVCPCwCB0ndTWom7y8t09x4CSG0hGdGsdw/formResponse"
+                action="https://script.google.com/macros/s/AKfycbw2kD5PBH0XKjBbxI7AnF7erawv1BjoyAics4FDXw0-GNDWELcrAZWCfE5rM_TETJQ/exec"
                 method="POST"
                 target="hidden_iframe"
                 class="kyudo-custom-form">
@@ -114,7 +114,7 @@
               </label>
               <input type="text"
                      id="entry_name"
-                     name="entry.1685795152"
+                     name="name"
                      class="form-control"
                      placeholder="例：山田 太郎"
                      required>
@@ -128,7 +128,7 @@
               </label>
               <input type="email"
                      id="entry_email"
-                     name="entry.919803707"
+                     name="email"
                      class="form-control"
                      placeholder="例：yamada@example.com"
                      required>
@@ -142,7 +142,7 @@
               </label>
               <input type="text"
                      id="entry_dan"
-                     name="entry.742703454"
+                     name="dan"
                      class="form-control"
                      placeholder="例：初段、弐段、参段、無段 など">
             </div>
@@ -155,17 +155,17 @@
               </label>
               <div class="checkbox-group">
                 <label class="checkbox-label">
-                  <input type="checkbox" name="entry.463803708" value="中学校から">
+                  <input type="checkbox" name="exp" value="中学校から">
                   <span class="checkbox-custom"></span>
                   <span class="checkbox-text">中学校から</span>
                 </label>
                 <label class="checkbox-label">
-                  <input type="checkbox" name="entry.463803708" value="高校から">
+                  <input type="checkbox" name="exp" value="高校から">
                   <span class="checkbox-custom"></span>
                   <span class="checkbox-text">高校から</span>
                 </label>
                 <label class="checkbox-label">
-                  <input type="checkbox" name="entry.463803708" value="大学から">
+                  <input type="checkbox" name="exp" value="大学から">
                   <span class="checkbox-custom"></span>
                   <span class="checkbox-text">大学から</span>
                 </label>
@@ -179,7 +179,7 @@
                 <span class="badge required">必須</span>
               </label>
               <textarea id="entry_message"
-                        name="entry.1092807037"
+                        name="message"
                         class="form-control form-textarea"
                         rows="6"
                         placeholder="見学希望の日時、用具の相談、初心者教室についてのご質問など、お気軽にご記入ください。"
