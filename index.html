@@ -32,6 +32,8 @@
       await OneSignal.init({
         appId: "28b0df39-f015-45df-b389-168d88a4d3e5",
       });
+      // 端末通知バーへのプッシュ通知購読プロンプトを表示
+      OneSignal.Slidedown.promptPush();
     });
   </script>
 </head>
@@ -506,29 +508,63 @@
       });
     }
 
-    // 7. 更新情報自動取得 (updates.json)
-    const newsList = document.getElementById('newsList');
-    if (newsList) {
-      fetch('updates.json')
+    // 7. 更新情報自動取得 (updates.json) & 新着通知トースト表示
+    function initUpdateChecker() {
+      fetch('updates.json?t=' + Date.now())
         .then(res => res.json())
         .then(data => {
+          if (!data || data.length === 0) return;
           data.sort((a, b) => new Date(b.date) - new Date(a.date));
-          newsList.innerHTML = '';
-          data.slice(0, 5).forEach(update => {
-            const li = document.createElement('li');
-            const date = new Date(update.date);
-            const m = String(date.getMonth() + 1).padStart(2, '0');
-            const d = String(date.getDate()).padStart(2, '0');
 
-            li.innerHTML = `
-              <time>${m}.${d}</time>
-              <a href="${update.url}">${update.page}を更新いたしました。</a>
+          // ニュース一覧の反映
+          const newsList = document.getElementById('newsList');
+          if (newsList) {
+            newsList.innerHTML = '';
+            data.slice(0, 5).forEach(update => {
+              const li = document.createElement('li');
+              const date = new Date(update.date);
+              const m = String(date.getMonth() + 1).padStart(2, '0');
+              const d = String(date.getDate()).padStart(2, '0');
+
+              li.innerHTML = `
+                <time>${m}.${d}</time>
+                <a href="${update.url}">${update.page}を更新いたしました。</a>
+              `;
+              newsList.appendChild(li);
+            });
+          }
+
+          // キャッシュ端末・新着情報のトースト通知
+          const latest = data[0];
+          const lastSeenKey = 'ryu_seen_update_' + latest.date + '_' + latest.page;
+          if (!localStorage.getItem(lastSeenKey)) {
+            const toast = document.createElement('div');
+            toast.className = 'site-update-toast';
+            toast.innerHTML = `
+              <div class="toast-title"><span>🔔</span><span>新しい更新情報が追加されました</span></div>
+              <p class="toast-msg">「${latest.page}」が更新されました。最新の内容をご確認いただけます。</p>
+              <div class="toast-actions">
+                <button type="button" class="toast-btn-close">閉じる</button>
+                <a href="${latest.url}" class="toast-btn-confirm">確認する</a>
+              </div>
             `;
-            newsList.appendChild(li);
-          });
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 1500);
+
+            toast.querySelector('.toast-btn-close').addEventListener('click', () => {
+              localStorage.setItem(lastSeenKey, '1');
+              toast.classList.remove('show');
+              setTimeout(() => toast.remove(), 400);
+            });
+
+            toast.querySelector('.toast-btn-confirm').addEventListener('click', () => {
+              localStorage.setItem(lastSeenKey, '1');
+            });
+          }
         })
         .catch(err => console.log('更新情報読み込み:', err));
     }
+    initUpdateChecker();
 
     // 8. 全文検索機能 (siteData)
     const searchInput = document.getElementById('searchInput');

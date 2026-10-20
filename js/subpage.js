@@ -185,5 +185,41 @@
         });
       });
     }
+
+    // 4. 新着更新情報チェック & トースト通知
+    fetch('../../updates.json?t=' + Date.now())
+      .then(res => res.json())
+      .then(data => {
+        if (!data || data.length === 0) return;
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const latest = data[0];
+        const lastSeenKey = 'ryu_seen_update_' + latest.date + '_' + latest.page;
+        if (!localStorage.getItem(lastSeenKey)) {
+          const toast = document.createElement('div');
+          toast.className = 'site-update-toast';
+          const targetUrl = '../../' + latest.url;
+          toast.innerHTML = `
+            <div class="toast-title"><span>🔔</span><span>新しい更新情報があります</span></div>
+            <p class="toast-msg">「${latest.page}」が更新されました。最新の内容をご確認いただけます。</p>
+            <div class="toast-actions">
+              <button type="button" class="toast-btn-close">閉じる</button>
+              <a href="${targetUrl}" class="toast-btn-confirm">確認する</a>
+            </div>
+          `;
+          document.body.appendChild(toast);
+          setTimeout(() => toast.classList.add('show'), 1500);
+
+          toast.querySelector('.toast-btn-close').addEventListener('click', () => {
+            localStorage.setItem(lastSeenKey, '1');
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400);
+          });
+
+          toast.querySelector('.toast-btn-confirm').addEventListener('click', () => {
+            localStorage.setItem(lastSeenKey, '1');
+          });
+        }
+      })
+      .catch(err => console.log('更新情報チェック:', err));
   });
 })();

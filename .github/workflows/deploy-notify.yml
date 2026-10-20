@@ -24,12 +24,13 @@ jobs:
       - name: Send OneSignal Notification
         run: |
           curl -X POST "https://onesignal.com/api/v1/notifications" \
-          -H "Content-Type: application/json" \
+          -H "Content-Type: application/json; charset=utf-8" \
           -H "Authorization: Basic ${{ secrets.ONESIGNAL_API_KEY }}" \
           -d '{
             "app_id": "${{ secrets.ONESIGNAL_APP_ID }}",
             "included_segments": ["All"],
-            "headings": {"en": "龍翔会サイトが更新されました"},
-            "contents": {"en": "ページが更新されました!最新情報をご覧ください。"},
-            "url": "https://ryugasakikyudo.vercel.app/"
+            "headings": {"en": "龍翔会 弓道", "ja": "龍翔会 弓道"},
+            "contents": {"en": "サイトに新しい情報・予定が追加されました。タップして確認できます。", "ja": "サイトに新しい情報・予定が追加されました。タップして確認できます。"},
+            "url": "https://ryugasakikyudo.vercel.app/",
+            "chrome_web_icon": "https://ryugasakikyudo.vercel.app/assets/img/apple-icon-180x180.png"
           }'

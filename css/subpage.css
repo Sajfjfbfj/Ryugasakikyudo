@@ -768,3 +768,98 @@ body.subpage main {
   background: var(--accent);
   border-radius: 1px;
 }
+
+/* ==========================================================================
+   新着更新通知トーストバナー (.site-update-toast)
+   ========================================================================== */
+.site-update-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  max-width: 360px;
+  background: rgba(28, 24, 38, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(183, 155, 224, 0.4);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 0 20px rgba(183, 155, 224, 0.2);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-update-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.site-update-toast .toast-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffd700;
+  letter-spacing: 0.05em;
+}
+
+.site-update-toast .toast-msg {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.site-update-toast .toast-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.site-update-toast .toast-btn-confirm {
+  padding: 0.45rem 1rem;
+  background: rgba(183, 155, 224, 0.28);
+  border: 1px solid var(--accent, #b79be0);
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.site-update-toast .toast-btn-confirm:hover {
+  background: rgba(183, 155, 224, 0.5);
+  color: #ffffff;
+}
+
+.site-update-toast .toast-btn-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.site-update-toast .toast-btn-close:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .site-update-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}
