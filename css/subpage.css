@@ -863,3 +863,19 @@ body.subpage main {
     max-width: none;
   }
 }
+
+/* Subpage Footer Centering */
+body.subpage footer {
+  text-align: center;
+}
+
+body.subpage footer ul {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+body.subpage footer ul li {
+  display: inline-flex;
+  align-items: center;
+}
